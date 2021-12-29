@@ -1,0 +1,11 @@
+.back{
+    background-image: url("../assets/un.JPG") !important;
+    /* background-position: ; */
+    /* background: blue; */
+    background-size: cover;
+    /* opacity: 0.9; */
+}
+.forelook{
+    /* background-image: url("../assets/forelook.JPG"); */
+    background-size: cover;             
+}

@@ -1,0 +1,47 @@
+@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
+
+
+.animate{
+   /* animation: animate ease 5s !important; */
+   margin: auto;
+   top: 7vh !important;
+   transition: all ease-in-out .1s  !important;
+}
+@keyframes animate{
+    0% { top: -100%};
+    100% {top: 10vh}
+}
+.d-flexs{
+    flex-direction: row !important;
+}
+.name, .category{
+    width: 47% !important;
+}
+.name{
+    margin-right: 40px;
+
+}
+
+.changeHeight{
+    height: 135vh !important;
+}
+.wrapperHeight{
+    height: 115vh !important;
+
+}
+
+@media screen and (max-width: 768px){
+    .wrapperHeight{
+        height: 120vh !important;
+    }
+}
+@media screen and (max-width: 540px) {
+    .animate{
+        top: 0% !important;
+    }
+}
