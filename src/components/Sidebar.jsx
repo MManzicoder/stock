@@ -71,7 +71,7 @@ position: fixed;
  display: flex;
  flex-direction: column;
  padding-left: 10px;
- box-shadow: 1px 0px 0px 1px rgba(0,0,0,0.2);
+ /* box-shadow: 1px 0px 0px 1px rgba(0,0,0,0.2); */
  z-index: 1;
 `
 const Logo = styled.div`

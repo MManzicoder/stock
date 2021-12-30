@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import userImgsrc from "../assets/sister.jpg";
 import { Notifications, ArrowDropDown } from "@material-ui/icons";
 function Header() {
+    const redirectToProfile = ()=>{}
     return (
        <Holder>
           <ProfileInfo>
@@ -13,12 +14,12 @@ function Header() {
            </div>
            </Notification>
            <UserInfo>
-               <UserImage>
+               <UserImage onClick={redirectToProfile}>
                    <Img src={userImgsrc}/>
                </UserImage>
                <span>Manzi Monnierey</span>
-               <ArrowDropDown className='dropdown'/>
            </UserInfo>
+            <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}><ArrowDropDown className='dropdown'/></LogoutSection>
           </ProfileInfo>
        </Holder>
     )
@@ -65,7 +66,7 @@ const Notification = styled.div`
       font-size: 10px;
       height: 14px;
       right: 4px;
-      padding-top: 3px;
+      padding-top: 0px;
 
   }
   margin-right: 15px;
@@ -95,4 +96,12 @@ const Img = styled.img`
     width: 100%;
     border-radius: 50%;
     object-fit: cover;
+`
+
+const LogoutSection = styled.div`
+  /* padding: 10px; */
+  margin-top: 5px;
+  .icon{
+      padding: 0px;
+  }
 `
