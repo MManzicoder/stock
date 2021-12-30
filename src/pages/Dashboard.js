@@ -43,7 +43,7 @@ return (
                               </ImageHolder>
                               <OtherInfo>
                                 <span style={{fontWeight: "bold"}}>{c.amount}</span>
-                                <span style={{color: "gray"}}>{c.name}</span>
+                                <p style={{color: "gray"}}>{c.name}</p>
                               </OtherInfo>
                           </Card>
                           )
@@ -67,7 +67,7 @@ export default Dashboard
 const Main = styled.div`
    width: 101%;
    height: 90vh;
-    background:rgba(30, 140, 250, 0.3);
+   background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
 `
@@ -128,6 +128,9 @@ const OtherInfo = styled.div`
   height: 80px;
   display: flex;
   flex-direction: column;
+  p{
+    margin-top: 10px;
+  }
 `
 const Division2 = styled.div`
   width: 96%;

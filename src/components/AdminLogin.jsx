@@ -46,13 +46,6 @@ export const AdminLogin = ()=>{
           </Logo>
           <Sub autoComplete="off" onSubmit={handleAdminLogin}>
              <Input type="hidden" autoComplete="off"/>
-             {/* {sponsorSignup && <FormControl>
-                 <Label for="names">Names</Label> 
-                 <Input type="text" id="names" name="names" 
-                 onChange={handleChange} placeholder="Names"
-                 required
-                 />
-                 </FormControl>} */}
               <FormControl>
                  <Label for="email">Email</Label> 
                  <Input type="email" name="email" id="email" 

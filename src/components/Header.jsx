@@ -1,9 +1,14 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import userImgsrc from "../assets/sister.jpg";
-import { Notifications, ArrowDropDown } from "@material-ui/icons";
+import { Notifications, ArrowDropDown, ArrowRightOutlined } from "@material-ui/icons";
 function Header() {
-    const redirectToProfile = ()=>{}
+    const [showLogoutSection, setShowLogoutSection ]= React.useState(false);
+    const history = useHistory();
+    const redirectToProfile = ()=>{
+         history.push("/profile");
+    }
     return (
        <Holder>
           <ProfileInfo>
@@ -13,13 +18,23 @@ function Header() {
                    <span>3</span>
            </div>
            </Notification>
-           <UserInfo>
-               <UserImage onClick={redirectToProfile}>
+           <UserInfo onClick={redirectToProfile}>
+               <UserImage>
                    <Img src={userImgsrc}/>
                </UserImage>
                <span>Manzi Monnierey</span>
            </UserInfo>
-            <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}><ArrowDropDown className='dropdown'/></LogoutSection>
+            <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}
+            onClick={()=>setShowLogoutSection((prev)=>!prev)}
+            ><ArrowDropDown className='dropdown'/></LogoutSection>
+            {showLogoutSection && (
+                <Lsection>
+                    <LogoutDiv>
+                        <ArrowRightOutlined />
+                        <span>Logout</span>
+                    </LogoutDiv>
+                </Lsection>
+            )}
           </ProfileInfo>
        </Holder>
     )
@@ -104,4 +119,25 @@ const LogoutSection = styled.div`
   .icon{
       padding: 0px;
   }
+`
+const Lsection = styled.div`
+   position: absolute;
+   height: 40px;
+   width: 100px;
+   top: 30px;
+   left: 170px;
+   background: rgba(30, 140, 250, 0.9);
+   border-radius: 7px;
+`
+const LogoutDiv = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  .icon{
+      color: #fff;
+  }   
 `

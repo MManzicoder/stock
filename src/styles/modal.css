@@ -9,7 +9,7 @@
 .animate{
    /* animation: animate ease 5s !important; */
    margin: auto;
-   top: 7vh !important;
+   top: 30vh !important;
    transition: all ease-in-out .1s  !important;
 }
 @keyframes animate{

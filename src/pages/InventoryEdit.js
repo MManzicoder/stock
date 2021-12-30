@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
-import { Link } from 'react-router-dom'
-function Inventory () {
-   const ing = {
+import { Link, useParams } from 'react-router-dom'
+import { Loader } from '../components/AdminLogin'
+import { Button } from './IngredientsEdit'
+function InventoryEdit () {
+     const ing = {
      _id: 124124,
      name: "Cazier in stock",
      amount: "300",
    }
+    const [quantity, setQuantity] = useState(ing.amount); 
+    const [loading, setLoading] = useState(false);
+    const updateInventory = ()=>{
+        setLoading(true);
+
+    }
     return (
       <Layout>
         <Main>
@@ -19,13 +27,14 @@ function Inventory () {
                 <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.amount}</p>
+                        <Input type="text" name="quantity" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
                     </FormControl>
                     <ButtonDiv>
-                      <Link 
-                      to={"/inventory/edit/"+ing._id}>
-                          Edit
-                        </Link>
+                      <Button 
+                      onClick={updateInventory}
+                       >
+                          {loading ? <Loader style={{margin: "0px", marginLeft: "40%"}}></Loader>: "Save"}
+                        </Button>
                     </ButtonDiv>
                    </Card>
                  <ArrowDefine>
@@ -52,7 +61,7 @@ function Inventory () {
     )
 }
 
-export default Inventory
+export default InventoryEdit
 const Main = styled.div`
    width: 101%;
    height: 90vh;
@@ -89,6 +98,7 @@ const ChartHolder = styled.div`
   width: 47%;
   height: 45vh;
   border-radius: 10px;
+   /* background:rgba(30, 140, 250, 0.3); */
    background: #fff;
   padding: 10px;
     box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
@@ -123,12 +133,16 @@ const FormControl = styled.div`
       align-items: center;
       /* text-align: center; */
       justify-content: space-around;
-      label,p{
-        font-weight: bold;
-      }
 `
 const Label = styled.label`
    /* width: 50%; */
+`
+const Input = styled.input`
+     width: 40%;
+     border: none;
+     border-bottom: 1px solid rgba(30, 140, 250, 0.9);
+     outline: none;
+     text-align: center;
 `
 const ButtonDiv = styled.div`
      width: 50%;

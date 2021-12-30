@@ -1,202 +1,63 @@
 import React, { useState, useRef } from 'react';
 import {useHistory} from "react-router-dom";
 import styled from "styled-components";
-import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars"
+import { Loader } from "../components/AdminLogin"
 import { Close } from "@material-ui/icons";
-import { request } from '../apiHandler/Authapi';
 import "../styles/modal.css";
-import { toast } from 'react-toastify'
-import { requirements } from '../shared/utils/data';
-import { categories } from '../shared/utils/Categories';
-import Tesseract from 'tesseract.js';
-import ProgressBar from './ProgressBar'; 
-import validate from '../shared/utils/ImageValidator';
+import { toast, ToastContainer } from 'react-toastify';
 
-const Modal = ({ showModal, setShowModal, setShowFound, setShowLost, showFoundForm, showLostForm }) => {
 
-    const [complete,setCompleted] = useState(0)
-    const [imageCheck,setImageCheck] = useState(false)
-    const [product, setProduct] = useState({
-        productName: "",
-        category: "",
-        date: "",
-        whereLost: "",
-        payment: "",
-        description: "",
-        productId:""
+const Modal = ({ showModal, setShowModal}) => {
+    const [loading, setLoading] = useState(false);
+    const [ingredient, setIngredient] = useState({
+        name: "",
+        quantity: 0
     })
-   const [isLoading, setIsLoading ] = useState(false);
-    let history=useHistory();
-    const dateRef = new Date();
-    const maxDate = new Date(dateRef.getFullYear(), dateRef.getMonth(), dateRef.getDate());
-
-    const [itemPhoto, setItemPhoto] = useState('');
-    const [itemPhotoPreview, setItemPhotoPreview] = useState('');
-
     const modalRef = useRef();
     const closeModal = e =>{
         if(modalRef.current === e.target){
             setShowModal(false);
-            setShowLost(false);
-            setShowFound(false);
         }
     }
-
-
     const closeAllStaff = () =>{
         setShowModal(false);
-        setShowLost(false);
-        setShowFound(false);
+
     }
-    const closePreview = () =>{
-        setItemPhoto("");
-        setItemPhotoPreview("");
+const saveIngredient = () =>{
+    if(ingredient.name =="" || ingredient.quantity == 0){
+        toast.error("All fields are required!")
+        setLoading(false);
     }
-
-
-    const onChange = e => {
-        if(e.target.name === 'itemPhoto'){
-             const reader = new FileReader();
-             reader.onload = ()=>{
-                 if(reader.readyState === 2){
-                     //console.log(reader.result)
-                     setItemPhoto(reader.result);
-                     setItemPhotoPreview(reader.result);
-                     Tesseract.recognize(
-                        reader.result,
-                         'eng',
-                        { logger: m => {
-                            setCompleted(Math.round(m.progress*100))
-
-                      
-                          
-                            
-                        }
-                            }
-                      ).then(({data:{text}}) => { 
-                      
-                       let matching = validate(text,category);
-                       
-                      
-                      if(category === '60afc01c4aa4cb37fcf899cc'){
-                          matching = 4;
-                      }
-                      if(matching < 3){
-                          setImageCheck(false);
-
-                      }else{
-                          console.log("Succefully validated",matching)
-                          setImageCheck(true)
-                      }
-                      })
-
-                 }
-             }
-             reader.readAsDataURL(e.target.files[0])
-        }else{
-            
-            setProduct({...product,[e.target.name]:e.target.value});
-        }
-    }
-  
-
-    const handleSubmit = async e =>{
-     e.preventDefault();
-     
-     setIsLoading(true);
-     const {
-        category,
-        date,
-        whereLost,
-        phone,
-        productId
-    } = product
-    
-    const productData = {category,date,whereLost,phone,productId,itemPhoto};
-    console.log(category)
-    //console.log(productData)
-     if((/^07(8|2|9)\d{7}$/.test(phone))){
-        request(`${ showLostForm ? "lostProducts/add-product" : "foundProducts/add-product"}`, "POST", productData, {"Access-Control-Allow-Origin": "*","Content-Type": "application/json","bearer":`${localStorage.getItem('auth')}`})
-        .then(data=>{
-            setIsLoading(false);
-            if(data.error){
-               toast.error(data.error, {style: {
-                   fontSize: 12
-               }});  
-            }
-            if(data.message){
-               toast.success(data.message);
-                if(showLostForm){
-                   history.push("/lostproducts");                 
-                }
-                if(showFoundForm){
-                   history.push("/foundproducts");
-                }
-              
-            }
-           
-        })
-        .catch(err=>{
-            setIsLoading(false);
-            toast.error("Unexpected error occurred!")})
-
-     }else{
-         setIsLoading(false);
-         toast.info("Invalid telephone number");
-     }
-
-
-    } 
-
-    const {category, date, whereLost, phone, productId } = product;
+    if(ingredient.name !== "" && ingredient.quantity !==0 ) setLoading(true);
+}
+const handleChange = e =>{
+    setIngredient({
+        ...ingredient,
+        [e.target.name]: e.target.value
+    })
+}
     return (
         showModal ? (
-        <Background className={itemPhoto && showFoundForm ? "changeHeight" : ""} ref={modalRef} onClick = { closeModal } style={showFoundForm ? { height: 700} : {}}>
-           <Wrapper className={`${ showModal ? "animate": "" } ${itemPhoto && showFoundForm ? "wrapperHeight" : ""}` } style={{height: 500, padding: 15}}>
-           <h2>{ showFoundForm ? requirements.showFoundForm.header: requirements.showLostForm.header}</h2>
-               <Form onSubmit = {handleSubmit} style={showFoundForm ? {width: 500} : {}} id="form" 
-               className="form">
-                   <Wrapp className={showFoundForm ? "d-flexs" : "" } 
-                   style={showFoundForm ? {display: 'flex', flexDirection: 'row'} : {} }>
-                       <Select value = {category}  name="category" onChange={onChange} 
-                    className={`${showFoundForm ? "category" : ""} ${showLostForm ? "mtcategory": ""} `} required>
-                        <Option value={""}>Choose Item Category</Option>
-                        {categories.map(category =>{
-                            return(
-                                <option value={category._id} key={category._id}>{category.name}</option>
-                            )
-                        })}
-                    </Select>
-                    <Input type="text" name="productId" required onChange={onChange} 
-                   className={` ${showFoundForm ? "name sm:mx-4" : "" } first`}
-                   value={productId} minLength={category === '60a93cbb0df9723780b334b1' ? 16 : 0} maxLength={category === '60a93cbb0df9723780b334b1' ? 16 : 16} placeholder="Add Item Id"/>
-
-                    
-                   </Wrapp>
-                      <DateTimePickerComponent name="date" value={date} onChange={onChange} placeholder={showLostForm ? requirements.showLostForm.label : requirements.showFoundForm.label} max={maxDate}/> 
-                   <Input type="text" style={{marginTop: 20}} name="whereLost" required onChange={onChange} value={whereLost} placeholder={showLostForm ? "Enter where you think it was lost ": "Enter where it was found"} maxLength="15" />
-                   <Input type="text" name="phone" onChange={onChange} value={phone} placeholder="Enter your Phone number" maxLength="13"/>
-                   {showFoundForm ? (<Hold className="hold">
-                      <label>Item Photo</label>
-                     {!itemPhoto && <Input type="file" required name="itemPhoto" onChange={ onChange }/> }
-                   </Hold>): null}
-                   {itemPhoto&&showFoundForm ? (
-                       <div>
-
-                        <Preview>
-                             
-                            <img src = {itemPhotoPreview} alt="found item"/>
-                            <ClosePreview onClick={closePreview}/>
-                           
-                        </Preview>
-                            {/* checking image validity */}
-                            <span className={imageCheck ? "text-green-700" : 'text-red-600'}>{imageCheck ? "The image is valid" : (complete === 100 ? "Please upload a valid image" : "Checking image validity")}</span>
-                            <ProgressBar  bgcolor={"#6a1b9a"} completed={complete} />
-                       </div>
-                   ): null}
-                   <Button type="submit" className="disabled:opacity-50" disabled={showFoundForm && (!imageCheck ? true : false)}>{ isLoading ? <Loader></Loader> : (showFoundForm&&!isLoading ? "Register An Item": "Find My Item")}</Button>
+        <Background ref={modalRef} onClick = { closeModal }>
+            <ToastContainer position="top-center" autoClose={3000} />
+           <Wrapper className={`${ showModal ? "animate": "" }`} style={{height: 250, padding: 15}}>
+               <h3>New Ingredient</h3>
+               <Form>
+                  <FormControl>
+                    <Label>Name</Label>
+                   <Input type='text' name='name' value={ingredient.name} onChange={handleChange} required placeholder='Enter name'/>
+                  </FormControl>
+                    <FormControl>
+                      <Label>Quantity</Label>
+                      <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={ingredient.quantity} onChange={handleChange} required/>
+                    </FormControl>                  
                </Form>
-               <CloseModalButton onClick={closeAllStaff} />
+               <AddButton>
+                   <Button onClick={saveIngredient}>{!loading ? "Add": 
+                    <Loader style={{marginLeft: "40%", marginTop: 0, height: 20, width: 20}}></Loader>}
+                   </Button>
+               </AddButton>
+            <CloseModalButton onClick={closeAllStaff} />
            </Wrapper>
         </Background>
         ): null
@@ -204,10 +65,11 @@ const Modal = ({ showModal, setShowModal, setShowFound, setShowLost, showFoundFo
 }
 const Background = styled.div`
       position: absolute;
+      top: 0px;
       width: 100%;
       height: 100vh;
       background: rgba(0, 0, 0, 0.6);
-      z-index: 2000 !important;
+      z-index: 5000 !important;
     @media screen and (max-width: 1024px){
         height: 100vh !important;
     }
@@ -234,45 +96,19 @@ const Background = styled.div`
    }
 `
 
-const Preview = styled.div`
-      width: 200px;
-      height: 250px;
-      position: relative;
-      padding: 7px;
-      img{
-          width: 100% !important;
-          height: 100% !important;
-          object-fit: cover;
-          border-radius: 5px;
-      }
-`
-const ClosePreview = styled(Close)`
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      border-radius: 50%;
-      background: #fff;
-      font-size: 20px !important;
-      color: red;
-      cursor: pointer;
-`
 
-const Wrapp = styled.div`
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 15px;
-`
 const Wrapper = styled.div`
       font-family: 'Roboto';
-      width: 50%;
+      width: 30%;
       height: 80vh;
       position: relative;
       top: -100%;
+      background: #fff;
       z-index: 5000 !important;
       background: #fff;
       border-radius: 5px;
       padding-top: 20px;
-      h2{
+      h3{
           text-align: center;
           font-size: 20px;
       }
@@ -342,73 +178,16 @@ const Wrapper = styled.div`
        }
    }
 `
-const Hold = styled.div`
-      display: flex;
-      flex-direction: column;
-      label{
-          margin-top: 10px;
-          padding-bottom: 0%;
-      }
-` 
-const Select = styled.select`
- width: 100%;
- padding: 10px 10px;
- border: 1px solid grey;
- border-radius: 5px;
- margin-top: 10px;
- outline: none;
- /* margin:0 1rem; */
- 
-`
-const Option = styled.option`
 
-`
-
-const Form = styled.form`
-   width: 50%;
-   margin: 5% auto;
-   height: auto;
-   font-size: 13px;
-   input{
-       border-radius: 5px;
-   }
-   input::placeholder{
-       text-align: left;
-   }
-   input:focus{
-    outline: dodgerblue; 
-    border: 1px solid dodgerblue;
-   }
-`
 const Input = styled.input`
- width: 100%;
+ width: 60%;
  margin-top: 10px;
  padding: 7px 10px;
  border: 1px solid gray;
+ border-radius: 5px;
+ outline: 1px solid rgba(30, 140, 250, 0.9);
 `
-const Button = styled.button`
-   width: 100%;
-   background: #0055ff;
-   color: #ffffff;
-   margin-top: 10px;
-   padding: 10px 10px;
-   font-weight: bold;
-   cursor: pointer;
-   outline: none;
-   border: none;
-   
-   border-radius: 3px;
-   ${props =>
-            props.disabled ?
-            `
-            opacity: .5;
-            cursor: default;
-            `:  `
-            opacity:1;
-            cursor:pointer;
-            `}
-           
-`
+
  const CloseModalButton = styled(Close)`
    cursor: pointer;
    position: absolute;
@@ -426,37 +205,35 @@ const Button = styled.button`
        border-radius: 50%;
    }
 `
-export const Loader = styled.div`
-     height: 25px;
-     width: 25px;
-     border-radius: 50%;
-     background: transparent;
-     border: 3px solid lightgray;
-     border-top: 3px solid #5e93ff;
-     margin-left: 48%;
-     animation: spin 1s linear infinite;
-     @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+const Form = styled.form`
+   width: 70%;
+   margin: 10px auto;
+`
+const AddButton = styled.div`
+  width: 30%;
+  height: 40px;
+  margin: 25px auto;
 
-@media screen and (max-width: 760px){
-      margin-left: 200px !important;
-      margin-top: 1px !important;
-      height: 15px !important;
-      width: 15px !important;
-  }
-  @media screen and (max-width: 450px){
-      margin-left: 150px !important;
-  }
-  @media screen and (max-width: 390px){
-      margin-left: 130px !important;
-  }
-@media screen and (max-width: 360px){
-      margin-left: 120px !important;
-  }
-  @media screen and (max-width: 300px){
-      margin-left: 90px !important;
-  }
+`
+const Button = styled.button`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 7px;
+  background:rgba(30, 140, 250, 0.9);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+`
+const FormControl = styled.div`
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+`
+const Label = styled.label`
+ width: 30% !important;
 `
 export default Modal

@@ -13,11 +13,15 @@ import Resend from "./components/Resend";
 // import ForgotPassword from "./components/ForgotPassword";
 import Auth from "./pages/Auth";
 import Inventory from "./pages/Inventory";
+import InventoryEdit from "./pages/InventoryEdit";
 import OutGoing from "./pages/OutGoing";
 import Profile from './pages/Profile';
 import Report from './pages/Report';
 import Ingredients from './pages/Ingredients';
 import Settings from './pages/Settings';
+import IngredientsEdit from './pages/IngredientsEdit';
+import IngredientsUsedEdit from './pages/IngredientsUsedEdit';
+
 
 function App() {
     const store = Store(useState);
@@ -27,12 +31,15 @@ function App() {
     <Router>
     <ToastContainer position="top-center" autoClose={5000} />
        <Switch>
-       <PublicRoute component = {Auth} path="/account" exact/>
-       {/* <Route exact  component={VerifyAccount} path="/verifyAccount/:verificationCode"/> */}
+
+       <Route component = {Auth} path="/account" exact/>
        <PublicRoute component={Dashboard}  path="/dashboard" /> 
+        <PublicRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
+        <PublicRoute component={IngredientsUsedEdit} exact path="/ingredients/editused/:ingId"/> 
        <PublicRoute component={Ingredients}  path="/ingredients" /> 
        <PublicRoute component={Report}  path="/report" /> 
        <PublicRoute component={Profile}  path="/profile" /> 
+       <PublicRoute component={InventoryEdit} path="/inventory/edit/:id"/>
        <PublicRoute component={Inventory} path="/inventory"/>
        <PublicRoute component={OutGoing} path="/outgoing"/>
        <PublicRoute component={Settings} path="/settings"/>
