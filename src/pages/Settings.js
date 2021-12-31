@@ -55,6 +55,7 @@ const StockSettings = styled.div`
        border-right: 3px dashed rgba(30, 140, 250, 0.5);
        h2{
            text-align: center;
+           color: rgba(30, 140, 250, 0.9);
        }
 `
 const OtherSettings = styled.div`
@@ -63,6 +64,7 @@ const OtherSettings = styled.div`
     padding-left: 20px;
        h2{
            text-align: center;
+           color: rgba(30, 140, 250, 0.9);
        }    
 `
 const FormControl = styled.div`

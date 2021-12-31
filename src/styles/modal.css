@@ -12,6 +12,12 @@
    top: 30vh !important;
    transition: all ease-in-out .1s  !important;
 }
+.animateOrder {
+    /* animation: animate ease 5s !important; */
+    margin: auto;
+    top: 20vh !important;
+    transition: all ease-in-out .1s !important;
+}
 @keyframes animate{
     0% { top: -100%};
     100% {top: 10vh}

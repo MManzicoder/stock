@@ -3,21 +3,36 @@ import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import userImgsrc from "../assets/sister.jpg";
 import { Notifications, ArrowDropDown, ArrowRightOutlined } from "@material-ui/icons";
+import { useState } from 'react';
 function Header() {
     const [showLogoutSection, setShowLogoutSection ]= React.useState(false);
+    const [showNotification, setShowNotification] = useState(false);
     const history = useHistory();
     const redirectToProfile = ()=>{
          history.push("/profile");
     }
+    const Notify = ()=>{
+        setShowLogoutSection(false);
+        setShowNotification(!showNotification);
+    }
+    const LogoutActivate = ()=>{
+        setShowNotification(false);
+        setShowLogoutSection(!showLogoutSection);
+    }
     return (
        <Holder>
           <ProfileInfo>
-           <Notification>
+           <Notification onClick={Notify}>
             <Notifications className="icon" color='blue'/>
            <div className="notification-counter" style={{background:"red", display: "block"}}>
                    <span>3</span>
            </div>
            </Notification>
+           {showNotification && (
+               <NotifyDiv>
+                   <p>No current notification</p>
+               </NotifyDiv>
+           )}
            <UserInfo onClick={redirectToProfile}>
                <UserImage>
                    <Img src={userImgsrc}/>
@@ -25,7 +40,7 @@ function Header() {
                <span>Manzi Monnierey</span>
            </UserInfo>
             <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}
-            onClick={()=>setShowLogoutSection((prev)=>!prev)}
+            onClick={LogoutActivate}
             ><ArrowDropDown className='dropdown'/></LogoutSection>
             {showLogoutSection && (
                 <Lsection>
@@ -141,3 +156,17 @@ const LogoutDiv = styled.div`
       color: #fff;
   }   
 `
+const NotifyDiv = styled.div`
+     position: absolute;
+     width: 200px;
+     padding: 20px;
+     height: 100px;
+     background: rgba(30, 140, 250, 0.9);
+     top: 48px;
+     left: -100px;
+     border-radius: 7px;
+     z-index: 2000;
+     p{
+         color: #fff;
+     }
+     `

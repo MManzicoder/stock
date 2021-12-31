@@ -40,10 +40,10 @@ function Inventory () {
             </FirstSection>
             <SecondSection>
                <ChartHolder>
-                 <Chart Title={"Stock Production for this weeek"} dataArray={[180, 220, 280, 320, 400, 470]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                 <Chart Title={"Stock Production for this weeek"} dataArray={[180, 220, 280, 320, 400, 470]} labels={["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                </ChartHolder>
                <ChartHolder>
-                 <Chart Title={"Stock production for last week"} dataArray={[140, 200, 260, 360, 390, 410, 450]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                 <Chart Title={"Stock production for last week"} dataArray={[140, 200, 260, 360, 390, 410, 450]} labels={["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                </ChartHolder>               
             </SecondSection>
           </Wrapper>         

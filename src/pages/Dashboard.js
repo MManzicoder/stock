@@ -22,7 +22,7 @@ function Dashboard() {
         },
         {
             name: "Ingredients used",
-            amount: "2500",
+            amount: "2500KG",
             img: money,
         },
     ]
@@ -52,10 +52,10 @@ return (
                 </Division1>
                 <Division2>
                     <ChartHolder>
-                        <Chart Title={"Purchase history for this week"} dataArray={[180, 220, 280, 320, 360, 430]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                        <Chart Title={"Purchase history for this week"} dataArray={[180, 220, 280, 320, 360, 430]} labels={["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                     </ChartHolder>
                     <ChartHolder>
-                        <Chart Title={"Purchase history for last week"} dataArray={[150, 200, 300, 320, 350, 400, 420]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
+                        <Chart Title={"Purchase history for last week"} dataArray={[150, 200, 300, 320, 350, 400, 420]} labels={["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]} background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
                     </ChartHolder>
                 </Division2>
               </Main>

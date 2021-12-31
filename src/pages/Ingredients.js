@@ -1,11 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
-import { Loader } from "../components/AdminLogin"
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Modal  from "../components/Modal"
 function Ingredients() {
-  const history = useHistory();
   const [ showModal , setShowModal ] = useState(false);
   const data  = [
   {
@@ -52,8 +50,7 @@ return (
                     </ButtonDiv>
                    </Card>
                         );
-                      })}
-                    
+                      })}                    
                  </IngredientSection>
                 <NewIngredient>
                    <AddIngredient onClick={()=>setShowModal(true)}>Add New</AddIngredient>
@@ -61,7 +58,7 @@ return (
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                                   <IngredientSection>
+                  <IngredientSection>
                       {data.map((ing, i)=>{
                         return(
                           <Card>
@@ -162,13 +159,6 @@ const FormControl = styled.div`
 `
 const Label = styled.label`
    /* width: 50%; */
-`
-const Input = styled.input`
-     width: 40%;
-     border: none;
-     border-bottom: 1px solid rgba(30, 140, 250, 0.9);
-     outline: none;
-     text-align: center;
 `
 const ButtonDiv = styled.div`
      width: 50%;
