@@ -26,6 +26,8 @@ function Dashboard() {
             img: money,
         },
     ]
+//     var d = new Date(dateString); get day from the date
+// var dayName = d.toString().split(' ')[0];
 return (
            <Layout>
               <Main>
