@@ -1,61 +1,66 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+export default function Table({fetching}) {
 
-const columns = [
+  const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: 'recipientphone',
+    headerName: 'Recipient Phone',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
+    field: 'address',
+    headerName: 'Address',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'quantity',
+    headerName: 'Quantity',
     type: 'number',
-    width: 110,
-    editable: true,
+    width: 150,
+    editable: false,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'amount',
+    headerName: 'Amount (RWF)',
+    sortable: false,
+    width: 160
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
     sortable: false,
     width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+    editable: true
+  }
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, recipientphone: '0780756824', address: 'Cyangungu', quantity: 50,amount: 35000,status: "Paid"},
+  { id: 2, recipientphone: '0780756824', address: 'Kabuga', quantity: 55,amount: 42000,status: "Not paid" },
+  { id: 3, recipientphone: '0780756824', address: 'Nyanza', quantity: 57,amount: 45000,status: "Paid" },
+  { id: 4, recipientphone: '0780756824', address: 'Nyamata', quantity:30,amount: 16000,status: "Paid" },
+  { id: 5, recipientphone: '0780756824', address: 'Gatsata', quantity: 35,amount: 24000,status: "Not paid" },
+  { id: 6, recipientphone: '0780756824', address: 'Kabarondo', quantity: 29,amount: 15000,status: "Paid" },
+  { id: 7, recipientphone: '0780756824', address: 'Gicumbi', quantity: 56,amount: 44000,status: "Paid" },
+  { id: 8, recipientphone: '0780756824', address: 'Mukamira', quantity: 51,amount: 36000,status: "Not paid" },
+  { id: 9, recipientphone: '0780756824', address: 'Gakenke', quantity: 63,amount: 65000,status: "Paid" },
 ];
 
-export default function Table() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      {/* <DataGrid
+    <div style={{ height: 250, width: '100%' }}>
+      <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={2}
         rowsPerPageOptions={[5]}
         checkboxSelection
+        loading={fetching}
         disableSelectionOnClick
-      /> */}
+      />
     </div>
   );
 }

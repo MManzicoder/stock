@@ -59,9 +59,9 @@ const handleChange = e =>{
                     <FormControl>
                       <Label>Status</Label>
                       <Select  name='status' disabled={loading} value={order.status} onChange={handleChange} required>
-                          <option>select status</option>
+                          <option value={""}>select status</option>
                           <option value={"1"}>Paid</option>
-                          <option value={"2"}>Pending</option>
+                          <option value={"2"}>Not paid</option>
                       </Select>
                     </FormControl>                                      
                </Form>

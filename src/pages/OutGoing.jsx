@@ -5,6 +5,7 @@ import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import AddOrder from '../components/AddOrder'
+import Table from '../components/Table'
 function OutGoing () {
     const [ showModal , setShowModal ] = useState(false);
    const paid = {
@@ -14,7 +15,7 @@ function OutGoing () {
    }
 const pending = {
      _id: 124124,
-     name: "Pending orders",
+     name: "Not paid orders",
      amount: "20",
    }
     return (
@@ -39,7 +40,7 @@ const pending = {
             </FirstSection>
             <SecondSection>
               <Orders>
-
+                 <Table fetching={false} />
               </Orders>
               <ButtonDiv>
                  <AddButton onClick={()=>setShowModal(true)}>Add order</AddButton>
@@ -140,7 +141,7 @@ const ButtonDiv = styled.div`
      margin: 30px auto;
 `
 const Orders = styled.div`
-   width: 70%;
+   width: 80%;
    margin:  auto;
    height: 40vh;
    border-radius: 10px;
