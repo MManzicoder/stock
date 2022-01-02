@@ -27,7 +27,30 @@ function Dashboard() {
         },
     ]
 //     var d = new Date(dateString); get day from the date
-// var dayName = d.toString().split(' ')[0];
+// var dayame = d.toString().split(' ')[0];
+
+// function nextweek(){
+//     var today = new Date();
+//     var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+//     return nextweek;
+// }
+
+//get first and last day of the current week
+// var curr = new Date; // get current date
+// var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+// var last = first + 6; // last day is the first day + 6
+
+var firstday = new Date(curr.setDate(first)).toUTCString();
+var lastday = new Date(curr.setDate(last)).toUTCString();
+// var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}; get dates between two dates
+
+//get first day and last day of the previous week 
+// var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
+// var beforeOneWeek2 = new Date(beforeOneWeek);
+//   day = beforeOneWeek.getDay()
+//   diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -6 : 1)
+//   lastMonday = new Date(beforeOneWeek.setDate(diffToMonday))
+//   lastSunday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
 return (
            <Layout>
               <Main>
