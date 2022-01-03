@@ -1,10 +1,12 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
-import userImgsrc from "../assets/sister.jpg";
+import userImgsrc from "../assets/avatar.png";
 import { Notifications, ArrowDropDown, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from 'react';
+import { isAuth } from '../shared/utils/isAuth';
 function Header() {
+    const {username, email, userType, profile}  = isAuth();
     const [showLogoutSection, setShowLogoutSection ]= React.useState(false);
     const [showNotification, setShowNotification] = useState(false);
     const history = useHistory();
@@ -18,6 +20,11 @@ function Header() {
     const LogoutActivate = ()=>{
         setShowNotification(false);
         setShowLogoutSection(!showLogoutSection);
+    }
+    const logout = ()=>{
+        localStorage.removeItem("auth");
+        localStorage.removeItem("user");
+        history.push("/account")   ;
     }
     return (
        <Holder>
@@ -37,19 +44,20 @@ function Header() {
                <UserImage>
                    <Img src={userImgsrc}/>
                </UserImage>
-               <span>Manzi Monnierey</span>
+               <span>{username}</span>
            </UserInfo>
             <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}
             onClick={LogoutActivate}
-            ><ArrowDropDown className='dropdown'/></LogoutSection>
-            {showLogoutSection && (
-                <Lsection>
+            ><ArrowDropDown className='dropdown'/>
+             {showLogoutSection && (
+                <Lsection onClick={logout}>
                     <LogoutDiv>
                         <ArrowRightOutlined />
                         <span>Logout</span>
                     </LogoutDiv>
                 </Lsection>
             )}
+            </LogoutSection>
           </ProfileInfo>
        </Holder>
     )
@@ -129,6 +137,9 @@ const Img = styled.img`
 `
 
 const LogoutSection = styled.div`
+position: relative;
+width: 100px;
+margin-left: 10px;
   /* padding: 10px; */
   margin-top: 5px;
   .icon{
@@ -140,7 +151,7 @@ const Lsection = styled.div`
    height: 40px;
    width: 100px;
    top: 30px;
-   left: 170px;
+   left: -30px;
    background: rgba(30, 140, 250, 0.9);
    border-radius: 7px;
 `

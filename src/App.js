@@ -33,16 +33,16 @@ function App() {
        <Switch>
 
        <Route component = {Auth} path="/account" exact/>
-       <PublicRoute component={Dashboard}  path="/dashboard" /> 
-        <PublicRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
-        <PublicRoute component={IngredientsUsedEdit} exact path="/ingredients/editused/:ingId"/> 
-       <PublicRoute component={Ingredients}  path="/ingredients" /> 
-       <PublicRoute component={Report}  path="/report" /> 
-       <PublicRoute component={Profile}  path="/profile" /> 
-       <PublicRoute component={InventoryEdit} path="/inventory/edit/:id"/>
-       <PublicRoute component={Inventory} path="/inventory"/>
-       <PublicRoute component={OutGoing} path="/outgoing"/>
-       <PublicRoute component={Settings} path="/settings"/>
+       <PrivateRoute component={Dashboard}  path="/dashboard" /> 
+       <PrivateRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
+       <PrivateRoute component={IngredientsUsedEdit} exact path="/ingredients/editused/:ingId"/> 
+       <PrivateRoute component={Ingredients}  path="/ingredients" /> 
+       <PrivateRoute component={Report}  path="/report" /> 
+       <PrivateRoute component={Profile}  path="/profile" /> 
+       <PrivateRoute component={InventoryEdit} path="/inventory/edit/:id"/>
+       <PrivateRoute component={Inventory} path="/inventory"/>
+       <PrivateRoute component={OutGoing} path="/outgoing"/>
+       <PrivateRoute component={Settings} path="/settings"/>
        <Route component={PasswordResetNotification} path="/resetMessage"/>       
        {/* <Route component={ForgotPassword} path="/forgotpassword"/> */}
        <Route component={ChangePassword} path="/shaka/reset/:code"/>

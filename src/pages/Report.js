@@ -53,7 +53,7 @@ const ReportDiv = styled.div`
  border-radius: 7px;
 `
 const ReportIssueSection = styled.div`
-   width: 60%;
+   width: 100%;
    margin: 30px auto;
    justify-content: space-around;
    display: flex;

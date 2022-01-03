@@ -1,84 +1,120 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Layout from '../components/Layout'
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useHistory} from "react-router-dom"
 import styled from "styled-components"
 import { Loader } from "../components/AdminLogin"
 import Modal from '../components/Modal';
+import { toast, ToastContainer } from 'react-toastify';
+import { getRequest, request } from  "../apiHandler/Authapi";
 function IngredientsEdit() {
+    const history = useHistory();
     const [ showModal , setShowModal ] = useState(false);
+    const [ingredients, setIngredients] = useState([]);
+    const [usedIngredients, setUsedIngredients] = useState([]);
+    const [quantity, setQuantity] = useState(0)
     const { ingId } = useParams()
-    const data  = [
-  {
-    id: 1,
-    name: "Honey",
-    amount: "100"
-  },
-  {
-    id: 2,
-    name: "Sugar",
-    amount: "150"
-  },
-  {
-    id: 3,    
-    name: "Salt",
-    amount: "200",
-  },
-    {
-    id: 4,      
-    name: "Salt",
-    amount: "200"
-  }
-]
-  const [quantity, setQuantity] = useState(data.filter((d)=>d.id == ingId)[0].amount)
-  const [loading, setLoading] = useState(false);
-  const saveConfig = ()=>{
+
+    const getIngredients =()=>{
+     setLoading(true);
+       getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error);
+            }
+            setIngredients(res.ingredients);
+        })
+
+}
+const getUsedIngredients =()=>{
       setLoading(true);
+       getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error);
+            }
+            setUsedIngredients(res.ingredients);
+        })
+
+}
+const getIngredient = ()=>{
+     getRequest(`ingredients/${ingId}`,{"bearer": `${localStorage.getItem("auth")}`})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error);
+            }
+            setQuantity(res.ingredient.quantity);
+        })
+
+}
+
+  const [loading, setLoading] = useState(false);
+  const saveIng = ()=>{
+      setLoading(true);
+      request(`ingredients/${ingId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      .then(data=>{
+        setLoading(false);
+        if(data.error) {
+          toast.error(data.error);
+        }
+        toast.success(data.message);
+        history.push("/ingredients");
+      })
     };
   
+  useEffect(()=>{
+    getIngredient();
+    getIngredients();
+    getUsedIngredients();
+  },[ingId])
     return (
      <Holder>
-               <Layout>
+        <Layout>
+                <ToastContainer position="top-center" autoClose={3000} />
         <Main>
           <Wrapper>
              <StockSettings>
                  <h2>Ingredients that are currently in stock</h2>
-                 <IngredientSection>
-                      {data.map((ing, i)=>{
+                 {loading ?<Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
+                      {ingredients && ingredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                   {ingId == ing.id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.amount+"Kg" }    
+                   {ingId == ing._id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+"Kg" }    
                     </FormControl>
                     <ButtonDiv>
-                        {ingId == ing.id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
-                      onClick={saveConfig}>
-                        { ingId == ing.id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
-                        </Button>): <Link to={"/ingredients/edit/"+ing.id}>Edit</Link> }
+                        {ingId == ing._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
+                      onClick={saveIng}>
+                        { ingId == ing._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
+                        </Button>): <Link to={"/ingredients/edit/"+ing._id}>Edit</Link> }
                       
                     </ButtonDiv>
                    </Card>
                         );
                       })}
                     
-                 </IngredientSection>
+                 </IngredientSection>) }
                <NewIngredient>
                    <AddIngredient onClick={()=>setShowModal(true)}>Add New</AddIngredient>
                  </NewIngredient>   
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                 <IngredientSection>
-                      {data.map((ing, i)=>{
+                 {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: 
+                 (<IngredientSection>
+                      {usedIngredients && usedIngredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.amount+"KG"}</p>
+                     <p>{" "+ing.quantity+"KG"}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/editused/"+ing.id}>
+                      to={"/ingredients/editused/"+ing._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -86,7 +122,7 @@ function IngredientsEdit() {
                         );
                       })}
                     
-                 </IngredientSection>
+                 </IngredientSection>)}
               </OtherSettings>
           </Wrapper>
         </Main>
@@ -142,7 +178,7 @@ const OtherSettings = styled.div`
 
 const Card = styled.div`
   width: 35%;
-  height: 100px;
+  height: auto;
   background: #fff;
   border-radius: 7px;
   padding: 10px;

@@ -7,6 +7,14 @@ export const request = (url, method, data, headers={}) =>{
       })
       .then(res=> res.json()).catch(err => console.log(err.message))
 }
+
+export const getRequest = (url, headers)=>{
+        return fetch(`${API}/${url}`, {
+                method: "GET",
+                headers: headers
+        })
+        .then(res=>res.json()).catch(err=>console.log(err.message))
+}
 export const DeteremineTheOwner = async (url, data)=>{
         return fetch(`${API}/${url}`, {
                 method: "GET",

@@ -5,6 +5,7 @@ import { Loader } from "../components/AdminLogin"
 import { Close } from "@material-ui/icons";
 import "../styles/modal.css";
 import { toast, ToastContainer } from 'react-toastify';
+import { request } from '../apiHandler/Authapi';
 
 
 const Modal = ({ showModal, setShowModal}) => {
@@ -26,9 +27,18 @@ const Modal = ({ showModal, setShowModal}) => {
 const saveIngredient = () =>{
     if(ingredient.name =="" || ingredient.quantity == 0){
         toast.error("All fields are required!")
-        setLoading(false);
     }
     if(ingredient.name !== "" && ingredient.quantity !==0 ) setLoading(true);
+     request("ingredients", "POST", ingredient, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error);
+            }
+            if(res.message){
+                toast.success(res.message);
+            }
+        })
 }
 const handleChange = e =>{
     setIngredient({

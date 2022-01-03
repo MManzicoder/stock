@@ -95,7 +95,7 @@ const ChartHolder = styled.div`
 `
 const Card = styled.div`
   width: 28%;
-  height: 100px;
+  height: 120px;
   background: #fff;
   border-radius: 7px;
   padding: 10px;

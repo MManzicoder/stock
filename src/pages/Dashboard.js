@@ -40,8 +40,8 @@ function Dashboard() {
 // var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
 // var last = first + 6; // last day is the first day + 6
 
-var firstday = new Date(curr.setDate(first)).toUTCString();
-var lastday = new Date(curr.setDate(last)).toUTCString();
+// var firstday = new Date(curr.setDate(first)).toUTCString();
+// var lastday = new Date(curr.setDate(last)).toUTCString();
 // var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}; get dates between two dates
 
 //get first day and last day of the previous week 

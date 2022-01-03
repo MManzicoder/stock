@@ -2,4 +2,4 @@ import { createContext } from 'react'
 
 export const Modes = createContext(null);
 
-export const API = 'https://shaka-1.herokuapp.com/api'
+export const API = 'http://localhost:5000/api'

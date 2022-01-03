@@ -5,9 +5,10 @@ import styled from "styled-components";
 // import { adminLoginHandler } from "../apiHandler";
 import { request } from "../apiHandler/Authapi";
 import urwunge from "../assets/target.png";
+import { toast, ToastContainer } from 'react-toastify';
 // import { Modes } from "../utils/context";
 export const AdminLogin = ()=>{
-   const navigate = useHistory();
+      const history = useHistory();
    // const { adminLogin, sponsorLogin,sponsorSignup, setSponsorLogin, setAdminLogin, setSponsorSignup } = useContext(Modes);
    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({
@@ -25,11 +26,22 @@ export const AdminLogin = ()=>{
  const handleAdminLogin = e =>{
     setLoading(true);
        e.preventDefault();
-     request(user)
+     request("auth/login","POST", user, {
+        "Content-Type":"application/json"
+     })
       .then(data=>{
          setLoading(false);
-         if(data.data.loginAdmin){
-            console.log(data.data);
+         if(data.error){
+            toast.error(data.error)
+         }
+         if(data.token){
+            localStorage.setItem("auth", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user))
+            if(data.user.userType ==="ADMIN"){
+               history.push("/dashboard")               
+            }else{
+               toast.error("Admin resource access denied!");
+            }
          }
       })
       .catch(err=>{
@@ -39,6 +51,7 @@ export const AdminLogin = ()=>{
  }
     return(
       <Holder>
+         <ToastContainer  position="top-center" draggable autoClose={2000} />
         <Wrapper>
           <Logo>
             <Image src={urwunge} alt="urwunge"/>
@@ -60,7 +73,9 @@ export const AdminLogin = ()=>{
                  required
                  />
               </FormControl>
-              <Button onClick={handleAdminLogin} style={loading ? {padding: "0px"}: {}}>{!loading ? "Sign In": <Loader style={loading ? {marginLeft: "120px", marginTop: "-2px"}: {}}></Loader> }</Button>
+              <Button onClick={handleAdminLogin} style={loading ? {padding: "0px"}: {}}>
+                 {!loading ? "Sign In": <Loader style={loading ? {marginLeft: "120px", marginTop: "-2px"}: {}}></Loader> }
+                 </Button>
               <UserBenefit>
                 <RememberMe>
                    <Input type="checkbox" style={{cursor: "pointer"}} 

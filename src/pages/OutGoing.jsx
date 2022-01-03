@@ -5,6 +5,7 @@ import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import AddOrder from '../components/AddOrder'
+// import Table from '../components/Table'
 import Table from '../components/Table'
 function OutGoing () {
     const [ showModal , setShowModal ] = useState(false);
@@ -138,7 +139,7 @@ const Label = styled.label`
 `
 const ButtonDiv = styled.div`
      width: 12%;
-     margin: 30px auto;
+     margin: 20px auto;
 `
 const Orders = styled.div`
    width: 80%;

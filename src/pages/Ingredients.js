@@ -1,74 +1,90 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
 import Modal  from "../components/Modal"
+import { useQuery } from 'react-query'
+import { API } from '../shared/context/modes'
+import { toast, ToastContainer } from 'react-toastify';
+import { getRequest, request } from '../apiHandler/Authapi'
+import { Loader } from "../components/AdminLogin"
 function Ingredients() {
   const [ showModal , setShowModal ] = useState(false);
-  const data  = [
-  {
-    id: 1,
-    name: "Honey",
-    amount: "100"
-  },
-  {
-    id: 2,
-    name: "Sugar",
-    amount: "150"
-  },
-  {
-    id: 3,    
-    name: "Salt",
-    amount: "200",
-  },
-    {
-    id: 4,      
-    name: "Salt",
-    amount: "200"
-  }
-]
+  const [ingredients, setIngredients] = useState([]);
+  const [usedIngredients, setUsedIngredients] = useState([]);
+  const [ loading, setLoading ] = useState(false); 
+const getIngredients =()=>{
+    setLoading(true);
+       getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error);
+            }
+            setIngredients(res.ingredients);
+        })
+
+}
+const getUsedIngredients =()=>{
+      setLoading(true);
+       getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
+        .then(res=>{
+            setLoading(false);
+            console.log(res);
+            if(res.error){
+                toast.error(res.error);
+            }
+            setUsedIngredients(res.ingredients);
+        })
+
+}
+  useEffect(()=>{
+    getIngredients();
+    getUsedIngredients();
+  },[])
 return (
 <Holder>
         <Layout>
+        <ToastContainer position="top-center" autoClose={3000} />
         <Main>
           <Wrapper>
              <StockSettings>
                  <h2>Ingredients that are currently in stock</h2>
-                 <IngredientSection>
-                      {data.map((ing, i)=>{
+                 {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
+                      {ingredients && ingredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.amount+"KG"}</p>
+                     <p>{" "+ing.quantity+"KG"}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/edit/"+ing.id}>
+                      to={"/ingredients/edit/"+ing._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
                    </Card>
                         );
                       })}                    
-                 </IngredientSection>
+                 </IngredientSection>)}
                 <NewIngredient>
                    <AddIngredient onClick={()=>setShowModal(true)}>Add New</AddIngredient>
                  </NewIngredient>
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                  <IngredientSection>
-                      {data.map((ing, i)=>{
+                 {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: ( <IngredientSection>
+                      {usedIngredients && usedIngredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.amount+"KG"}</p>
+                     <p>{" "+ing.quantity+"KG"}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/editused/"+ing.id}>
+                      to={"/ingredients/editused/"+ing._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -77,6 +93,8 @@ return (
                       })}
                     
                  </IngredientSection>
+                 )
+                    }
               </OtherSettings>
           </Wrapper>
         </Main>
@@ -132,7 +150,7 @@ const OtherSettings = styled.div`
 
 const Card = styled.div`
   width: 35%;
-  height: 100px;
+  height: auto;
   background: #fff;
   border-radius: 7px;
   padding: 10px;
