@@ -16,6 +16,8 @@ function IngredientsEdit() {
     const [quantity, setQuantity] = useState(0)
     const { ingId } = useParams()
   const [pageNumber, setPageNumber]= useState(0);
+  const todayObj = new Date();
+  const today = new Date(todayObj.setDate(todayObj.getDate()));
   const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
     const getIngredients =()=>{
      setLoading(true);
@@ -62,8 +64,14 @@ const getIngredient = ()=>{
         if(data.error) {
           toast.error(data.error);
         }
-        toast.success(data.message);
-        history.push("/ingredients");
+
+        request("history/update", "POST", {date: today}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        .then(res=>{
+          toast.success(data.message);          
+           history.push("/ingredients");
+           
+        })
+        .catch(err=>console.log(err.message))
       })
     };
   

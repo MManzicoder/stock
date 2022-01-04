@@ -24,7 +24,7 @@ function Header() {
     const logout = ()=>{
         localStorage.removeItem("auth");
         localStorage.removeItem("user");
-        history.push("/account")   ;
+        history.push("/");
     }
     return (
        <Holder>
@@ -161,6 +161,7 @@ const LogoutDiv = styled.div`
   height: 100%;
   width: 100%;
   justify-content: center;
+  z-index: 3,
   color: #fff;
   cursor: pointer;
   .icon{

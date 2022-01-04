@@ -1,24 +1,56 @@
-import React , { useState } from 'react'
+import React , { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import {Loader} from "../components/AdminLogin";
+import { request, getRequest } from '../apiHandler/Authapi';
+import { toast, ToastContainer } from 'react-toastify';
 function Settings() {
-    const [ price, setPrice ] = useState(0);
+    const [ price, setPrice ] = useState({
+      amount: 0,
+      _id: "",
+    });
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(false);
     const saveConfig = ()=>{
-        // setUpdate(false);
         setLoading(true);
+        request(`price/${price._id}`, "PUT", {amount: price.amount}, {"bearer":`${localStorage.getItem("auth")}`, "Content-Type" : "application/json"})
+        .then(res=>{
+          setLoading(false);
+          if(res.message){
+            toast.success(res.message)
+            setUpdate(false);
+          }else{
+            toast.error(res.error)
+          }
+        })
+        .catch(err=>console.log(err.message))
     };
+const retrievePrice = ()=>{
+  getRequest("price", {"bearer": `${localStorage.getItem("auth")}`})
+  .then(res=>{
+    if(res.error){
+      toast.error(res.error)
+    }
+    setPrice({
+      ...price,
+      _id: res.price._id,
+      amount: res.price.amount
+    })
+  })
+}
+useEffect(()=>{
+  retrievePrice();
+},[update])
     return (
       <Layout>
         <Main>
+          <ToastContainer position='top-center' autoClose={2500}/>
           <Wrapper>
               <StockSettings>
                  <h2>Stock settings</h2>
                  <FormControl>
                      <Label>Price of one Cazier </Label>
-                {update ? <Input type='number' name="price" value={price} onChange={(e)=>setPrice(e.target.value)}/>: "= "+price+" RWF"}     
+                {update ? <Input type='number' name="price" value={price.amount} onChange={(e)=>setPrice({...price, amount: e.target.value})}/>: "= "+price.amount+" RWF"}     
                  </FormControl>
                  <Button type="button" style={loading ? {padding: "9px 20px"}: {}} onClick={update ? saveConfig: ()=>setUpdate(true)}>{!loading ? (update ? "Save": "Update" ): <Loader style={{margin: "0px"}}></Loader>}</Button>
               </StockSettings>

@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { Redirect,BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { Modes } from './shared/context/modes';
 import { Store } from './shared/utils/Store';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import { PublicRoute } from './components/PublicRoute';
 import {  ToastContainer } from 'react-toastify';
+import { isAuth } from "./shared/utils/isAuth"
 import 'react-toastify/dist/ReactToastify.css';
 import ChangePassword from './components/ChangePassword'; 
 import PasswordResetNotification from "./components/PasswordResetNotification";
@@ -34,8 +35,8 @@ function App() {
     <Router>
     <ToastContainer position="top-center" autoClose={5000} />
        <Switch>
-
-       <Route component = {Auth} path="/account" exact/>
+       {/* {isAuth() ? <Redirect to="/dashboard" />: <Redirect to="/account"/>} */}
+       <PublicRoute component = {Auth} path="/" exact/>
        <PrivateRoute component={Dashboard}  path="/dashboard" /> 
        <PrivateRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
        <PrivateRoute component={MaterialsEdit} exact path="/materials/edit/:mId"/> 

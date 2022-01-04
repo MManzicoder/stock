@@ -11,13 +11,166 @@ import { getRequest} from "../apiHandler/Authapi"
 import { useEffect } from 'react'
 import {toast, ToastContainer } from 'react-toastify'
 function InventoryEdit () {
-  const history = useHistory();
+  const name = "Cazier in stock(Beer)";
+  const dObj = new Date();
+  const today = new Date(dObj.setDate(dObj.getDate()));
   const { id } = useParams();
      const [stock, setStock] = useState({
      name: "Cazier in stock",
      _id: "",
      quantity: 0
    });
+     const [price, setPrice] = useState(0);
+const [prevSun, setPrevSun] = useState(0);
+  const [prevMon, setPrevMon] = useState(0);
+  const [prevTue, setPrevTue] = useState(0);
+  const [prevWed, setPrevWed] = useState(0);
+  const [prevThu, setPrevThu] = useState(0);
+  const [prevFri, setPrevFri] = useState(0);
+  const [prevSat, setPrevSat] = useState(0);
+  const [currSun, setCurrSun] = useState(0);
+  const [currMon, setCurrMon] = useState(0);
+  const [currTue, setCurrTue] = useState(0);
+  const [currWed, setCurrWed] = useState(0);
+  const [currThu, setCurrThu] = useState(0);
+  const [currFri, setCurrFri] = useState(0);
+  const [currSat, setCurrSat] = useState(0);
+  const [amount, setAmount ] = useState(0);
+  const [history, setHistory] = useState({});
+const getStock = ()=>{
+    getRequest("stock", {"bearer": `${localStorage.getItem("auth")}`})
+    .then(res=>{
+      setStock(res.stock)
+    })
+    .catch(err=>console.log(err.message))
+}
+var curr = new Date; // get current date
+var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+var last = first + 6; // last day is the first day + 6
+
+var firstday = new Date(curr.setDate(first));
+var lastday = new Date(curr.setDate(last));
+// var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}; get dates between two dates
+
+//get first day and last day of the previous week 
+const currentDateObj = new Date();
+const currentDate = currentDateObj.getDate();
+
+var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
+var beforeOneWeek2 = new Date(beforeOneWeek);
+ const  day = beforeOneWeek.getDay()
+ const diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -7 : 0)
+ const lastSunday = new Date(beforeOneWeek.setDate(diffToMonday))
+
+  const lastSaturday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
+  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}
+  const datesofPreviousWeek = getDaysArray(lastSunday, lastSaturday);
+  const labels = datesofPreviousWeek.map((d,i)=>{
+    return d.toString().split(" ")[0];
+  })
+  const getPrevSun =()=>{
+    request("history/date", "POST", {date: datesofPreviousWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevSun(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getPrevMon =()=>{
+       request("history/date", "POST", {date: datesofPreviousWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevMon(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+  const getPrevTue =()=>{
+    request("history/date", "POST", {date: datesofPreviousWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevTue(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getPrevWed =()=>{
+       request("history/date", "POST", {date: datesofPreviousWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevWed(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getPrevThu =()=>{
+       request("history/date", "POST", {date: datesofPreviousWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevThu(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getPrevFri =()=>{
+       request("history/date", "POST", {date: datesofPreviousWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevFri(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getPrevSat =()=>{
+       request("history/date", "POST", {date: datesofPreviousWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setPrevSat(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+  const datesOfCurrentWeek = getDaysArray(firstday, lastday);
+  const getCurrSun =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrSun(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrMon =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrMon(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrTue =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+     setCurrTue(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrWed =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrWed(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrThu =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrThu(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrFri =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrFri(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+    const getCurrSat =()=>{
+       request("history/date", "POST", {date: datesOfCurrentWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    .then(res=>{
+      setCurrSat(res.history.stock)
+    })
+    .catch(err=>console.log(err.message))
+  }
+
+  const data1 =[prevSun, prevMon, prevTue, prevWed, prevThu, prevFri, prevSat];
+  const data2 = [currSun, currMon, currTue, currWed, currThu, currFri, currSat];
+
    const stockRetrieve = ()=>{
      getRequest(`stock/${id}`, {"bearer": `${localStorage.getItem("auth")}`})
      .then(res=>{
@@ -34,7 +187,23 @@ function InventoryEdit () {
   
     }
     useEffect(()=>{
-     stockRetrieve()
+   stockRetrieve()
+   retrievePrice();
+    getStock();
+    getPrevSun();
+    getPrevMon();
+    getPrevTue();
+    getPrevWed();
+    getPrevThu();
+    getPrevFri();
+    getPrevSat();
+    getCurrSun();
+    getCurrMon();
+    getCurrTue();
+    getCurrWed();
+    getCurrThu();
+    getCurrFri();
+    getCurrSat();  
    }, [id])
     const [loading, setLoading] = useState(false);
     const handleChange = e =>{
@@ -52,12 +221,24 @@ function InventoryEdit () {
             toast.error(res.error)
           }
           if(res.message){
+            request("history", "POST", { quantity: stock.quantity, prevQuantity: res.prevQuantity, date: today}, {"bearer":`${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+            .then()
+            .catch(err=>console.log(err.message));
             toast.success(res.message);
-            history.push("/inventory");
+            // history.push("/inventory");
           }
         })
 
     }
+const retrievePrice = ()=>{
+  getRequest("price", {"bearer": `${localStorage.getItem("auth")}`})
+  .then(res=>{
+    if(res.error){
+      toast.error(res.error)
+    }
+    setPrice(res.price.amount)
+  })
+}
 
     return (
       <Layout>
@@ -66,9 +247,9 @@ function InventoryEdit () {
           <Wrapper>
             <h2>Stock Analysis</h2>
             <FirstSection>
-                <Card>
+                <Card style={{width: "230px"}}>
                         <FormControl>
-                        <Label>{stock?.name} </Label>
+                        <Label>{name} </Label>
                         <Input type="text" name="quantity" value={stock.quantity} onChange={handleChange}/>
                     </FormControl>
                     <ButtonDiv>
@@ -85,16 +266,16 @@ function InventoryEdit () {
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
-                   <p style={{marginTop: "20px"}}>150000RWF</p>
+                   <p style={{marginTop: "20px"}}>{(stock.quantity * price)+" FRW"}</p>
                  </Card>
                  
             </FirstSection>
             <SecondSection>
                <ChartHolder>
-                 <Chart Title={"Stock Production for this weeek"} dataArray={[180, 220, 280, 320, 400, 470]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                 <Chart Title={"Stock Production for this weeek"} dataArray={data2} labels={labels} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                </ChartHolder>
                <ChartHolder>
-                 <Chart Title={"Stock production for last week"} dataArray={[140, 200, 260, 360, 390, 410, 450]} labels={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday"]} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                 <Chart Title={"Stock production for last week"} dataArray={data1} labels={labels} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                </ChartHolder>               
             </SecondSection>
           </Wrapper>         
