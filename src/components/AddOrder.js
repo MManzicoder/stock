@@ -4,12 +4,13 @@ import { Loader } from "../components/AdminLogin"
 import { Close } from "@material-ui/icons";
 import "../styles/modal.css";
 import { toast, ToastContainer } from 'react-toastify';
+import { request } from '../apiHandler/Authapi';
 
 
 const AddOrder = ({ showModal, setShowModal}) => {
     const [loading, setLoading] = useState(false);
     const [order, setIngredient] = useState({
-        name: "",
+        recipientphone: "",
         address: "",
         quantity: 0,
         status: ""
@@ -29,7 +30,18 @@ const saveOrder = () =>{
         toast.error("All fields are required!")
         setLoading(false);
     }
-    if(order.name !== "" && order.quantity !==0 ) setLoading(true);
+    setLoading(true);
+        request("orders", "POST", order, {"bearer":`${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        .then(res=>{
+            setLoading(false)
+            console.log(res);
+            if(res.error){
+                toast.error(res.error)
+            }
+            toast.success(res.message);
+            window.location ="/outgoing";
+        })
+        .catch(err=>console.log(err.message))
 }
 const handleChange = e =>{
     setIngredient({
@@ -46,7 +58,7 @@ const handleChange = e =>{
                <Form>
                   <FormControl>
                     <Label>Recipient</Label>
-                   <Input type='text' name='name' value={order.name} disabled={loading} onChange={handleChange} required placeholder='Enter recipient phone'/>
+                   <Input type='text' name='recipientphone' value={order.recipientphone} disabled={loading} onChange={handleChange} required placeholder='Enter recipient phone'/>
                   </FormControl>
                   <FormControl>
                     <Label>Address</Label>
@@ -60,8 +72,8 @@ const handleChange = e =>{
                       <Label>Status</Label>
                       <Select  name='status' disabled={loading} value={order.status} onChange={handleChange} required>
                           <option value={""}>select status</option>
-                          <option value={"1"}>Paid</option>
-                          <option value={"2"}>Not paid</option>
+                          <option value={"Paid"}>Paid</option>
+                          <option value={"Not paid"}>Not paid</option>
                       </Select>
                     </FormControl>                                      
                </Form>

@@ -8,75 +8,76 @@ import { toast, ToastContainer } from 'react-toastify';
 import { getRequest, request } from  "../apiHandler/Authapi";
 import ReactPaginate from "react-paginate";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons"
-function IngredientsUsedEdit() {
+import AddMaterial from '../components/AddMaterial'
+function MaterialsUsedEdit() {
 const history = useHistory();
     const [ showModal , setShowModal ] = useState(false);
-    const [ingredients, setIngredients] = useState([]);
-    const [usedIngredients, setUsedIngredients] = useState([]);
+    const [materials, setMaterials] = useState([]);
+    const [usedMaterials, setUsedMaterials] = useState([]);
     const [quantity, setQuantity] = useState(0)
-    const { ingId } = useParams()
+    const { mId } = useParams();
   const [pageNumber, setPageNumber]= useState(0);
-  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
-    const getIngredients =()=>{
+  const materialsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+    const getMaterials =()=>{
      setLoading(true);
-       getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("materials",{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
                 toast.error(res.error);
             }
-            setIngredients(res.ingredients);
+            setMaterials(res.materials);
         })
 
 }
-const getUsedIngredients =()=>{
+const getUsedMaterials =()=>{
       setLoading(true);
-       getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("usedmaterials",{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
                 toast.error(res.error);
             }
-            setUsedIngredients(res.ingredients);
+            setUsedMaterials(res.materials);
         })
 
 }
-const getIngredient = ()=>{
-     getRequest(`usedingredients/${ingId}`,{"bearer": `${localStorage.getItem("auth")}`})
+const getMaterial = ()=>{
+     getRequest(`usedmaterials/${mId}`,{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
                 toast.error(res.error);
             }
-            setQuantity(res.ingredient.quantity);
+            setQuantity(res.material.quantity);
         })
 
 }
 
   const [loading, setLoading] = useState(false);
-  const saveIng = ()=>{
+  const saveMat = ()=>{
       setLoading(true);
-      request(`usedingredients/${ingId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      request(`usedmaterials/${mId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
       .then(data=>{
         setLoading(false);
+        console.log(data);
         if(data.error) {
           toast.error(data.error);
         }
         toast.success(data.message);
-        history.push("/ingredients");
+        history.push("/packaging");
       })
     };
   
   useEffect(()=>{
-    getIngredient();
-    getIngredients();
-    getUsedIngredients();
-  },[ingId])    
-  const pagesVisited = pageNumber * ingredientsPerPage;
-  const displayPageIngredients = ingredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
-  const displayPageUsedIngredients = usedIngredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
-   const pageCount1 = Math.ceil(ingredients.length / ingredientsPerPage);
-   const pageCount2 = Math.ceil(usedIngredients.length / ingredientsPerPage);
+    getMaterial();
+    getMaterials();
+    getUsedMaterials();
+  },[mId])    
+  const pagesVisited = pageNumber * materialsPerPage;
+  const displayPageMaterials = materials.slice(pagesVisited, pagesVisited + materialsPerPage);
+  const displayPageUsedMaterials = usedMaterials.slice(pagesVisited, pagesVisited + materialsPerPage);
+   const pageCount1 = Math.ceil(materials.length / materialsPerPage);
     const changePage = ({ selected })=>{
           setPageNumber(selected);
     }
@@ -86,18 +87,18 @@ const getIngredient = ()=>{
         <Main>
           <Wrapper>
              <StockSettings>
-                 <h2>Ingredients that are currently in stock</h2>
+                 <h2>Packaging materials in the stock</h2>
                     {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: (  <IngredientSection>
-                      {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
+                      {displayPageMaterials && displayPageMaterials.map((mat, i)=>{
                         return(
                           <Card>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                     <p>{" "+ing.quantity+"Kg"}</p>
+                        <Label>{mat.name} </Label>
+                     <p>{" "+mat.quantity}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/edit/"+ing._id}>
+                      to={"/materials/edit/"+mat._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -107,7 +108,7 @@ const getIngredient = ()=>{
                     
                  </IngredientSection>
 )}              
-{ingredients.length > 0 && <ReactPaginate
+{materials.length > 0 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -125,20 +126,20 @@ const getIngredient = ()=>{
                  </NewIngredient>   
               </StockSettings>
               <OtherSettings>
-                  <h2>Used ingredients</h2>
+                  <h2>Materials out of the stock</h2>
                    {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>:(<IngredientSection>
-                      {displayPageUsedIngredients  && displayPageUsedIngredients.map((ing, i)=>{
+                      {displayPageUsedMaterials  && displayPageUsedMaterials.map((mat, i)=>{
                         return(
                           <Card>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                   {ingId == ing._id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? "L": "KG"}` }    
+                        <Label>{mat.name} </Label>
+                   {mId == mat._id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+mat.quantity}    
                     </FormControl>
                     <ButtonDiv>
-                        {ingId == ing._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
-                      onClick={saveIng}>
-                        { ingId == ing._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
-                        </Button>): <Link to={"/ingredients/editused/"+ing._id}>Edit</Link> }
+                        {mId == mat._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
+                      onClick={saveMat}>
+                        { mId == mat._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
+                        </Button>): <Link to={"/materials/editused/"+mat._id}>Edit</Link> }
                       
                     </ButtonDiv>
                    </Card>
@@ -150,12 +151,12 @@ const getIngredient = ()=>{
           </Wrapper>
         </Main>
       </Layout>
-      {showModal && (<Modal showModal={showModal} setShowModal ={setShowModal}/>)}
+      {showModal && (<AddMaterial showModal={showModal} setShowModal ={setShowModal}/>)}
      </Holder>
     )
 }
 
-export default IngredientsUsedEdit
+export default MaterialsUsedEdit
 const Main = styled.div`
    width: 101%;
    height: 90vh;

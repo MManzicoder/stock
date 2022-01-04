@@ -21,6 +21,9 @@ import Ingredients from './pages/Ingredients';
 import Settings from './pages/Settings';
 import IngredientsEdit from './pages/IngredientsEdit';
 import IngredientsUsedEdit from './pages/IngredientsUsedEdit';
+import Packaging from './pages/Packaging';
+import MaterialsEdit from './pages/MaterialEdit';
+import MaterialsUsedEdit from './pages/MaterialsUsedEdit';
 
 
 function App() {
@@ -35,8 +38,11 @@ function App() {
        <Route component = {Auth} path="/account" exact/>
        <PrivateRoute component={Dashboard}  path="/dashboard" /> 
        <PrivateRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
+       <PrivateRoute component={MaterialsEdit} exact path="/materials/edit/:mId"/> 
        <PrivateRoute component={IngredientsUsedEdit} exact path="/ingredients/editused/:ingId"/> 
+       <PrivateRoute component={MaterialsUsedEdit} exact path="/materials/editused/:mId"/> 
        <PrivateRoute component={Ingredients}  path="/ingredients" /> 
+       <PrivateRoute component={Packaging}  path="/packaging" /> 
        <PrivateRoute component={Report}  path="/report" /> 
        <PrivateRoute component={Profile}  path="/profile" /> 
        <PrivateRoute component={InventoryEdit} path="/inventory/edit/:id"/>

@@ -1,29 +1,65 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
 import { Link } from 'react-router-dom'
+import { getRequest} from "../apiHandler/Authapi"
+import { useEffect } from 'react'
+import {toast, ToastContainer } from 'react-toastify'
 function Inventory () {
-   const ing = {
-     _id: 124124,
-     name: "Cazier in stock",
-     amount: "300",
+   const [stock, setStock] = useState({
+     name: "Cazier in stock(Beer)",
+     _id: "",
+     quantity: 0
+   });
+   const [price, setPrice] = useState(0);
+
+   const stockRetrieve = ()=> {
+    getRequest("stock", {"bearer": `${localStorage.getItem("auth")}`})
+     .then(res=>{
+       if(res.error){
+         toast.error(res.error)
+       }
+       setStock({
+         ...stock,
+         _id: res.stock.stock_id,
+         quantity: res.stock.quantity
+        })
+     })
+     .catch(err=>console.log(err.message))
    }
-    return (
+
+const retrievePrice = ()=>{
+  getRequest("price", {"bearer": `${localStorage.getItem("auth")}`})
+  .then(res=>{
+    if(res.error){
+      toast.error(res.error)
+    }
+    setPrice(res.price.amount)
+  })
+}
+
+   useEffect(()=>{
+     stockRetrieve()
+     retrievePrice();
+   }, [])
+    
+   return (
       <Layout>
+        <ToastContainer position='top-center' autoClose={3000}/>
         <Main>
           <Wrapper>
             <h2>Stock Analysis</h2>
             <FirstSection>
-                <Card>
+                <Card style={{width: 250}}>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                     <p>{" "+ing.amount}</p>
+                        <Label>{stock?.name} </Label>
+                     <p>{" "+stock?.quantity}</p>
                     </FormControl>
-                    <ButtonDiv>
+                    <ButtonDiv style={{marginLeft: 100}}>
                       <Link 
-                      to={"/inventory/edit/"+ing._id}>
+                      to={"/inventory/edit/"+stock._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -34,7 +70,7 @@ function Inventory () {
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
-                   <p style={{marginTop: "20px"}}>150000RWF</p>
+                   <p style={{marginTop: "20px"}}>{(stock.quantity * price)/1000+"K FRW"}</p>
                  </Card>
                  
             </FirstSection>

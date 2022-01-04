@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import { Loader } from "../components/AdminLogin"
 import { Close } from "@material-ui/icons";
@@ -8,9 +7,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import { request } from '../apiHandler/Authapi';
 
 
-const Modal = ({ showModal, setShowModal, setIngredients, setUsedIngredients}) => {
+const AddMaterial = ({ showModal, setShowModal, setMaterials, setUsedMaterials}) => {
     const [loading, setLoading] = useState(false);
-    const [ingredient, setIngredient] = useState({
+    const [material, setMaterial] = useState({
         name: "",
         quantity: 0
     })
@@ -24,11 +23,11 @@ const Modal = ({ showModal, setShowModal, setIngredients, setUsedIngredients}) =
         setShowModal(false);
 
     }
-const saveIngredient = () =>{
-    if(ingredient.name =="" || ingredient.quantity == 0){
+const saveMaterial = () =>{
+    if(material.name =="" || material.quantity == 0){
         toast.error("All fields are required!")
-    }else if(ingredient.name !== "" && ingredient.quantity !==0 ) setLoading(true);
-     request("ingredients", "POST", ingredient, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    }else if(material.name !== "" && material.quantity !==0 ) setLoading(true);
+     request("materials", "POST", material, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -36,13 +35,13 @@ const saveIngredient = () =>{
             }
             if(res.message){
                 toast.success(res.message);
-                window.location ="/ingredients";
+                window.location ="/packaging";
             }
         })
 }
 const handleChange = e =>{
-    setIngredient({
-        ...ingredient,
+    setMaterial({
+        ...material,
         [e.target.name]: e.target.value
     })
 }
@@ -51,19 +50,19 @@ const handleChange = e =>{
         <Background ref={modalRef} onClick = { closeModal }>
             <ToastContainer position="top-center" autoClose={3000} />
            <Wrapper className={`${ showModal ? "animate": "" }`} style={{height: 250, padding: 15}}>
-               <h3>New Ingredient</h3>
+               <h3>New Material</h3>
                <Form>
                   <FormControl>
                     <Label>Name</Label>
-                   <Input type='text' name='name' value={ingredient.name} onChange={handleChange} required placeholder='Enter name'/>
+                   <Input type='text' name='name' value={material.name} onChange={handleChange} required placeholder='Enter name'/>
                   </FormControl>
                     <FormControl>
                       <Label>Quantity</Label>
-                      <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={ingredient.quantity} onChange={handleChange} required/>
+                      <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={material.quantity} onChange={handleChange} required/>
                     </FormControl>                  
                </Form>
                <AddButton>
-                   <Button onClick={saveIngredient}>{!loading ? "Add": 
+                   <Button onClick={saveMaterial}>{!loading ? "Add": 
                     <Loader style={{marginLeft: "40%", marginTop: 0, height: 20, width: 20}}></Loader>}
                    </Button>
                </AddButton>
@@ -246,4 +245,4 @@ const FormControl = styled.div`
 const Label = styled.label`
  width: 30% !important;
 `
-export default Modal
+export default AddMaterial

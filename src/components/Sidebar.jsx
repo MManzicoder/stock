@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom"
-import { DashboardRounded , Inbox, Group, People, Person, Report, Settings, Shop, Input, OutdoorGrill} from "@material-ui/icons"
+import { DashboardRounded , AddBox, Inbox, Group, People, Person, Report, Settings, Shop, Input, OutdoorGrill} from "@material-ui/icons"
 import urwunge from "../assets/target.png"
 function Sidebar() {
     const location = useLocation();
@@ -34,12 +34,17 @@ function Sidebar() {
               </ListItem>
               <ListItem>
                   <Link to="/outgoing" style={isActive(location, "/outgoing")}><OutdoorGrill className='icon'/>
-                  <span>Outgoing</span>
+                  <span>Orders</span>
                   </Link>
               </ListItem>
               <ListItem>
                   <Link to="/ingredients" style={isActive(location, "/ingredients")}><Shop className='icon'/>
                   <span>Ingredients</span>
+                  </Link>
+              </ListItem>
+              <ListItem>
+                  <Link to="/packaging" style={isActive(location, "/packaging")}><AddBox className='icon'/>
+                  <span>Packaging</span>
                   </Link>
               </ListItem>
               <ListItem>

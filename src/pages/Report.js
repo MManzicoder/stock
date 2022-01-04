@@ -17,7 +17,7 @@ function Report() {
                <ReportIssueSection><p>Gained Amount</p><p>150000RWF</p></ReportIssueSection>
                <ReportIssueSection><p>Expected Amount</p><p>250000RWF</p></ReportIssueSection>
                <DownloadReport>
-                  <DownloadButton>Download</DownloadButton>
+                  <DownloadButton >Download</DownloadButton>
                </DownloadReport>
             </ReportDiv>
           </Wrapper>          

@@ -3,31 +3,73 @@ import Layout from '../components/Layout'
 import styled from "styled-components"
 import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { Loader } from '../components/AdminLogin'
 import { Button } from './IngredientsEdit'
+import { request } from '../apiHandler/Authapi'
+import { getRequest} from "../apiHandler/Authapi"
+import { useEffect } from 'react'
+import {toast, ToastContainer } from 'react-toastify'
 function InventoryEdit () {
-     const ing = {
-     _id: 124124,
+  const history = useHistory();
+  const { id } = useParams();
+     const [stock, setStock] = useState({
      name: "Cazier in stock",
-     amount: "300",
-   }
-    const [quantity, setQuantity] = useState(ing.amount); 
+     _id: "",
+     quantity: 0
+   });
+   const stockRetrieve = ()=>{
+     getRequest(`stock/${id}`, {"bearer": `${localStorage.getItem("auth")}`})
+     .then(res=>{
+       if(res.error){
+         toast.error(res.error)
+       }
+       console.log(res);
+       setStock({
+         ...stock,
+         _id: res.stock._id,
+         quantity: res.stock.quantity
+        })
+     })
+  
+    }
+    useEffect(()=>{
+     stockRetrieve()
+   }, [id])
     const [loading, setLoading] = useState(false);
+    const handleChange = e =>{
+      setStock({
+        ...stock,
+        quantity: e.target.value
+      })
+    }
     const updateInventory = ()=>{
-        setLoading(true);
+      setLoading(true);
+        request(`stock/${id}`, "PUT", {quantity: stock.quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        .then(res=>{
+          setLoading(false);
+          if(res.error){
+            toast.error(res.error)
+          }
+          if(res.message){
+            toast.success(res.message);
+            history.push("/inventory");
+          }
+        })
 
     }
+
     return (
       <Layout>
+        <ToastContainer position="top-center" autoClose={3000} />
         <Main>
           <Wrapper>
             <h2>Stock Analysis</h2>
             <FirstSection>
                 <Card>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                        <Input type="text" name="quantity" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
+                        <Label>{stock?.name} </Label>
+                        <Input type="text" name="quantity" value={stock.quantity} onChange={handleChange}/>
                     </FormControl>
                     <ButtonDiv>
                       <Button 
@@ -105,7 +147,7 @@ const ChartHolder = styled.div`
 `
 const Card = styled.div`
   width: 28%;
-  height: 100px;
+  height:110px;
   background: #fff;
   border-radius: 7px;
   padding: 10px;
@@ -146,7 +188,7 @@ const Input = styled.input`
 `
 const ButtonDiv = styled.div`
      width: 50%;
-     margin: 30px auto;
+     margin: 10px auto;
      margin-left: 50px;
      a{
       

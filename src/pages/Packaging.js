@@ -2,54 +2,53 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
-import Modal  from "../components/Modal"
 import { toast, ToastContainer } from 'react-toastify';
 import { getRequest, request } from '../apiHandler/Authapi'
 import { Loader } from "../components/AdminLogin"
 import ReactPaginate from "react-paginate";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons"
 import "../styles/pagination.css";
-function Ingredients() {
+import AddMaterial from '../components/AddMaterial'
+function Packaging() {
   const [ showModal , setShowModal ] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  const [usedIngredients, setUsedIngredients] = useState([]);
+  const [materials, setMaterials] = useState([]);
+  const [usedMaterials, setUsedMaterials] = useState([]);
   const [ loading, setLoading ] = useState(false); 
   const [pageNumber, setPageNumber]= useState(0);
-  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
-const getIngredients =()=>{
+  const materialsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+const getMaterials =()=>{
     setLoading(true);
-       getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("materials",{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
                 toast.error(res.error);
             }
-            setIngredients(res.ingredients);
+            setMaterials(res.materials);
         })
 
 }
-const getUsedIngredients =()=>{
+const getUsedMaterials =()=>{
       setLoading(true);
-       getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("usedmaterials",{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             console.log(res);
             if(res.error){
                 toast.error(res.error);
             }
-            setUsedIngredients(res.ingredients);
+            setUsedMaterials(res.materials);
         })
 
 }
   useEffect(()=>{
-    getIngredients();
-    getUsedIngredients();
+    getMaterials();
+    getUsedMaterials();
   },[])
-  const pagesVisited = pageNumber * ingredientsPerPage;
-  const displayPageIngredients = ingredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
-  const displayPageUsedIngredients = usedIngredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
-   const pageCount1 = Math.ceil(ingredients.length / ingredientsPerPage);
-   const pageCount2 = Math.ceil(usedIngredients.length / ingredientsPerPage);
+  const pagesVisited = pageNumber * materialsPerPage;
+  const displayPageMaterials = materials.slice(pagesVisited, pagesVisited + materialsPerPage);
+  const displayPageUsedMaterials = usedMaterials.slice(pagesVisited, pagesVisited + materialsPerPage);
+   const pageCount1 = Math.ceil(materials.length / materialsPerPage);
     const changePage = ({ selected })=>{
           setPageNumber(selected);
     }
@@ -60,18 +59,18 @@ return (
         <Main>
           <Wrapper>
              <StockSettings>
-                 <h2>Ingredients that are currently in stock</h2>
+                 <h2>Packaging materials in the stock</h2>
                  {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
-                      {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
+                      {displayPageMaterials && displayPageMaterials.map((mat, i)=>{
                         return(
                           <Card>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                     <p>{" "+ing.quantity + `${ing.name =="Water" ? "L":"KG"}`}</p>
+                        <Label>{mat.name} </Label>
+                     <p>{" "+mat.quantity }</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/edit/"+ing._id}>
+                      to={"/materials/edit/"+mat._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -79,7 +78,7 @@ return (
                         );
                       })}                    
                  </IngredientSection>)}
-                 {ingredients.length > 0 && <ReactPaginate
+                 {materials.length > 0 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -97,19 +96,19 @@ return (
                  </NewIngredient>
               </StockSettings>
               <OtherSettings>
-                  <h2>Used ingredients</h2>
+                  <h2>Materials out of the stock</h2>
                  {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: 
                  ( <IngredientSection>
-                      {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
+                      {displayPageUsedMaterials && displayPageUsedMaterials.map((matr, i)=>{
                         return(
                           <Card>
                         <FormControl>
-                        <Label>{ing.name} </Label>
-                     <p>{" "+ing.quantity+ `${ing.name =="Water" ? "L": "KG"}`}</p>
+                        <Label>{matr.name} </Label>
+                     <p>{" "+matr.quantity}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
-                      to={"/ingredients/editused/"+ing._id}>
+                      to={"/materials/editused/"+matr._id}>
                           Edit
                         </Link>
                     </ButtonDiv>
@@ -125,12 +124,12 @@ return (
           </Wrapper>
         </Main>
       </Layout>
-      {showModal && (<Modal showModal={showModal} setShowModal={setShowModal} setIngredients={setIngredients} setUsedIngredients={setUsedIngredients}/>)}
+      {showModal && (<AddMaterial showModal={showModal} setShowModal={setShowModal} setMaterials={setMaterials} setUsedMaterials={setUsedMaterials}/>)}
 </Holder>
     )
 }
 
-export default Ingredients
+export default Packaging;
 const Holder= styled.div`
 width: 100%;
 height: 100vh;

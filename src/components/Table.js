@@ -1,8 +1,27 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-export default function Table({fetching}) {
+import { getRequest} from "../apiHandler/Authapi";
+export default function Table() {
+  const [orders, setOrders] = useState([]);
+  const [fetching, setFetching] = useState(false);
+   const getOrders = ()=>{
+     setFetching(true);
+     getRequest("orders", {"bearer": `${localStorage.getItem("auth")}`})
+     .then(res=>{
+       setFetching(false);
+       console.log(res)
+       if(res.error){
+        console.log(res.error)
+       }
+       setOrders(res.orders);
+     })
+     .catch(err=>console.log(err.message))
+   }
 
-  const columns = [
+   useEffect(()=>{
+      getOrders();
+   }, [])
+   const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'recipientphone',
@@ -29,6 +48,12 @@ export default function Table({fetching}) {
     sortable: false,
     width: 160
   },
+    {
+    field: 'createdAt',
+    headerName: 'Date',
+    sortable: false,
+    width: 160
+  },
   {
     field: 'status',
     headerName: 'Status',
@@ -37,23 +62,10 @@ export default function Table({fetching}) {
     editable: true
   }
 ];
-
-const rows = [
-  { id: 1, recipientphone: '0780756824', address: 'Cyangungu', quantity: 50,amount: 35000,status: "Paid"},
-  { id: 2, recipientphone: '0780756824', address: 'Kabuga', quantity: 55,amount: 42000,status: "Not paid" },
-  { id: 3, recipientphone: '0780756824', address: 'Nyanza', quantity: 57,amount: 45000,status: "Paid" },
-  { id: 4, recipientphone: '0780756824', address: 'Nyamata', quantity:30,amount: 16000,status: "Paid" },
-  { id: 5, recipientphone: '0780756824', address: 'Gatsata', quantity: 35,amount: 24000,status: "Not paid" },
-  { id: 6, recipientphone: '0780756824', address: 'Kabarondo', quantity: 29,amount: 15000,status: "Paid" },
-  { id: 7, recipientphone: '0780756824', address: 'Gicumbi', quantity: 56,amount: 44000,status: "Paid" },
-  { id: 8, recipientphone: '0780756824', address: 'Mukamira', quantity: 51,amount: 36000,status: "Not paid" },
-  { id: 9, recipientphone: '0780756824', address: 'Gakenke', quantity: 63,amount: 65000,status: "Paid" },
-];
-
   return (
     <div style={{ height: 250, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={orders}
         columns={columns}
         pageSize={2}
         rowsPerPageOptions={[5]}

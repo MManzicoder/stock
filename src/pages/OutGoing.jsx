@@ -5,20 +5,45 @@ import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import AddOrder from '../components/AddOrder'
-// import Table from '../components/Table'
 import Table from '../components/Table'
+import { getRequest } from '../apiHandler/Authapi'
+import { toast, ToastContainer } from 'react-toastify';
+import { useEffect } from 'react'
 function OutGoing () {
     const [ showModal , setShowModal ] = useState(false);
-   const paid = {
-     _id: 124124,
-     name: "Paid orders",
-     amount: "100",
+    const [orders, setOrders] = useState([]);
+    const [fetching, setFetching] = useState(false);
+    const [paid, setPaid] = useState({
+      name: "Paid orders",
+      quantity: 0
+    })
+    const [notPaid, setNotPaid] = useState({
+      name: "Not Paid orders",
+      quantity: 0
+    })    
+   const getOrders = ()=>{
+     setFetching(true);
+     getRequest("orders", {"bearer": `${localStorage.getItem("auth")}`})
+     .then(res=>{
+       setFetching(false);
+       if(res.error){
+         toast.error(res.error)
+       }
+       setOrders(res.orders);
+        setPaid({
+          ...paid,
+          quantity: res.paid
+        });
+        setNotPaid({
+          ...notPaid,
+          quantity: res.notPaid
+        });
+     })
+     .catch(err=>console.log(err.message))
    }
-const pending = {
-     _id: 124124,
-     name: "Not paid orders",
-     amount: "20",
-   }
+   useEffect(()=>{
+      getOrders();
+   }, [])
     return (
         <Holder>
                 <Layout>
@@ -27,21 +52,21 @@ const pending = {
             <FirstSection>
                 <Card>
                         <Label>{paid.name} </Label>
-                     <p>{" "+paid.amount}</p>
+                     <p>{" "+paid.quantity}</p>
                    </Card>
                  <ArrowDefine>
                    <DoubleArrowOutlined className='icon'/>
                    <DoubleArrowOutlined className='icon'/>
                  </ArrowDefine>
                 <Card>
-                        <Label>{pending.name} </Label>
-                     <p>{" "+pending.amount}</p>
+                        <Label>{notPaid.name} </Label>
+                     <p>{" "+notPaid.quantity}</p>
                    </Card>
                  
             </FirstSection>
             <SecondSection>
               <Orders>
-                 <Table fetching={false} />
+                 <Table/>
               </Orders>
               <ButtonDiv>
                  <AddButton onClick={()=>setShowModal(true)}>Add order</AddButton>

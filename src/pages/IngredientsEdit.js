@@ -6,6 +6,8 @@ import { Loader } from "../components/AdminLogin"
 import Modal from '../components/Modal';
 import { toast, ToastContainer } from 'react-toastify';
 import { getRequest, request } from  "../apiHandler/Authapi";
+import ReactPaginate from "react-paginate";
+import { ArrowLeft, ArrowRight } from "@material-ui/icons"
 function IngredientsEdit() {
     const history = useHistory();
     const [ showModal , setShowModal ] = useState(false);
@@ -13,7 +15,8 @@ function IngredientsEdit() {
     const [usedIngredients, setUsedIngredients] = useState([]);
     const [quantity, setQuantity] = useState(0)
     const { ingId } = useParams()
-
+  const [pageNumber, setPageNumber]= useState(0);
+  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
     const getIngredients =()=>{
      setLoading(true);
        getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
@@ -69,6 +72,13 @@ const getIngredient = ()=>{
     getIngredients();
     getUsedIngredients();
   },[ingId])
+  const pagesVisited = pageNumber * ingredientsPerPage;
+  const displayPageIngredients = ingredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
+  const displayPageUsedIngredients = usedIngredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
+   const pageCount1 = Math.ceil(ingredients.length / ingredientsPerPage);
+    const changePage = ({ selected })=>{
+          setPageNumber(selected);
+    }
     return (
      <Holder>
         <Layout>
@@ -78,7 +88,7 @@ const getIngredient = ()=>{
              <StockSettings>
                  <h2>Ingredients that are currently in stock</h2>
                  {loading ?<Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
-                      {ingredients && ingredients.map((ing, i)=>{
+                      {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
@@ -97,6 +107,19 @@ const getIngredient = ()=>{
                       })}
                     
                  </IngredientSection>) }
+                  {ingredients.length > 0 && <ReactPaginate
+                      previousLabel= { <ArrowLeft />}
+                      nextLabel ={ <ArrowRight /> }
+                      pageCount = { pageCount1 }
+                      onPageChange ={changePage}
+                      containerClassName = { "pagination"}
+                      previousLinkClassName = {"previousLink"}
+                      nextLinkClassName = {"nextLink"}
+                      disabledClassName = {"paginationDisabled"}
+                      activeClassName = {"paginationActive"}
+                      activeLinkClassName = { "activeLink"}
+
+                  />}
                <NewIngredient>
                    <AddIngredient onClick={()=>setShowModal(true)}>Add New</AddIngredient>
                  </NewIngredient>   
@@ -105,12 +128,12 @@ const getIngredient = ()=>{
                   <h2>Used ingredients</h2>
                  {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: 
                  (<IngredientSection>
-                      {usedIngredients && usedIngredients.map((ing, i)=>{
+                      {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.quantity+"KG"}</p>
+                     <p>{" "+ing.quantity+`${ing.name == "Water" ? "L": "KG"}`}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
@@ -181,7 +204,7 @@ const Card = styled.div`
   height: auto;
   background: #fff;
   border-radius: 7px;
-  padding: 10px;
+  padding: 5px;
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
@@ -228,7 +251,7 @@ export const Button = styled.button`
 `
 const ButtonDiv = styled.div`
      width: 50%;
-     margin: 30px auto;
+     margin: 38px auto;
      margin-left: 50px;
      a{
       

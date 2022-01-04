@@ -1,0 +1,55 @@
+ .nextLink,
+ .previousLink {
+     border-radius: 5px !important;
+     padding: 4px 8px !important;
+     cursor: pointer;
+     text-align: center;
+     justify-content: center;
+     
+ }
+
+ .pagination {
+     align-items: center !important;
+     display: flex;
+     position: absolute;
+     list-style: none;
+     left: 25%;
+     top: 78vh;
+     width: 40%;
+ }
+ .pagination1 {
+     align-items: center !important;
+     display: flex;
+     position: absolute;
+     list-style: none;
+     left: 50%;
+     top: 78vh;
+     width: 40%;
+ }
+ .pagination a {
+     /* padding: 10px 12px; */
+     padding: 8px 15px;
+     margin: 8px;
+     border-radius: 50%;
+     outline: none;
+     cursor: pointer;
+ }
+ .pagination1 a {
+     /* padding: 10px 12px; */
+     padding: 8px 15px;
+     margin: 8px;
+     border-radius: 50%;
+     outline: none;
+     cursor: pointer;
+ }
+ .pagination a:hover {
+     background: dodgerblue;
+     color: #fff;
+ }
+
+
+
+ .activeLink {
+     background: dodgerblue;
+     color: #fff;
+ }
