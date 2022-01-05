@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 // import { adminLoginHandler } from "../apiHandler";
 import { request } from "../apiHandler/Authapi";
-import urwunge from "../assets/target.png";
+import karame from "../assets/target.png";
 import { toast, ToastContainer } from 'react-toastify';
 // import { Modes } from "../utils/context";
 export const AdminLogin = ()=>{
@@ -54,8 +54,8 @@ export const AdminLogin = ()=>{
          <ToastContainer  position="top-center" draggable autoClose={2000} />
         <Wrapper>
           <Logo>
-            <Image src={urwunge} alt="urwunge"/>
-            <p>Urwunge</p>
+            <Image src={karame} alt="karame"/>
+            <p>Karame</p>
           </Logo>
           <Sub autoComplete="off" onSubmit={handleAdminLogin}>
              <Input type="hidden" autoComplete="off"/>

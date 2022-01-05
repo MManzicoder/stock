@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom"
 import { DashboardRounded , AddBox, Inbox, Group, People, Person, Report, Settings, Shop, Input, OutdoorGrill} from "@material-ui/icons"
-import urwunge from "../assets/target.png"
+import karame from "../assets/target.png"
 function Sidebar() {
     const location = useLocation();
     const isActive = (history, path)=>{
@@ -18,8 +18,8 @@ function Sidebar() {
         <Holder>
            <Link to="/dashboard">
             <Logo>
-             <Image src={urwunge} alt="urwunge"/>
-             <p>Urwunge</p>
+             <Image src={karame} alt="karame"/>
+             <p>Karame</p>
           </Logo></Link>
            <MenuItems>
               <ListItem>

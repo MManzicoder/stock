@@ -82,7 +82,7 @@ const getUsedWater = ()=>{
         },
         {
             name: "Ingredients used",
-            amount: history.ingredients  + " KG",
+            amount: history ? history?.ingredients+"KG": 0  + " KG",
             img: money,
         },
     ]
