@@ -54,8 +54,6 @@ function App() {
        {/* <Route component={ForgotPassword} path="/forgotpassword"/> */}
        <Route component={ChangePassword} path="/shaka/reset/:code"/>
        </Switch>
-       
-      
     </Router>
   
     </Modes.Provider>

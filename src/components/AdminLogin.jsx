@@ -55,7 +55,7 @@ export const AdminLogin = ()=>{
         <Wrapper>
           <Logo>
             <Image src={karame} alt="karame"/>
-            <p>Karame</p>
+            <p>Cetraf</p>
           </Logo>
           <Sub autoComplete="off" onSubmit={handleAdminLogin}>
              <Input type="hidden" autoComplete="off"/>
@@ -122,6 +122,8 @@ export const Logo = styled.div`
    margin-left: 30px;
    align-items: center;
    margin-bottom: 20px;
+   background: #0000ffb9;
+   border-radius: 50%;
    cursor: pointer;
    img{
       height: 100% !important;
@@ -135,7 +137,7 @@ export const Logo = styled.div`
       font-weight: bold;
       color: black;
       font-size: 20px;
-      left: 140px;
+      left: 145px;
    }
 `
 export const Sub = styled.form`

@@ -19,7 +19,8 @@ function Sidebar() {
            <Link to="/dashboard">
             <Logo>
              <Image src={karame} alt="karame"/>
-             <p>Karame</p>
+           
+             <p>Cetraf</p>
           </Logo></Link>
            <MenuItems>
               <ListItem>
@@ -80,8 +81,10 @@ position: fixed;
  z-index: 1;
 `
 const Logo = styled.div`
-   height: 70px;
-   width: 70px;
+   margin-top: 10px;
+   height: 50px;
+   width: 50px;
+   background: dodgerblue;
    position: relative;
    margin-left: 0px;
    border-radius: 50%;
@@ -94,8 +97,10 @@ const Logo = styled.div`
    /* background: black; */
    p{
        position: absolute;
-       top: 25px;
-       left: 70px;
+       top: 13px;
+       left: 60px;
+       width: 70%;
+       /* font-size: px; */
    }
 `
 const Image = styled.img`

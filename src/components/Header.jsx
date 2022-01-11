@@ -154,6 +154,7 @@ const Lsection = styled.div`
    left: -30px;
    background: rgba(30, 140, 250, 0.9);
    border-radius: 7px;
+   color: #fff;
 `
 const LogoutDiv = styled.div`
   display: flex;
