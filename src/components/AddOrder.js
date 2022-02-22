@@ -29,6 +29,7 @@ const saveOrder = () =>{
     if(order.name =="" || order.quantity == 0 || order.address ==""){
         toast.error("All fields are required!")
         setLoading(false);
+        return;
     }
     setLoading(true);
         request("orders", "POST", order, {"bearer":`${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
