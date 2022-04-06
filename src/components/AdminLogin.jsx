@@ -55,7 +55,7 @@ export const AdminLogin = ()=>{
         <Wrapper>
           <Logo>
             <Image src={karame} alt="karame"/>
-            <p>Cetraf</p>
+            <p>Ubwiza</p>
           </Logo>
           <Sub autoComplete="off" onSubmit={handleAdminLogin}>
              <Input type="hidden" autoComplete="off"/>

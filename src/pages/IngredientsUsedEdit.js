@@ -58,17 +58,21 @@ const getIngredient = ()=>{
   const [loading, setLoading] = useState(false);
   const saveIng = ()=>{
       setLoading(true);
-      request(`usedingredients/${ingId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      request(`usedingredients/${ingId}`, "PUT", 
+      {quantity}, {"bearer": `${localStorage.getItem("auth")}`, 
+      "Content-Type":"application/json"})
       .then(data=>{
         setLoading(false);
         if(data.error) {
           toast.error(data.error);
         }
-        request("history/update", "POST", {date: today}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+        request("history/update", "POST", {date: today}, 
+        {"bearer": `${localStorage.getItem("auth")}`, 
+        "Content-Type":"application/json"})
         .then(res=>{
           toast.success(data.message);          
            history.push("/ingredients");
-           
         })
         .catch(err=>console.log(err.message))
       })
@@ -79,12 +83,13 @@ const getIngredient = ()=>{
     getIngredients();
     getUsedIngredients();
   },[ingId])    
+
   const pagesVisited = pageNumber * ingredientsPerPage;
   const displayPageIngredients = ingredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
   const displayPageUsedIngredients = usedIngredients.slice(pagesVisited, pagesVisited + ingredientsPerPage);
-   const pageCount1 = Math.ceil(ingredients.length / ingredientsPerPage);
-   const pageCount2 = Math.ceil(usedIngredients.length / ingredientsPerPage);
-    const changePage = ({ selected })=>{
+  const pageCount1 = Math.ceil(ingredients.length / ingredientsPerPage);
+  const pageCount2 = Math.ceil(usedIngredients.length / ingredientsPerPage);
+  const changePage = ({ selected })=>{
           setPageNumber(selected);
     }
   return (
@@ -100,7 +105,7 @@ const getIngredient = ()=>{
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                     <p>{" "+ing.quantity+"Kg"}</p>
+                     <p>{" "+ing.quantity} { ing.name === "Water" ? " L":" KG"}</p>
                     </FormControl>
                     <ButtonDiv>
                       <Link 
@@ -114,7 +119,7 @@ const getIngredient = ()=>{
                     
                  </IngredientSection>
 )}              
-{ingredients.length > 0 && <ReactPaginate
+{ingredients.length > 4 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -133,13 +138,16 @@ const getIngredient = ()=>{
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                   {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>:(<IngredientSection>
+                   {loading ? <Loader style={{height: 100, width:100, marginTop: 100, 
+                    border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}>
+                    </Loader>:(<IngredientSection>
                       {displayPageUsedIngredients  && displayPageUsedIngredients.map((ing, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{ing.name} </Label>
-                   {ingId == ing._id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? "L": "KG"}` }    
+                   {ingId == ing._id ? <Input type='number' name="price" value={quantity} 
+                   onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? " L": " KG"}` }    
                     </FormControl>
                     <ButtonDiv>
                         {ingId == ing._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 

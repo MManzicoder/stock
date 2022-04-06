@@ -79,7 +79,7 @@ return (
                         );
                       })}                    
                  </IngredientSection>)}
-                 {ingredients.length > 0 && <ReactPaginate
+                 {ingredients.length > 4 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }

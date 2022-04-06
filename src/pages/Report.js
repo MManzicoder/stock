@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import {request, getRequest} from "../apiHandler/Authapi"
 import { toast, ToastContainer } from 'react-toastify';
-
+import CurrencyFormat from "react-currency-format";
 function Report() {
    const dObj = new Date();
    const today = new Date(dObj.setDate(dObj.getDate()));
@@ -82,17 +82,26 @@ const retrievePrice = ()=>{
             <h2>Report for the stock</h2>
             <Filter>
               <Label>Date</Label>
-              <DateTimePickerComponent name="date" value={date} onChange={onChange} max={today}/> 
+              <DateTimePickerComponent  name="date" value={date} onChange={onChange} max={today}/> 
             </Filter>
             <ReportDiv>
-               <ReportIssueSection><p>Ingredients used</p><p>{!history ? (0 +"KG"): history.ingredients+"KG"}</p></ReportIssueSection>
-               <ReportIssueSection><p>Beer produced (Cazier) </p><p>{!history ? 0 : history.stock }</p></ReportIssueSection>
-               <ReportIssueSection><p>Beer Left (Cazier) </p><p>{ stock.quantity }</p></ReportIssueSection>
-               <ReportIssueSection><p>Registered orders</p><p>{orders.length}</p></ReportIssueSection>
+               <ReportIssueSection><p>Ingredients used</p><p>
+                {!history ? (0 +"KG"): history.ingredients+"KG"}</p>
+                </ReportIssueSection>
+               <ReportIssueSection><p>Beer produced (Cazier) </p><p>
+                 {!history ? 0 : history.stock }</p></ReportIssueSection>
+               <ReportIssueSection><p>Beer Left (Cazier) </p>
+               <p>{ stock.quantity }</p></ReportIssueSection>
+               <ReportIssueSection><p>Registered orders</p><p>
+                 {orders.length}</p></ReportIssueSection>
                <ReportIssueSection><p>Paid orders</p><p>{Paid}</p></ReportIssueSection>
                <ReportIssueSection><p>Not paid orders</p><p>{NoPaid}</p></ReportIssueSection>
-               <ReportIssueSection><p>Gained Amount</p><p>{(price * paidQuantity)+"FRW"}</p></ReportIssueSection>
-               <ReportIssueSection><p>Expected Amount</p><p>{(price * totalQuantity) +"FRW"}</p></ReportIssueSection>
+               <ReportIssueSection><p>Gained Amount</p>
+               <p><CurrencyFormat value={price * paidQuantity}  suffix=" Frw" 
+               thousandSeparator={true} displayType={"text"} /></p></ReportIssueSection>
+               <ReportIssueSection><p>Expected Amount</p>
+               <p><CurrencyFormat value={price * totalQuantity}  suffix=" Frw" 
+               thousandSeparator={true} displayType={"text"} /></p></ReportIssueSection>
                <DownloadReport>
                   <DownloadButton >Download</DownloadButton>
                </DownloadReport>

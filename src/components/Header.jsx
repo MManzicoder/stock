@@ -31,7 +31,8 @@ function Header() {
           <ProfileInfo>
            <Notification onClick={Notify}>
             <Notifications className="icon" color='blue'/>
-           <div className="notification-counter" style={{background:"red", display: "block"}}>
+           <div className="notification-counter" 
+           style={{background:"red", display: "block"}}>
                    <span>3</span>
            </div>
            </Notification>
@@ -46,7 +47,8 @@ function Header() {
                </UserImage>
                <span>{username}</span>
            </UserInfo>
-            <LogoutSection style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}
+            <LogoutSection 
+            style={{cursor: "pointer", justifyContent: "center", alignItems: "center"}}
             onClick={LogoutActivate}
             ><ArrowDropDown className='dropdown'/>
              {showLogoutSection && (
@@ -145,6 +147,7 @@ margin-left: 10px;
   .icon{
       padding: 0px;
   }
+  z-index: 3;
 `
 const Lsection = styled.div`
    position: absolute;

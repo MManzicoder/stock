@@ -20,7 +20,7 @@ function Sidebar() {
             <Logo>
              <Image src={karame} alt="karame"/>
            
-             <p>Cetraf</p>
+             <p>Ubwiza</p>
           </Logo></Link>
            <MenuItems>
               <ListItem>
@@ -30,11 +30,11 @@ function Sidebar() {
               </ListItem>
               <ListItem>
                   <Link to="/inventory" style={isActive(location, "/inventory")}><Input className='icon'/>
-                  <span>Inventory</span>
+                  <span>In Stock</span>
                   </Link>
               </ListItem>
               <ListItem>
-                  <Link to="/outgoing" style={isActive(location, "/outgoing")}><OutdoorGrill className='icon'/>
+                  <Link to="/orders" style={isActive(location, "/orders")}><OutdoorGrill className='icon'/>
                   <span>Orders</span>
                   </Link>
               </ListItem>

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import {toast, ToastContainer } from 'react-toastify'
 import { request, getRequest} from "../apiHandler/Authapi"
+import CurrencyFormat from "react-currency-format";
 function Inventory () {
   const name = "Cazier in stock(Beer)";
    const [stock, setStock] = useState({
@@ -29,7 +30,6 @@ function Inventory () {
   const [currFri, setCurrFri] = useState(0);
   const [currSat, setCurrSat] = useState(0);
   const [amount, setAmount ] = useState(0);
-  const [history, setHistory] = useState({});
   const todayObj = new Date();
   const td = todayObj.getDate();
   const today = new Date(todayObj.setDate(td));
@@ -51,113 +51,161 @@ var lastday = new Date(curr.setDate(last));
 //get first day and last day of the previous week 
 const currentDateObj = new Date();
 const currentDate = currentDateObj.getDate();
-
 var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
 var beforeOneWeek2 = new Date(beforeOneWeek);
- const  day = beforeOneWeek.getDay()
- const diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -7 : 0)
- const lastSunday = new Date(beforeOneWeek.setDate(diffToMonday))
+const  day = beforeOneWeek.getDay()
+const diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -7 : 0)
+const lastSunday = new Date(beforeOneWeek.setDate(diffToMonday))
 
-  const lastSaturday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
-  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}
-  const datesofPreviousWeek = getDaysArray(lastSunday, lastSaturday);
+const lastSaturday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
+var getDaysArray = function(s,e) 
+{for(var a=[],d=new Date(s);d<=e;
+  d.setDate(d.getDate()+1)){ a.push(new Date(d));}
+  return a;
+}
+
+const datesofPreviousWeek = getDaysArray(lastSunday, lastSaturday);
   const labels = datesofPreviousWeek.map((d,i)=>{
     return d.toString().split(" ")[0];
   })
-  const getPrevSun =()=>{
-    request("history/date", "POST", {date: datesofPreviousWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getPrevSun =()=>{
+  request("history/date", "POST", 
+  {date: datesofPreviousWeek[0] },
+  {"bearer": `${localStorage.getItem("auth")}`, 
+  "Content-Type":"application/json"})
     .then(res=>{
       setPrevSun(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getPrevMon =()=>{
-       request("history/date", "POST", {date: datesofPreviousWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getPrevMon =()=>{
+  request("history/date", "POST", 
+   {date: datesofPreviousWeek[1] },
+   {"bearer": `${localStorage.getItem("auth")}`, 
+   "Content-Type":"application/json"})
     .then(res=>{
       setPrevMon(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-  const getPrevTue =()=>{
-    request("history/date", "POST", {date: datesofPreviousWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+const getPrevTue =()=>{
+  request("history/date", "POST", 
+  {date: datesofPreviousWeek[2] },
+  {"bearer": `${localStorage.getItem("auth")}`, 
+  "Content-Type":"application/json"})
     .then(res=>{
       setPrevTue(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getPrevWed =()=>{
-       request("history/date", "POST", {date: datesofPreviousWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+const getPrevWed =()=>{
+ request("history/date", "POST", 
+ {date: datesofPreviousWeek[3] },
+ {"bearer": `${localStorage.getItem("auth")}`, 
+ "Content-Type":"application/json"})
     .then(res=>{
       setPrevWed(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getPrevThu =()=>{
-       request("history/date", "POST", {date: datesofPreviousWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getPrevThu =()=>{
+  request("history/date", "POST", 
+    {date: datesofPreviousWeek[4] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setPrevThu(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getPrevFri =()=>{
-       request("history/date", "POST", {date: datesofPreviousWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getPrevFri =()=>{
+    request("history/date", "POST", 
+    {date: datesofPreviousWeek[5] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setPrevFri(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getPrevSat =()=>{
-       request("history/date", "POST", {date: datesofPreviousWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getPrevSat =()=>{
+  request("history/date", "POST", 
+  {date: datesofPreviousWeek[6] },
+  {"bearer": `${localStorage.getItem("auth")}`, 
+  "Content-Type":"application/json"})
     .then(res=>{
       setPrevSat(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-  const datesOfCurrentWeek = getDaysArray(firstday, lastday);
-  const getCurrSun =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const datesOfCurrentWeek = getDaysArray(firstday, lastday);
+const getCurrSun =()=>{
+    request("history/date", "POST", 
+    {date: datesOfCurrentWeek[0] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setCurrSun(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrMon =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getCurrMon =()=>{
+    request("history/date", "POST", 
+    {date: datesOfCurrentWeek[1] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setCurrMon(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrTue =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+const getCurrTue =()=>{
+    request("history/date", "POST", 
+    {date: datesOfCurrentWeek[2] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
      setCurrTue(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrWed =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("history/date", "POST", 
+       {date: datesOfCurrentWeek[3] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrWed(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrThu =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("history/date", "POST", 
+       {date: datesOfCurrentWeek[4] },{"bearer": 
+       `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrThu(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrFri =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("history/date", "POST", 
+       {date: datesOfCurrentWeek[5] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrFri(res.history.stock)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrSat =()=>{
-       request("history/date", "POST", {date: datesOfCurrentWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("history/date", "POST", 
+       {date: datesOfCurrentWeek[6] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrSat(res.history.stock)
     })
@@ -236,7 +284,7 @@ const retrievePrice = ()=>{
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
-                   <p style={{marginTop: "20px"}}>{(stock.quantity * price)/1000+"K FRW"}</p>
+                   <CurrencyFormat value={stock.quantity*price}  suffix=" Frw" thousandSeparator={true} displayType={"text"} />
                  </Card>
                  
             </FirstSection>

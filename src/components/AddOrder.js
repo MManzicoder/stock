@@ -40,7 +40,7 @@ const saveOrder = () =>{
                 toast.error(res.error)
             }
             toast.success(res.message);
-            window.location ="/outgoing";
+            window.location ="/orders";
         })
         .catch(err=>console.log(err.message))
 }
@@ -59,11 +59,11 @@ const handleChange = e =>{
                <Form>
                   <FormControl>
                     <Label>Recipient</Label>
-                   <Input type='text' name='recipientphone' value={order.recipientphone} disabled={loading} onChange={handleChange} required placeholder='Enter recipient phone'/>
+                   <Input type='text' name='recipientphone' value={order.recipientphone} disabled={loading} onChange={handleChange} required placeholder='client phone'/>
                   </FormControl>
                   <FormControl>
                     <Label>Address</Label>
-                   <Input type='text' name='address' value={order.address} disabled={loading} onChange={handleChange} required placeholder='location of the recipient'/>
+                   <Input type='text' name='address' value={order.address} disabled={loading} onChange={handleChange} required placeholder='client location'/>
                   </FormControl>                  
                     <FormControl>
                       <Label>Quantity</Label>
@@ -224,6 +224,7 @@ const Input = styled.input`
    height: 32px;
    padding: 0;
    z-index: 10;
+   color: red;
    @media screen and (max-width: 540px){
        left: 46%;
        height: 40px !important;

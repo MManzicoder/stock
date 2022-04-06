@@ -8,8 +8,10 @@ import lose from '../assets/lose.png'
 import happy from '../assets/happy.png'
 import money from '../assets/money.jpg'
 import { getRequest, request } from '../apiHandler/Authapi';
-
+import { isAuth } from '../shared/utils/isAuth';
+import CurrencyFormat from "react-currency-format"
 function Dashboard() {
+  const {username, email, userType, profile}  = isAuth();
   const [prevSun, setPrevSun] = useState(0);
   const [prevMon, setPrevMon] = useState(0);
   const [prevTue, setPrevTue] = useState(0);
@@ -33,14 +35,19 @@ function Dashboard() {
   const td = todayObj.getDate();
   const today = new Date(todayObj.setDate(td));
   const getAmount = ()=>{
-    request("orders/date", "POST", {date: today},{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    request("orders/date", "POST", 
+    {date: today},{"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setAmount(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
+  
   const getHistory = ()=>{
-    request("history/date", "POST", {date: today},{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    request("history/date", "POST", 
+    {date: today},{"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       if(res.error){
         console.log(res.error)
@@ -56,14 +63,18 @@ const getStock = ()=>{
     .catch(err=>console.log(err.message))
 }
 const getUsedIngredients = ()=>{
-  request("usedingredients/date", "POST", {date: today}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+  request("usedingredients/date", "POST", 
+    {date: today}, {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
   .then(res=>{
     setIngredients(res.quantity)
   })
   .catch(err=>console.log(err.message))
 }
 const getUsedWater = ()=>{
-    request("usedingredients/water/date", "POST", {date: today}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+  request("usedingredients/water/date", "POST", 
+  {date: today}, {"bearer": `${localStorage.getItem("auth")}`, 
+  "Content-Type":"application/json"})
   .then(res=>{
     setUsedWater(res.quantity)
   })
@@ -111,49 +122,68 @@ var beforeOneWeek2 = new Date(beforeOneWeek);
     return d.toString().split(" ")[0];
   })
   const getPrevSun =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
     .then(res=>{
       setPrevSun(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getPrevMon =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[1] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevMon(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
   const getPrevTue =()=>{
-    request("orders/date", "POST", {date: datesofPreviousWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+    request("orders/date", "POST", 
+    {date: datesofPreviousWeek[2] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setPrevTue(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getPrevWed =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[3] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevWed(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getPrevThu =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[4] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevThu(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getPrevFri =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[5] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevFri(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getPrevSat =()=>{
-       request("orders/date", "POST", {date: datesofPreviousWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesofPreviousWeek[6] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevSat(res.amount)
     })
@@ -161,54 +191,79 @@ var beforeOneWeek2 = new Date(beforeOneWeek);
   }
   const datesOfCurrentWeek = getDaysArray(firstday, lastday);
   const getCurrSun =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesOfCurrentWeek[0] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrSun(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrMon =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[1] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       request("orders/date", "POST", 
+       {date: datesOfCurrentWeek[1] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setCurrMon(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrTue =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[2] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+   const getCurrTue =()=>{
+       request("orders/date", "POST", 
+       {date: datesOfCurrentWeek[2] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
      setCurrTue(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
     const getCurrWed =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[3] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      request("orders/date", "POST", 
+      {date: datesOfCurrentWeek[3] },
+      {"bearer": `${localStorage.getItem("auth")}`, 
+      "Content-Type":"application/json"})
     .then(res=>{
       setCurrWed(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrThu =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[4] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+  const getCurrThu =()=>{
+    request("orders/date", "POST", 
+    {date: datesOfCurrentWeek[4] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setCurrThu(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrFri =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[5] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+  const getCurrFri =()=>{
+    request("orders/date", "POST", 
+    {date: datesOfCurrentWeek[5] },
+    {"bearer": `${localStorage.getItem("auth")}`, 
+    "Content-Type":"application/json"})
     .then(res=>{
       setCurrFri(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
-    const getCurrSat =()=>{
-       request("orders/date", "POST", {date: datesOfCurrentWeek[6] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+
+const getCurrSat =()=>{
+  request("orders/date", "POST", 
+  {date: datesOfCurrentWeek[6] },
+  {"bearer": `${localStorage.getItem("auth")}`, 
+  "Content-Type":"application/json"})
     .then(res=>{
       setCurrSat(res.amount)
     })
     .catch(err=>console.log(err.message))
   }
+  
   useEffect(()=>{
     getAmount();
     getStock();
@@ -229,7 +284,7 @@ var beforeOneWeek2 = new Date(beforeOneWeek);
     getCurrThu();
     getCurrFri();
     getCurrSat();
-  })
+  },[])
   const data1 =[prevSun, prevMon, prevTue, prevWed, prevThu, prevFri, prevSat];
   const data2 = [currSun, currMon, currTue, currWed, currThu, currFri, currSat];
 return (
@@ -237,7 +292,7 @@ return (
               <Main>
                 <Division1>
                     <Greetings>
-                        <h2>Hi <span>Manzi Monnierey</span>, </h2>
+                        <h2>Hi <span>{username}</span>, </h2>
                           <p>This is how your stock looks like today</p>  
                     </Greetings>
                     <SubDivision>
@@ -248,7 +303,7 @@ return (
                                  <img src={c.img}/>
                               </ImageHolder>
                               <OtherInfo>
-                                <span style={{fontWeight: "bold"}}>{c.amount}</span>
+                                <span style={{fontWeight: "bold"}}>{i == 0 ? <CurrencyFormat value={c.amount} thousandSeparator={true} suffix=" Frw" displayType={"text"} />: c.amount}</span>
                                 <p style={{color: "gray"}}>{c.name}</p>
                               </OtherInfo>
                           </Card>

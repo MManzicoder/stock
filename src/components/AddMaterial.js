@@ -27,7 +27,9 @@ const saveMaterial = () =>{
     if(material.name =="" || material.quantity == 0){
         toast.error("All fields are required!")
     }else if(material.name !== "" && material.quantity !==0 ) setLoading(true);
-     request("materials", "POST", material, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+     request("materials", "POST", 
+      material, {"bearer": `${localStorage.getItem("auth")}`, 
+      "Content-Type":"application/json"})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -49,21 +51,30 @@ const handleChange = e =>{
         showModal ? (
         <Background ref={modalRef} onClick = { closeModal }>
             <ToastContainer position="top-center" autoClose={3000} />
-           <Wrapper className={`${ showModal ? "animate": "" }`} style={{height: 250, padding: 15}}>
+           <Wrapper className={`${ showModal ? "animate": "" }`} 
+           style={{height: 250, padding: 15}}>
                <h3>New Material</h3>
                <Form>
                   <FormControl>
                     <Label>Name</Label>
-                   <Input type='text' name='name' value={material.name} onChange={handleChange} required placeholder='Enter name'/>
+                   <Input type='text' name='name' 
+                   value={material.name} onChange={handleChange} 
+                   required placeholder='Enter name'/>
                   </FormControl>
                     <FormControl>
                       <Label>Quantity</Label>
-                      <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={material.quantity} onChange={handleChange} required/>
+                      <Input type='text' name='quantity' 
+                      placeholder='Enter quantity' disabled={loading} 
+                      value={material.quantity} onChange={handleChange} 
+                      required/>
                     </FormControl>                  
                </Form>
                <AddButton>
                    <Button onClick={saveMaterial}>{!loading ? "Add": 
-                    <Loader style={{marginLeft: "40%", marginTop: 0, height: 20, width: 20}}></Loader>}
+                    <Loader 
+                    style={{marginLeft: "40%", 
+                    marginTop: 0, height: 20, width: 20}}
+                    ></Loader>}
                    </Button>
                </AddButton>
             <CloseModalButton onClick={closeAllStaff} />

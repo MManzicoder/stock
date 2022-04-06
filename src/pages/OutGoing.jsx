@@ -69,7 +69,9 @@ function OutGoing () {
                  <Table/>
               </Orders>
               <ButtonDiv>
-                 <AddButton onClick={()=>setShowModal(true)}>Add order</AddButton>
+                 <AddButton 
+                 onClick={()=>setShowModal(true)}
+                 >Add order</AddButton>
               </ButtonDiv>
             </SecondSection>
           </Wrapper>         

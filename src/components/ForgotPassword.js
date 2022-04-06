@@ -1,76 +1,66 @@
 import React,{useState} from "react";
 import styled from "styled-components";
-// import Shield from "../assets/Shield.svg"
+import Shield from "../assets/forgot.png"
 // import axios from "axios";
 import {toast} from "react-toastify";
 import {request} from "../apiHandler/Authapi";
 import { useHistory } from "react-router-dom";
+import SimpleHeader from "./SimpleHeader";
 
-const ChangePassword = () =>{
+const ForgotPassword = () =>{
    
-    const [password,setPassword]=useState("");
-    const [retype,setRetype]=useState("");
+    const [email,setEmail]=useState("");
     const [isLoading,setIsLoading]=useState(false);
     const history=useHistory();
-    
+
     const handleData = async (e) =>{
          e.preventDefault();
-         setIsLoading(true);
-        if(password==="" && retype==="")
-            setIsLoading(false);
-            toast.error("Please fill the required field");
-            setIsLoading(true);
-            return;
-
+        if(email===""){
+            toast.error("Email is required!");
+        }else{
             try{
-                const uniqueNumber = history.location.pathname.split('/')[3]
-
-              let res= await  request("users/confirmReset", "POST",
-               {  newPassword:password,retype,uniqueNumber }, 
-               {"Content-Type":"application/json"});
-             
+                setIsLoading(true);
+              let res= await  request("auth/resetPassword", "POST", {  email }, {"Content-Type":"application/json"});
+              console.log(res);
                 if(res.error){
-                    setIsLoading(false);
+                    setIsLoading(false)
                     toast.error(res.error);
                 }
                  if(res.message){
-                     setIsLoading(false);
-                      history.push("/account");
+                     setIsLoading(false)
+                      history.push("/resetMessage");
                 }
            
                }catch(err){
                        console.log(err);
                        toast.error("Unexpected error occurred!");
                }
+        }
  
-        
+       
     }
 
     return (
+        <Holder>
+        <SimpleHeader />
         <Container>
           <div className="form-container">
-          {/* <img src={Shield} alt="The logo for verification"/> */}
-          <h2 style={{textAlign:"center"}}> Please Choose and Confirm a New Password</h2>
+          <img src={Shield} alt="The logo for verification"/>
+          <p>Forgot password?</p>
            <form onSubmit={handleData}>
-                <div className="row " required>
-                    <input className="text-black font-bold outline-none px-2" 
-                    type="password" onChange={(e) => setPassword(e.target.value)} 
-                     placeholder="Enter a new Password"
-                    />
-                </div>
-                <div className="row border-0  " required>
-                    <input className="text-black font-bold outline-none px-2" 
-                    type="password" onChange={(e) => setRetype(e.target.value)} 
-                     placeholder="Confirm Password"
+                <div className="row" required>
+                    <input className="outline-none" type="email" onChange={(e) => setEmail(e.target.value)} 
+                     placeholder="Enter an email to reset your account!"
                     />
                 </div>
                 <div className="row">
-                    <button>{ !isLoading?"Reset account password" : 
-                    <div className="loader"></div>}</button>
+                    <button>{ !isLoading?"Submit" : <div className="loader outline-none"></div>}</button>
                 </div>
            </form>
            </div>
         </Container>
+        </Holder>
+        
     )
 }
 
@@ -86,7 +76,11 @@ flex-direction: column;
 align-items: center; 
 .form-container{
     background: white;
+    border-radius: 10px;
     padding: 5%;
+    form{
+        margin-top: 10px;
+    }
 }
 .form-container  img{
     margin: 0px auto;
@@ -95,11 +89,13 @@ align-items: center;
      margin-top: 10px;
  }
  .row input{
-     background-color: rgba(191, 219, 225);
-     width: 400px;
+     border: 1px solid black;
+     width: 300px;
      height: 40px;
      border-radius: 4px;
-     
+     padding: 2px 10px;
+     border:   1px solid rgba(30, 140, 250, 0.9);
+     outline: none;
  }
  .row button{
      border: none;
@@ -108,14 +104,14 @@ align-items: center;
      padding: 10px;
      color: white;
      width: 100%;
+     cursor: pointer;
  }
-
  .loader{
     width: 20px;
     height: 20px;
     border-radius: 50%;
     border: 5px solid lightgray;
-    border-top: 5px solid #5e93ff;
+    border-top: 5px solid dodgerblue;
     animation: spinner 1s linear infinite; 
     margin: 0px auto;
   }
@@ -127,7 +123,6 @@ align-items: center;
       transform: rotate(360deg);
     }
   }
-
  @media only screen and (max-width: 620px){
     margin: 0px;
     padding: 20% 10px;
@@ -143,5 +138,12 @@ align-items: center;
  
  }
 `
+const Holder = styled.div`
+  height: 100vh;
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+`
 
-export default ChangePassword;
+export default ForgotPassword;

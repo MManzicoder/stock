@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ChangePassword from './components/ChangePassword'; 
 import PasswordResetNotification from "./components/PasswordResetNotification";
 import Resend from "./components/Resend";
-// import ForgotPassword from "./components/ForgotPassword";
+import ForgotPassword from "./components/ForgotPassword";
 import Auth from "./pages/Auth";
 import Inventory from "./pages/Inventory";
 import InventoryEdit from "./pages/InventoryEdit";
@@ -48,10 +48,10 @@ function App() {
        <PrivateRoute component={Profile}  path="/profile" /> 
        <PrivateRoute component={InventoryEdit} path="/inventory/edit/:id"/>
        <PrivateRoute component={Inventory} path="/inventory"/>
-       <PrivateRoute component={OutGoing} path="/outgoing"/>
+       <PrivateRoute component={OutGoing} path="/orders"/>
        <PrivateRoute component={Settings} path="/settings"/>
        <Route component={PasswordResetNotification} path="/resetMessage"/>       
-       {/* <Route component={ForgotPassword} path="/forgotpassword"/> */}
+       <Route component={ForgotPassword} path="/forgotpassword"/>
        <Route component={ChangePassword} path="/shaka/reset/:code"/>
        </Switch>
     </Router>

@@ -108,7 +108,7 @@ const getMaterial = ()=>{
                     
                  </IngredientSection>
 )}              
-{materials.length > 0 && <ReactPaginate
+{materials.length > 4 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }

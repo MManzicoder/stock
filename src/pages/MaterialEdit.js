@@ -56,7 +56,9 @@ const getMaterial = ()=>{
   const [loading, setLoading] = useState(false);
   const saveMat = ()=>{
       setLoading(true);
-      request(`materials/${mId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      request(`materials/${mId}`, "PUT", 
+      {quantity}, {"bearer": `${localStorage.getItem("auth")}`,
+      "Content-Type":"application/json"})
       .then(data=>{
         setLoading(false);
         if(data.error) {
@@ -107,7 +109,7 @@ const getMaterial = ()=>{
                       })}
                     
                  </IngredientSection>) }
-                  {materials.length > 0 && <ReactPaginate
+                  {materials.length > 4 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
