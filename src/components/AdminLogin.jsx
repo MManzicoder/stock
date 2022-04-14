@@ -46,6 +46,7 @@ export const AdminLogin = ()=>{
       })
       .catch(err=>{
          setLoading(false);
+         toast.error("An error occured try again!");
          console.log(err.message)
       });
  }
@@ -74,7 +75,8 @@ export const AdminLogin = ()=>{
                  />
               </FormControl>
               <Button onClick={handleAdminLogin} style={loading ? {padding: "0px"}: {}}>
-                 {!loading ? "Sign In": <Loader style={loading ? {marginLeft: "120px", marginTop: "-2px"}: {}}></Loader> }
+                 {!loading ? "Sign In": <Loader style={loading ? {marginLeft: "100px", marginTop: "-2px"}: {}}>
+                 </Loader> }
                  </Button>
               <UserBenefit>
                 <RememberMe>

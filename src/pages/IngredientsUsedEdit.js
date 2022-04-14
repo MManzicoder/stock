@@ -10,18 +10,20 @@ import ReactPaginate from "react-paginate";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons"
 function IngredientsUsedEdit() {
 const history = useHistory();
-    const [ showModal , setShowModal ] = useState(false);
-    const [ingredients, setIngredients] = useState([]);
-    const [usedIngredients, setUsedIngredients] = useState([]);
-    const [quantity, setQuantity] = useState(0)
-    const { ingId } = useParams()
+  const [ showModal , setShowModal ] = useState(false);
+  const [ingredients, setIngredients] = useState([]);
+  const [usedIngredients, setUsedIngredients] = useState([]);
+  const [quantity, setQuantity] = useState(0)
+  const { ingId } = useParams()
   const [pageNumber, setPageNumber]= useState(0);
   const todayObj = new Date();
   const today = new Date(todayObj.setDate(todayObj.getDate()));
-  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+  const ingredientsPerPage = window.screen.width > 1000 ? 4 : 
+  (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
     const getIngredients =()=>{
      setLoading(true);
-       getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("ingredients",
+       {"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -33,7 +35,8 @@ const history = useHistory();
 }
 const getUsedIngredients =()=>{
       setLoading(true);
-       getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("usedingredients",
+       {"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -44,7 +47,8 @@ const getUsedIngredients =()=>{
 
 }
 const getIngredient = ()=>{
-     getRequest(`usedingredients/${ingId}`,{"bearer": `${localStorage.getItem("auth")}`})
+     getRequest(`usedingredients/${ingId}`,
+     {"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -99,7 +103,9 @@ const getIngredient = ()=>{
           <Wrapper>
              <StockSettings>
                  <h2>Ingredients that are currently in stock</h2>
-                    {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: (  <IngredientSection>
+                    {loading ? <Loader 
+                    style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",
+                    borderTop: "3px solid transparent"}}></Loader>: (  <IngredientSection>
                       {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
                           <Card>
@@ -147,12 +153,14 @@ const getIngredient = ()=>{
                         <FormControl>
                         <Label>{ing.name} </Label>
                    {ingId == ing._id ? <Input type='number' name="price" value={quantity} 
-                   onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? " L": " KG"}` }    
+                   onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? 
+                   " L": " KG"}` }    
                     </FormControl>
                     <ButtonDiv>
                         {ingId == ing._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
                       onClick={saveIng}>
-                        { ingId == ing._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
+                        { ingId == ing._id ? (!loading  ?  "Save": <Loader 
+                        style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
                         </Button>): <Link to={"/ingredients/editused/"+ing._id}>Edit</Link> }
                       
                     </ButtonDiv>

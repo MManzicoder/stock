@@ -13,6 +13,7 @@ const AddOrder = ({ showModal, setShowModal}) => {
         recipientphone: "",
         address: "",
         quantity: 0,
+        price: 0,
         status: ""
     })
     const modalRef = useRef();
@@ -32,7 +33,9 @@ const saveOrder = () =>{
         return;
     }
     setLoading(true);
-        request("orders", "POST", order, {"bearer":`${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        request("orders", "POST", 
+        order, {"bearer":`${localStorage.getItem("auth")}`, 
+        "Content-Type":"application/json"})
         .then(res=>{
             setLoading(false)
             console.log(res);
@@ -54,7 +57,7 @@ const handleChange = e =>{
         showModal ? (
         <Background ref={modalRef} onClick = { closeModal }>
             <ToastContainer position="top-center" autoClose={3000} />
-           <Wrapper className={`${ showModal ? "animateOrder": "" }`} style={{height: 350, padding: 15}}>
+           <Wrapper className={`${ showModal ? "animateOrder": "" }`} style={{height: 380, padding: 15}}>
                <h3>New Order</h3>
                <Form>
                   <FormControl>
@@ -69,6 +72,10 @@ const handleChange = e =>{
                       <Label>Quantity</Label>
                       <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={order.quantity} onChange={handleChange} required/>
                     </FormControl>
+                    <FormControl>
+                      <Label>Price</Label>
+                      <Input type='text' name='price' placeholder='Enter price' disabled={loading} value={order.price} onChange={handleChange} required/>
+                    </FormControl>                                      
                     <FormControl>
                       <Label>Status</Label>
                       <Select  name='status' disabled={loading} value={order.status} onChange={handleChange} required>

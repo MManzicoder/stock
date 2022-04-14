@@ -46,7 +46,6 @@ var last = first + 6; // last day is the first day + 6
 
 var firstday = new Date(curr.setDate(first));
 var lastday = new Date(curr.setDate(last));
-// var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}; get dates between two dates
 
 //get first day and last day of the previous week 
 const currentDateObj = new Date();
@@ -284,16 +283,19 @@ const retrievePrice = ()=>{
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
-                   <CurrencyFormat value={stock.quantity*price}  suffix=" Frw" thousandSeparator={true} displayType={"text"} />
+                   <CurrencyFormat value={stock.quantity*price}  suffix=" Frw" 
+                   thousandSeparator={true} displayType={"text"} />
                  </Card>
                  
             </FirstSection>
             <SecondSection>
                <ChartHolder>
-                 <Chart Title={"Stock Production for this weeek"} dataArray={data2} labels={labels} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                 <Chart Title={"Stock Production for this weeek"} dataArray={data2} 
+                 labels={labels} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                </ChartHolder>
                <ChartHolder>
-                 <Chart Title={"Stock production for last week"} dataArray={data1} labels={labels} background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
+                 <Chart Title={"Stock production for last week"} dataArray={data1} 
+                 labels={labels} background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
                </ChartHolder>               
             </SecondSection>
           </Wrapper>         

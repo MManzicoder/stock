@@ -116,14 +116,17 @@ var beforeOneWeek2 = new Date(beforeOneWeek);
  const lastSunday = new Date(beforeOneWeek.setDate(diffToMonday))
 
   const lastSaturday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
-  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}
+  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1))
+    { a.push(new Date(d));}return a;}
   const datesofPreviousWeek = getDaysArray(lastSunday, lastSaturday);
   const labels = datesofPreviousWeek.map((d,i)=>{
     return d.toString().split(" ")[0];
   })
   const getPrevSun =()=>{
        request("orders/date", "POST", 
-       {date: datesofPreviousWeek[0] },{"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+       {date: datesofPreviousWeek[0] },
+       {"bearer": `${localStorage.getItem("auth")}`, 
+       "Content-Type":"application/json"})
     .then(res=>{
       setPrevSun(res.amount)
     })
@@ -303,7 +306,8 @@ return (
                                  <img src={c.img}/>
                               </ImageHolder>
                               <OtherInfo>
-                                <span style={{fontWeight: "bold"}}>{i == 0 ? <CurrencyFormat value={c.amount} thousandSeparator={true} suffix=" Frw" displayType={"text"} />: c.amount}</span>
+                                <span style={{fontWeight: "bold"}}>{i == 0 ? <CurrencyFormat value={c.amount} 
+                                thousandSeparator={true} suffix=" Frw" displayType={"text"} />: c.amount}</span>
                                 <p style={{color: "gray"}}>{c.name}</p>
                               </OtherInfo>
                           </Card>
@@ -313,10 +317,12 @@ return (
                 </Division1>
                 <Division2>
                     <ChartHolder>
-                        <Chart Title={"Purchase history for this week"} dataArray={data2} labels={labels} background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
+                        <Chart Title={"Purchase history for this week"} dataArray={data2} labels={labels} 
+                        background={"rgb(50, 40, 230)"} dataSet={"This Week"}/>
                     </ChartHolder>
                     <ChartHolder>
-                        <Chart Title={"Purchase history for last week"} dataArray={data1} labels={labels} background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
+                        <Chart Title={"Purchase history for last week"} dataArray={data1} labels={labels} 
+                        background={"rgba(30, 140, 250, 0.9)"} dataSet={"Last Week"}/>
                     </ChartHolder>
                 </Division2>
               </Main>

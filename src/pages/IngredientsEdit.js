@@ -18,7 +18,8 @@ function IngredientsEdit() {
   const [pageNumber, setPageNumber]= useState(0);
   const todayObj = new Date();
   const today = new Date(todayObj.setDate(todayObj.getDate()));
-  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+  const ingredientsPerPage = window.screen.width > 1000 ? 4 : 
+  (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
     const getIngredients =()=>{
      setLoading(true);
        getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
@@ -58,14 +59,18 @@ const getIngredient = ()=>{
   const [loading, setLoading] = useState(false);
   const saveIng = ()=>{
       setLoading(true);
-      request(`ingredients/${ingId}`, "PUT", {quantity}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+      request(`ingredients/${ingId}`, "PUT", 
+      {quantity}, {"bearer": `${localStorage.getItem("auth")}`, 
+      "Content-Type":"application/json"})
       .then(data=>{
         setLoading(false);
         if(data.error) {
           toast.error(data.error);
         }
 
-        request("history/update", "POST", {date: today}, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
+        request("history/update", "POST", 
+        {date: today}, {"bearer": `${localStorage.getItem("auth")}`, 
+        "Content-Type":"application/json"})
         .then(res=>{
           toast.success(data.message);          
            history.push("/ingredients");
@@ -105,12 +110,14 @@ const getIngredient = ()=>{
                         <FormControl>
                         <Label>{ing.name} </Label>
                    {ingId == ing._id ? <Input type='number' name="price" 
-                   value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+ing.quantity+`${ing.name=="Water" ? " L": " KG" }` }    
+                   value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+
+                   ing.quantity+`${ing.name=="Water" ? " L": " KG" }` }    
                     </FormControl>
                     <ButtonDiv>
                         {ingId == ing._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
                       onClick={saveIng}>
-                        { ingId == ing._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
+                        { ingId == ing._id ? (!loading  ?  "Save": 
+                        <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
                         </Button>): <Link to={"/ingredients/edit/"+ing._id}>Edit</Link> }
                       
                     </ButtonDiv>
@@ -138,7 +145,9 @@ const getIngredient = ()=>{
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                 {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: 
+                 {loading ? <Loader 
+                 style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",
+                 borderTop: "3px solid transparent"}}></Loader>: 
                  (<IngredientSection>
                       {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
                         return(

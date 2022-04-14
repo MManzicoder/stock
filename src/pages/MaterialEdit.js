@@ -16,10 +16,12 @@ function MaterialsEdit() {
     const [quantity, setQuantity] = useState(0)
     const { mId } = useParams()
   const [pageNumber, setPageNumber]= useState(0);
-  const materialsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+  const materialsPerPage = window.screen.width > 1000 ? 4 : 
+  (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
     const getMaterials =()=>{
      setLoading(true);
-       getRequest("materials",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("materials",{"bearer": 
+       `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -31,7 +33,8 @@ function MaterialsEdit() {
 }
 const getUsedMaterials =()=>{
       setLoading(true);
-       getRequest("usedmaterials",{"bearer": `${localStorage.getItem("auth")}`})
+       getRequest("usedmaterials",{"bearer": 
+       `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -42,7 +45,8 @@ const getUsedMaterials =()=>{
 
 }
 const getMaterial = ()=>{
-     getRequest(`materials/${mId}`,{"bearer": `${localStorage.getItem("auth")}`})
+     getRequest(`materials/${mId}`,{"bearer": 
+     `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
             if(res.error){
@@ -89,18 +93,22 @@ const getMaterial = ()=>{
           <Wrapper>
              <StockSettings>
                  <h2>Packaging materials the stock in stock</h2>
-                 {loading ?<Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
+                 {loading ?<Loader 
+                 style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", 
+                 borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
                       {displayPageMaterials && displayPageMaterials.map((mat, i)=>{
                         return(
                           <Card>
                         <FormControl>
                         <Label>{mat.name} </Label>
-                   {mId == mat._id ? <Input type='number' name="price" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>: " "+mat.quantity }    
+                   {mId == mat._id ? <Input type='number' name="price" value={quantity} 
+                   onChange={(e)=>setQuantity(e.target.value)}/>: " "+mat.quantity }    
                     </FormControl>
                     <ButtonDiv>
                         {mId == mat._id ?(<Button type="button" style={loading ? {padding: "9px 20px"}: {}} 
                       onClick={saveMat}>
-                        { mId == mat._id ? (!loading  ?  "Save": <Loader style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
+                        { mId == mat._id ? (!loading  ?  "Save": <Loader 
+                        style={{margin: "0px", marginLeft: "25%"}}></Loader>) : "Edit"}
                         </Button>): <Link to={"/materials/edit/"+mat._id}>Edit</Link> }
                       
                     </ButtonDiv>
@@ -128,7 +136,9 @@ const getMaterial = ()=>{
               </StockSettings>
               <OtherSettings>
                   <h2>Materials out of the stock</h2>
-                 {loading ? <Loader style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}></Loader>: 
+                 {loading ? <Loader 
+                 style={{height: 100, width:100, marginTop: 100, border: "3px solid dodgerblue",
+                 borderTop: "3px solid transparent"}}></Loader>: 
                  (<IngredientSection>
                       {displayPageUsedMaterials && displayPageUsedMaterials.map((mat, i)=>{
                         return(

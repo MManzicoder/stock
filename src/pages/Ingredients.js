@@ -15,7 +15,8 @@ function Ingredients() {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [ loading, setLoading ] = useState(false); 
   const [pageNumber, setPageNumber]= useState(0);
-  const ingredientsPerPage = window.screen.width > 1000 ? 4 : (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
+  const ingredientsPerPage = window.screen.width > 1000 ? 4 : 
+  (window.screen.width >500 && window.screen.width < 800 ? 2:  2);
 const getIngredients =()=>{
     setLoading(true);
        getRequest("ingredients",{"bearer": `${localStorage.getItem("auth")}`})
@@ -61,7 +62,8 @@ return (
           <Wrapper>
              <StockSettings>
                  <h2>Ingredients that are currently in stock</h2>
-                 {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
+                 {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100,
+                   border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
                       {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
                           <Card>
@@ -98,7 +100,9 @@ return (
               </StockSettings>
               <OtherSettings>
                   <h2>Used ingredients</h2>
-                 {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: 
+                 {loading ? <Loader 
+                 style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", 
+                 borderTop: "3px solid transparent"}}></Loader>: 
                  ( <IngredientSection>
                       {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
                         return(

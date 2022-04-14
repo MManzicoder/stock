@@ -26,6 +26,7 @@ const AddMaterial = ({ showModal, setShowModal, setMaterials, setUsedMaterials})
 const saveMaterial = () =>{
     if(material.name =="" || material.quantity == 0){
         toast.error("All fields are required!")
+        return;
     }else if(material.name !== "" && material.quantity !==0 ) setLoading(true);
      request("materials", "POST", 
       material, {"bearer": `${localStorage.getItem("auth")}`, 

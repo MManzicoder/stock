@@ -27,6 +27,7 @@ const Modal = ({ showModal, setShowModal, setIngredients, setUsedIngredients}) =
 const saveIngredient = () =>{
     if(ingredient.name =="" || ingredient.quantity == 0){
         toast.error("All fields are required!")
+        return;
     }else if(ingredient.name !== "" && ingredient.quantity !==0 ) setLoading(true);
      request("ingredients", "POST", ingredient, {"bearer": `${localStorage.getItem("auth")}`, "Content-Type":"application/json"})
         .then(res=>{

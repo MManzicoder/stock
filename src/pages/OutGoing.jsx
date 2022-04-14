@@ -12,7 +12,6 @@ import { useEffect } from 'react'
 function OutGoing () {
     const [ showModal , setShowModal ] = useState(false);
     const [orders, setOrders] = useState([]);
-    const [fetching, setFetching] = useState(false);
     const [paid, setPaid] = useState({
       name: "Paid orders",
       quantity: 0
@@ -22,10 +21,9 @@ function OutGoing () {
       quantity: 0
     })    
    const getOrders = ()=>{
-     setFetching(true);
-     getRequest("orders", {"bearer": `${localStorage.getItem("auth")}`})
+     getRequest("orders", {"bearer": 
+     `${localStorage.getItem("auth")}`})
      .then(res=>{
-       setFetching(false);
        if(res.error){
          toast.error(res.error)
        }

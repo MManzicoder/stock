@@ -50,7 +50,6 @@ var last = first + 6; // last day is the first day + 6
 
 var firstday = new Date(curr.setDate(first));
 var lastday = new Date(curr.setDate(last));
-// var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}; get dates between two dates
 
 //get first day and last day of the previous week 
 const currentDateObj = new Date();
@@ -63,7 +62,8 @@ var beforeOneWeek2 = new Date(beforeOneWeek);
  const lastSunday = new Date(beforeOneWeek.setDate(diffToMonday))
 
   const lastSaturday = new Date(beforeOneWeek2.setDate(diffToMonday + 6));
-  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;}
+  var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1))
+    { a.push(new Date(d));}return a;}
   const datesofPreviousWeek = getDaysArray(lastSunday, lastSaturday);
   const labels = datesofPreviousWeek.map((d,i)=>{
     return d.toString().split(" ")[0];
