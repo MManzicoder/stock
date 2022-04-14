@@ -11,7 +11,7 @@ import { getRequest} from "../apiHandler/Authapi"
 import { useEffect } from 'react'
 import {toast, ToastContainer } from 'react-toastify'
 function InventoryEdit () {
-  const name = "Cazier in stock(Beer)";
+  const name = "Crates in stock(Beer)";
   const dObj = new Date();
   const today = new Date(dObj.setDate(dObj.getDate()));
   const { id } = useParams();

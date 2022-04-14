@@ -296,7 +296,7 @@ return (
                 <Division1>
                     <Greetings>
                         <h2>Hi <span>{username}</span>, </h2>
-                          <p>This is how your stock looks like today</p>  
+                          <p>This is how your stock looks like today</p> 
                     </Greetings>
                     <SubDivision>
                       {cards.map((c, i)=>{

@@ -9,7 +9,7 @@ import {toast, ToastContainer } from 'react-toastify'
 import { request, getRequest} from "../apiHandler/Authapi"
 import CurrencyFormat from "react-currency-format";
 function Inventory () {
-  const name = "Cazier in stock(Beer)";
+  const name = "Crates in stock(Beer)";
    const [stock, setStock] = useState({
      stock_id: "",
      quantity: 0

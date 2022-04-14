@@ -48,14 +48,16 @@ useEffect(()=>{
           <Wrapper>
               <StockSettings>
                  <h2>Stock settings</h2>
-                 <FormControl>
+                 {/* <FormControl>
                      <Label>Price of one Cazier </Label>
                 {update ? <Input type='number' name="price" value={price.amount} onChange={(e)=>setPrice({...price, amount: e.target.value})}/>: "= "+price.amount+" RWF"}     
                  </FormControl>
-                 <Button type="button" style={loading ? {padding: "9px 20px"}: {}} onClick={update ? saveConfig: ()=>setUpdate(true)}>{!loading ? (update ? "Save": "Update" ): <Loader style={{margin: "0px"}}></Loader>}</Button>
+                 <Button type="button" style={loading ? {padding: "9px 20px"}: {}} onClick={update ? saveConfig: ()=>setUpdate(true)}>{!loading ? (update ? "Save": "Update" ): <Loader style={{margin: "0px"}}></Loader>}</Button> */}
+                 <p>No settings available</p>
               </StockSettings>
               <OtherSettings>
                   <h2>Other settings</h2>
+                  <p>No settings available</p>
               </OtherSettings>
           </Wrapper>
         </Main>
@@ -89,6 +91,11 @@ const StockSettings = styled.div`
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
        }
+       p{
+         text-align: center;
+         margin-top: 30vh;
+         color: grey;
+       }
 `
 const OtherSettings = styled.div`
     width: 49%;
@@ -98,6 +105,11 @@ const OtherSettings = styled.div`
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
        }    
+      p{
+         text-align: center;
+         margin-top: 30vh;
+         color: grey;
+       }
 `
 const FormControl = styled.div`
       width: 60%;

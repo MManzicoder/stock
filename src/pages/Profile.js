@@ -6,7 +6,9 @@ function Profile() {
     return (
       <Layout>
         <Main>
-          <Wrapper></Wrapper>          
+          <Wrapper>
+            
+          </Wrapper>          
         </Main>
       </Layout>
     )

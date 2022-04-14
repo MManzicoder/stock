@@ -39,8 +39,14 @@ export default function Table() {
     field: 'quantity',
     headerName: 'Quantity',
     type: 'number',
-    width: 150,
+    width: 120,
     editable: false,
+  },
+    {
+    field: 'price',
+    headerName: 'Price (RWF)',
+    sortable: false,
+    width: 120
   },
   {
     field: 'amount',

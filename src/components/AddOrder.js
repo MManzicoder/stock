@@ -27,7 +27,7 @@ const AddOrder = ({ showModal, setShowModal}) => {
 
     }
 const saveOrder = () =>{
-    if(order.name =="" || order.quantity == 0 || order.address ==""){
+    if(order.name =="" || order.quantity == 0 || order.address =="" || order.price == 0){
         toast.error("All fields are required!")
         setLoading(false);
         return;
@@ -62,19 +62,23 @@ const handleChange = e =>{
                <Form>
                   <FormControl>
                     <Label>Recipient</Label>
-                   <Input type='text' name='recipientphone' value={order.recipientphone} disabled={loading} onChange={handleChange} required placeholder='client phone'/>
+                   <Input type='text' name='recipientphone' value={order.recipientphone} 
+                   disabled={loading} onChange={handleChange} required placeholder='client phone'/>
                   </FormControl>
                   <FormControl>
                     <Label>Address</Label>
-                   <Input type='text' name='address' value={order.address} disabled={loading} onChange={handleChange} required placeholder='client location'/>
+                   <Input type='text' name='address' value={order.address} disabled={loading} 
+                   onChange={handleChange} required placeholder='client location'/>
                   </FormControl>                  
                     <FormControl>
                       <Label>Quantity</Label>
-                      <Input type='text' name='quantity' placeholder='Enter quantity' disabled={loading} value={order.quantity} onChange={handleChange} required/>
+                      <Input type='text' name='quantity' placeholder='Enter quantity' 
+                      disabled={loading} value={order.quantity} onChange={handleChange} required/>
                     </FormControl>
                     <FormControl>
                       <Label>Price</Label>
-                      <Input type='text' name='price' placeholder='Enter price' disabled={loading} value={order.price} onChange={handleChange} required/>
+                      <Input type='text' name='price' placeholder='Enter price' disabled={loading} 
+                      value={order.price} onChange={handleChange} required/>
                     </FormControl>                                      
                     <FormControl>
                       <Label>Status</Label>
