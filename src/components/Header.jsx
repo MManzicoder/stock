@@ -73,6 +73,9 @@ position: relative;
  display: flex;
  flex-direction: column;
  padding-left: 10px;
+ @media screen and (max-width: 1024px){
+      height: 5vh;
+   }
  /* background: black; */
 `
 const ProfileInfo = styled.div`
@@ -82,6 +85,9 @@ const ProfileInfo = styled.div`
    display: flex;
    top: 15px;
    align-items: center !important;
+   @media screen and (max-width: 1024px){
+       right: 30px;
+   }
 `
 const Notification = styled.div`
     width: 30px;

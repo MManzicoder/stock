@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import { Loader } from "../components/AdminLogin"
 import { Close } from "@material-ui/icons";
@@ -124,9 +123,9 @@ const Wrapper = styled.div`
           font-size: 20px;
       }
       @media screen and (max-width: 1024px){
-          width: 70% !important;
-          height: 60vh !important;
-          .form{
+          width: 60% !important;
+          height: 25vh !important;
+            .form{
               width: 80% !important;
               input{
                   margin-top: 30px !important;

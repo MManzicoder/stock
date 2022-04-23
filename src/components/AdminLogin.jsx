@@ -53,12 +53,12 @@ export const AdminLogin = ()=>{
     return(
       <Holder>
          <ToastContainer  position="top-center" draggable autoClose={2000} />
-        <Wrapper>
+        <Wrapper className="wrapp">
           <Logo>
             <Image src={karame} alt="karame"/>
             <p>Ubwiza</p>
           </Logo>
-          <Sub autoComplete="off" onSubmit={handleAdminLogin}>
+          <Sub className="sub" autoComplete="off" onSubmit={handleAdminLogin}>
              <Input type="hidden" autoComplete="off"/>
               <FormControl>
                  <Label for="email">Email</Label> 
@@ -78,7 +78,7 @@ export const AdminLogin = ()=>{
                  {!loading ? "Sign In": <Loader style={loading ? {marginLeft: "100px", marginTop: "-2px"}: {}}>
                  </Loader> }
                  </Button>
-              <UserBenefit>
+              <UserBenefit className="userbenefit">
                 <RememberMe>
                    <Input type="checkbox" style={{cursor: "pointer"}} 
                    id = "remember" name="remember"/>
@@ -106,6 +106,32 @@ export const Holder = styled.div`
    height: 100%;
    border-radius: 5px 0px 0px 5px;
    background: #fff;
+   @media only screen and (max-width: 768px){
+      width: 100%;
+      .wrapp{
+         width:80%;
+         margin: 15vh auto;
+         .sub{
+            margin-top: 50px;
+         }
+      }
+   @media screen and (max-width: 539px){
+      .wrapp{
+         width: 100%;
+      }
+   }
+   @media screen and (max-width: 359px){
+      width: 100% !important;
+      .wrapp{
+         width: 100% !important;
+         /* background: blue; */
+         .sub{
+             width: 100% !important;
+         }
+      }
+   }
+   }
+
 `
 export const Wrapper = styled.div`
 position: relative;
@@ -115,6 +141,24 @@ position: relative;
  width: 85%;
  margin: 60px auto;
  padding-left: 40px !important;
+ @media screen and (max-width: 1024px){
+    width: 90% !important;
+    .sub{
+       input, button{
+          width: 100%;
+       }
+    }
+    .userbenefit{
+       display: block;
+    }
+    
+ }
+ @media screen and (max-width: 450px){
+      height: 100vh !important;
+ }
+ @media screen and (max-height: 360px){
+    width: 100% !important;
+ }
 `
 export const Logo = styled.div`
    height: 70px;
@@ -146,6 +190,8 @@ export const Sub = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
+  @media screen and (max-width: 450px){
+  }
 `
 export const Image = styled.img`
 
@@ -153,6 +199,17 @@ export const Image = styled.img`
 export const FormControl = styled.div`
  display: flex;
  flex-direction: column;
+ @media screen and (max-width: 450px){
+    input{
+       width: 80%;
+    }
+ }
+ @media screen and (max-width: 360px){
+    input{
+       width: 100% !important;
+    }
+    
+ }
 `
 export const Label = styled.label`
 font-weight: bold;
@@ -172,6 +229,10 @@ export const Input = styled.input`
    :focus{  
       border: 2px solid dodgerblue;
    }
+   @media only screen and (max-width: 360px){
+      width: 100%;
+   }
+   
 `
 export const Button = styled.button`
   position: relative !important;
@@ -186,6 +247,12 @@ export const Button = styled.button`
   outline: none;
   align-items: center;
   place-items: center;
+  @media screen and (max-width: 450px){
+     width: 80%
+  }
+  @media screen and (max-width: 360px){
+     width: 100%;
+  }
 `
 export const UserBenefit = styled.div`
   margin-top: 15px;
@@ -198,6 +265,9 @@ export const UserBenefit = styled.div`
      width: 60%;
   }
 
+  @media only screen and (max-width: 450px){
+    display: block !important;
+  }
 `
 export const BottomHeader = styled.div`
  position: absolute;
@@ -225,6 +295,56 @@ export const RememberMe = styled.div`
       width: 80% !important;
       color: #000000;
    }
+   @media screen and (max-width: 1024px){
+      width: 100% !important;
+      input{
+         width: 7%;
+         margin-left: -80px;
+      }
+      label{
+         width: 90%;
+         margin-left: -100px;
+      }
+   }
+   @media screen and (width: 820px){
+      display: block;
+    input{
+         width: 7%;
+         /* margin-left: 0px; */
+
+      }
+      label{
+         width: 90%;
+         margin-left: -30px;
+
+      }
+   }
+   @media screen and (max-width: 450px){
+      width: 100% !important;
+   }
+   @media screen and (max-width: 280px){
+      input{
+         width: 7%;
+         margin-left: -80px;
+      }
+      label{
+         width: 90%;
+         margin-left: -60px;
+      }
+   }
+   @media screen and (width: 540px){
+      label{
+         width: 90%;
+         margin-left: -140px;
+      }
+   }
+   @media screen and (width: 912px){
+      label{
+         width: 90%;
+         margin-left: -80px;
+      }
+   }
+   
 `
  export const Loader = styled.div`
      height: 12px;

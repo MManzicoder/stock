@@ -322,6 +322,11 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 20px;
     flex-wrap: wrap;   
+    @media screen and (max-width: 1024px){
+      h2{
+        width: 100%;
+      }
+   }
 `
 const FirstSection = styled.div`
       width: 60%;
@@ -329,13 +334,20 @@ const FirstSection = styled.div`
       display: flex;
       justify-content: space-around;  
       margin: 20px auto;
+      @media screen and (max-width: 1024px){
+       width: 70%;
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
   display: flex;
   align-items: center;
-  margin: 70px auto;
+  margin: 20px auto;
   justify-content: space-around;
+  @media screen and (width: 1024px){
+    width: 98%;
+      flex-direction: column;
+   }
 `
 const ChartHolder = styled.div`
   width: 47%;
@@ -343,7 +355,12 @@ const ChartHolder = styled.div`
   border-radius: 10px;
    background: #fff;
   padding: 10px;
-    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  @media screen and (max-width: 1024px){
+     width: 90%;
+      height: 30vh;
+      margin-bottom: 30px;
+   }
 `
 const Card = styled.div`
   width: 28%;
@@ -354,6 +371,9 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  @media screen and (width: 1024px){
+      width: 35%;
+   }
   /* margin-left: 15px; */
 `
 const ArrowDefine = styled.div`

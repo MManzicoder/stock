@@ -3,9 +3,16 @@
     /* background-position: ; */
     /* background: blue; */
     background-size: cover;
-    /* opacity: 0.9; */
+    /* opacity: 0.9;
 }
 .forelook{
     /* background-image: url("../assets/forelook.JPG"); */
     background-size: cover;             
 }
+
+/* 
+@media only screen and (max-width: 540px){
+    .back{
+    
+    }
+} */

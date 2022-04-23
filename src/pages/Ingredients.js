@@ -34,7 +34,6 @@ const getUsedIngredients =()=>{
        getRequest("usedingredients",{"bearer": `${localStorage.getItem("auth")}`})
         .then(res=>{
             setLoading(false);
-            console.log(res);
             if(res.error){
                 toast.error(res.error);
             }
@@ -66,7 +65,7 @@ return (
                    border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
                       {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
-                          <Card>
+                          <Card key={i}>
                         <FormControl>
                         <Label>{ing.name} </Label>
                      <p>{" "+ing.quantity + `${ing.name =="Water" ? "L":"KG"}`}</p>
@@ -106,7 +105,7 @@ return (
                  ( <IngredientSection>
                       {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
                         return(
-                          <Card>
+                          <Card key={i}>
                         <FormControl>
                         <Label>{ing.name} </Label>
                      <p>{" "+ing.quantity+ `${ing.name =="Water" ? "L": "KG"}`}</p>
@@ -165,6 +164,10 @@ const StockSettings = styled.div`
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
            opacity: 0.8;
+           font-size: 18px;
+       }
+       @media screen and (max-width: 1024px){
+          
        }
 `
 const OtherSettings = styled.div`
@@ -175,6 +178,7 @@ const OtherSettings = styled.div`
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
            opacity: 0.8;
+           font-size: 18px;           
        }    
 `
 
@@ -187,7 +191,10 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
+  @media screen and (max-width: 1024px){
+    width: 40% !important;
+  } 
 `
 const IngredientSection = styled.div`
   width: 90%;
@@ -197,6 +204,9 @@ const IngredientSection = styled.div`
   justify-content: space-around;
   height: auto;
   margin: 40px auto;
+  @media screen and (max-width: 1024px){
+     width: 100%;        
+  }
 `
 const FormControl = styled.div`
       width: 100%;
@@ -219,12 +229,19 @@ const ButtonDiv = styled.div`
        text-decoration: none;
        border-radius: 5px;
        background:rgba(30, 140, 250, 0.9);
-       color: #fff
+       color: #fff;
+
      }
+    @media screen and (max-width: 1024px){
+          margin-left: 30px;  
+       }
 `
 const NewIngredient = styled.div`
   width: 20%;
   margin: 10px auto;
+  @media screen and (max-width: 1024px){
+          width: 30% !important;
+       }
 `
 
 const AddIngredient = styled.button`

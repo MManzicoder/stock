@@ -48,12 +48,12 @@ useEffect(()=>{
           <Wrapper>
               <StockSettings>
                  <h2>Stock settings</h2>
-                 {/* <FormControl>
-                     <Label>Price of one Cazier </Label>
+                 <FormControl>
+                     <Label>Default price</Label>
                 {update ? <Input type='number' name="price" value={price.amount} onChange={(e)=>setPrice({...price, amount: e.target.value})}/>: "= "+price.amount+" RWF"}     
                  </FormControl>
-                 <Button type="button" style={loading ? {padding: "9px 20px"}: {}} onClick={update ? saveConfig: ()=>setUpdate(true)}>{!loading ? (update ? "Save": "Update" ): <Loader style={{margin: "0px"}}></Loader>}</Button> */}
-                 <p>No settings available</p>
+                 <Button type="button" style={loading ? {padding: "9px 20px"}: {}} onClick={update ? saveConfig: ()=>setUpdate(true)}>{!loading ? (update ? "Save": "Update" ): <Loader style={{margin: "0px"}}></Loader>}</Button>
+                 {/* <p>No settings available</p> */}
               </StockSettings>
               <OtherSettings>
                   <h2>Other settings</h2>

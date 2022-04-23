@@ -37,6 +37,15 @@ const Wrapp = styled.div`
    margin: 20px auto;
    display: flex;
    border-radius: 5px;
+   @media only screen and (max-width: 768px){
+      .back{
+         display: none;
+      }
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      
+   }
 `
 const ForeLook = styled.div`
    width: 60%;

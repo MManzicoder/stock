@@ -337,6 +337,10 @@ const Main = styled.div`
    background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+  @media screen and (width: 1024px){
+      width: 100%;
+   }
+   
 `
 const Division1 = styled.div`
    display: flex;
@@ -363,6 +367,11 @@ const SubDivision = styled.div`
   width: 70%;
   margin: 10px;
   justify-content: space-around;
+  flex-wrap: wrap;
+  @media screen and (width: 1024px){
+      width: 90%;
+   }
+   
 `
 const Card = styled.div`
   width: 28%;
@@ -373,6 +382,10 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  @media screen and (max-width: 1024px){
+    width: 30%;
+    margin-bottom: 30px;
+  }
   /* margin-left: 15px; */
 `
 const ImageHolder = styled.div`
@@ -405,6 +418,10 @@ const Division2 = styled.div`
   align-items: center;
   margin: 20px auto;
   justify-content: space-around;
+  @media screen and (max-width: 1024px){
+      flex-direction: column;
+   }
+   
 `
 const ChartHolder = styled.div`
   width: 47%;
@@ -412,4 +429,9 @@ const ChartHolder = styled.div`
   border-radius: 10px;
   background: #fff;
   padding: 10px;
+  @media screen and (max-width: 1024px){
+      width: 90%;
+      height: 30vh;
+      margin-bottom: 10px;
+   }
 `

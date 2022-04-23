@@ -42,19 +42,17 @@ const getOrders = ()=>{
 }
 let NoPaid = 0;
 let Paid = 0;
-let paidQuantity =0;
-let notPaidQuantity = 0;
+let paidAmount =0;
+let notpaidAmount = 0;
 let totalQuantity =0;
 if(orders.length > 0){
   orders.map((or, i)=>{
-    totalQuantity = or.quantity + totalQuantity;
-    console.log(totalQuantity)
     if(or.status == "Paid"){
       Paid++;
-      paidQuantity += or.quantity
+      paidAmount += or.quantity * or.price;
      }else{
        NoPaid++;
-       notPaidQuantity += or.quantity
+       notpaidAmount += or.quantity * or.price;
      }
   })
 }
@@ -97,10 +95,10 @@ const retrievePrice = ()=>{
                <ReportIssueSection><p>Paid orders</p><p>{Paid}</p></ReportIssueSection>
                <ReportIssueSection><p>Not paid orders</p><p>{NoPaid}</p></ReportIssueSection>
                <ReportIssueSection><p>Gained Amount</p>
-               <p><CurrencyFormat value={price * paidQuantity}  suffix=" Frw" 
+               <p><CurrencyFormat value={paidAmount}  suffix=" Frw" 
                thousandSeparator={true} displayType={"text"} /></p></ReportIssueSection>
                <ReportIssueSection><p>Expected Amount</p>
-               <p><CurrencyFormat value={price * totalQuantity}  suffix=" Frw" 
+               <p><CurrencyFormat value={paidAmount + notpaidAmount}  suffix=" Frw" 
                thousandSeparator={true} displayType={"text"} /></p></ReportIssueSection>
                <DownloadReport>
                   <DownloadButton >Download</DownloadButton>
@@ -139,6 +137,10 @@ const ReportDiv = styled.div`
  height: 65vh;
  border: 3px dashed rgba(30, 140, 250, 0.5);
  border-radius: 7px;
+ @media screen and (max-width: 1024px){
+   width: 80%;
+   height: 40vh;
+ }
 `
 const ReportIssueSection = styled.div`
    width: 100%;
@@ -157,6 +159,10 @@ const DownloadReport = styled.div`
    margin: 45px auto;
    height: 40px;
    border-radius: 35px;
+  @media screen and (max-width: 1024px){
+   margin-top: 80px;
+   width: 23%;
+ }
 `
 const DownloadButton = styled.button`
     width: 100%;

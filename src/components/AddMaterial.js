@@ -115,11 +115,22 @@ const Background = styled.div`
 @media screen and (max-width: 280px){
        height: 132vh !important;
    }
+}
+  @media screen and (max-width: 400px){
+      height: 140vh !important;
+  }
+  @media screen and (max-width: 320px){
+      height: 152vh !important;
+
+}
+@media screen and (max-width: 280px){
+       height: 132vh !important;
+   }
 `
 
 
 const Wrapper = styled.div`
-      font-family: 'Roboto';
+         font-family: 'Roboto';
       width: 30%;
       height: 80vh;
       position: relative;
@@ -134,9 +145,9 @@ const Wrapper = styled.div`
           font-size: 20px;
       }
       @media screen and (max-width: 1024px){
-          width: 70% !important;
-          height: 60vh !important;
-          .form{
+          width: 60% !important;
+          height: 25vh !important;
+            .form{
               width: 80% !important;
               input{
                   margin-top: 30px !important;

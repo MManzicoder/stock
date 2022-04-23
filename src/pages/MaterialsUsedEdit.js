@@ -191,23 +191,28 @@ const Wrapper = styled.div`
     padding: 20px;
 `
 const StockSettings = styled.div`
-       width: 49%;
+              width: 49%;
        height: 100%;
        border-right: 3px dashed rgba(30, 140, 250, 0.5);
        h2{
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
            opacity: 0.8;
+           font-size: 18px;
+       }
+       @media screen and (max-width: 1024px){
+          
        }
 `
 const OtherSettings = styled.div`
     width: 49%;
     height: 100%;
     padding-left: 20px;
-       h2{
+    h2{
            text-align: center;
            color: rgba(30, 140, 250, 0.9);
            opacity: 0.8;
+           font-size: 18px;           
        }    
 `
 
@@ -220,15 +225,22 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
+  @media screen and (max-width: 1024px){
+    width: 40% !important;
+  } 
 `
 const IngredientSection = styled.div`
-  width: 90%;
+   width: 90%;
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   height: auto;
-  margin: 30px auto;
+  margin: 40px auto;
+  @media screen and (max-width: 1024px){
+     width: 100%;        
+  }
 `
 const FormControl = styled.div`
       width: 100%;
@@ -263,7 +275,7 @@ const Button = styled.button`
 `
 const ButtonDiv = styled.div`
      width: 50%;
-     margin: 35px auto;
+     margin: 30px auto;
      margin-left: 50px;
      a{
       
@@ -271,12 +283,20 @@ const ButtonDiv = styled.div`
        text-decoration: none;
        border-radius: 5px;
        background:rgba(30, 140, 250, 0.9);
-       color: #fff
+       color: #fff;
+
      }
+    @media screen and (max-width: 1024px){
+          margin-left: 30px;  
+       }
 `
 const NewIngredient = styled.div`
   width: 20%;
   margin: 10px auto;
+  @media screen and (max-width: 1024px){
+          width: 30% !important;
+       }
+
 `
 
 const AddIngredient = styled.button`

@@ -110,6 +110,9 @@ const FirstSection = styled.div`
       display: flex;
       justify-content: space-around;  
       margin: 20px auto;
+      @media screen and (max-width: 1024px){
+      width: 80%;   
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -134,7 +137,9 @@ const Card = styled.div`
   label{
     font-weight: bold;
   }
-  /* margin-left: 15px; */
+  @media screen and (max-width: 1024px){
+      width: 34%;   
+   }
 `
 const ArrowDefine = styled.div`
      width: 10%;
@@ -164,7 +169,10 @@ const Label = styled.label`
 `
 const ButtonDiv = styled.div`
      width: 12%;
-     margin: 20px auto;
+     margin: 25px auto;
+    @media screen and (max-width: 1024px){
+      width: 20%;   
+   }
 `
 const Orders = styled.div`
    width: 80%;
@@ -172,6 +180,11 @@ const Orders = styled.div`
    height: 40vh;
    border-radius: 10px;
    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+     @media screen and (max-width: 1024px){
+      width: 90%;
+      height: 50vh;
+      margin: 0px;
+   }
 `
 const AddButton = styled.button`
     width: 100%;

@@ -9,7 +9,7 @@
 .animate{
    /* animation: animate ease 5s !important; */
    margin: auto;
-   top: 30vh !important;
+   top: 20vh !important;
    transition: all ease-in-out .1s  !important;
 }
 .animateOrder {
