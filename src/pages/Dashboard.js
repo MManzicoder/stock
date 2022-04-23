@@ -337,8 +337,9 @@ const Main = styled.div`
    background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
-  @media screen and (width: 1024px){
+  @media screen and (max-width: 768px){
       width: 100%;
+      height: 93vh;   
    }
    
 `
@@ -368,8 +369,11 @@ const SubDivision = styled.div`
   margin: 10px;
   justify-content: space-around;
   flex-wrap: wrap;
-  @media screen and (width: 1024px){
+  @media screen and (max-width: 1024px){
       width: 90%;
+   }
+   @media screen and (max-width: 768px){
+     width: 95%;
    }
    
 `
@@ -432,6 +436,10 @@ const ChartHolder = styled.div`
   @media screen and (max-width: 1024px){
       width: 90%;
       height: 30vh;
+      margin-bottom: 10px;
+   }
+   @media screen and (max-width: 768px){
+      height: 34vh;
       margin-bottom: 10px;
    }
 `

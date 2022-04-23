@@ -311,6 +311,11 @@ const Main = styled.div`
     background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   display: flex;
+   @media screen and (max-width: 768px){
+     width: 100%;
+     height: 93vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -327,6 +332,14 @@ const Wrapper = styled.div`
         width: 100%;
       }
    }
+  @media screen and (max-width: 768px){
+     width: 100%;
+     height: 100%;
+      h2{
+        padding: 0px;
+        text-align: center;
+      }
+   }
 `
 const FirstSection = styled.div`
       width: 60%;
@@ -337,6 +350,12 @@ const FirstSection = styled.div`
       @media screen and (max-width: 1024px){
        width: 70%;
    }
+      @media screen and (max-width: 768px){
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        /* background: blue; */
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -344,7 +363,7 @@ const SecondSection = styled.div`
   align-items: center;
   margin: 20px auto;
   justify-content: space-around;
-  @media screen and (width: 1024px){
+  @media screen and (max-width: 1024px){
     width: 98%;
       flex-direction: column;
    }
@@ -360,6 +379,9 @@ const ChartHolder = styled.div`
      width: 90%;
       height: 30vh;
       margin-bottom: 30px;
+   }
+  @media screen and (max-width: 768px){
+       height: 32vh; 
    }
 `
 const Card = styled.div`

@@ -339,9 +339,14 @@ export default InventoryEdit
 const Main = styled.div`
    width: 101%;
    height: 90vh;
-    background:rgba(30, 140, 250, 0.3);
+  background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   display: flex;
+   @media screen and (max-width: 768px){
+     width: 100%;
+     height: 93vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -353,6 +358,19 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 20px;
     flex-wrap: wrap;   
+    @media screen and (max-width: 1024px){
+      h2{
+        width: 100%;
+      }
+   }
+  @media screen and (max-width: 768px){
+     width: 100%;
+     height: 100%;
+      h2{
+        padding: 0px;
+        text-align: center;
+      }
+   }
 `
 const FirstSection = styled.div`
       width: 60%;
@@ -360,32 +378,56 @@ const FirstSection = styled.div`
       display: flex;
       justify-content: space-around;  
       margin: 20px auto;
+      @media screen and (max-width: 1024px){
+       width: 70%;
+   }
+      @media screen and (max-width: 768px){
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        /* background: blue; */
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
   display: flex;
   align-items: center;
-  margin: 70px auto;
+  margin: 20px auto;
   justify-content: space-around;
+  @media screen and (max-width: 1024px){
+    width: 98%;
+      flex-direction: column;
+   }
 `
 const ChartHolder = styled.div`
   width: 47%;
   height: 45vh;
   border-radius: 10px;
-   /* background:rgba(30, 140, 250, 0.3); */
    background: #fff;
   padding: 10px;
-    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  @media screen and (max-width: 1024px){
+     width: 90%;
+      height: 30vh;
+      margin-bottom: 30px;
+   }
+  @media screen and (max-width: 768px){
+       height: 32vh; 
+   }
 `
 const Card = styled.div`
   width: 28%;
-  height:110px;
+  height: 120px;
   background: #fff;
   border-radius: 7px;
   padding: 10px;
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+  @media screen and (width: 1024px){
+      width: 37%;
+      height: 135px;
+   }
   /* margin-left: 15px; */
 `
 const ArrowDefine = styled.div`
@@ -420,7 +462,7 @@ const Input = styled.input`
 `
 const ButtonDiv = styled.div`
      width: 50%;
-     margin: 10px auto;
+     margin: 30px auto;
      margin-left: 50px;
      a{
       
@@ -429,5 +471,8 @@ const ButtonDiv = styled.div`
        border-radius: 5px;
        background:rgba(30, 140, 250, 0.9);
        color: #fff
+     }
+     @media screen and (max-width: 768px){
+       margin-top: 10px;
      }
 `

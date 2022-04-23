@@ -125,6 +125,11 @@ const Wrapper = styled.div`
          height: 35vh !important;
          width: 70%;
     }
+    @media screen and (max-width: 768px){
+         height: 40vh !important;
+         width: 70%;
+    }
+
 `
 
  const CloseModalButton = styled(Close)`

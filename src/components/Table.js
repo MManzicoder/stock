@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { getRequest} from "../apiHandler/Authapi";
 import OrderView from './OrderView';
+import styled from 'styled-components';
 export default function Table() {
   const [orders, setOrders] = useState([]);
   const [fetching, setFetching] = useState(false);
@@ -16,6 +17,7 @@ export default function Table() {
     status:"",
     createdAt:""
   })
+  const pageSize = window.screen.width >=1366 ? 2 : window.screen.width === 1024 ? 10 : window.screen.width === 768 ? 7 : 4;
    const getOrders = ()=>{
      setFetching(true);
      getRequest("orders", {"bearer": `${localStorage.getItem("auth")}`})
@@ -84,19 +86,25 @@ const handleCellClick = (params)=>{
   setShowModal((prev)=>!prev);
 }
   return (
-    <div style={{ height: window.screen.width ===1024 ? 650 : 250, width: '100%' }}>
+    <Hold style={{ height: window.screen.width ===1024 ? 650 : 250, width: '100%' }}>
       <DataGrid
         rows={orders}
         columns={columns}
         onCellClick = {handleCellClick}
-        pageSize={window.screen.width === 1024 ? 10 : 2}
+        pageSize={pageSize}
         rowsPerPageOptions={[5]}
         checkboxSelection
         loading={fetching}
         disableSelectionOnClick
       />
      {showModal && <OrderView data = {currentRow} show={true} />}
-    </div>
+    </Hold>
   );
 }
 
+
+const Hold = styled.div`
+   @media screen and (min-width: 768px){
+     height: 500px !important;
+   }
+`

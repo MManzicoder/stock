@@ -36,7 +36,6 @@ const Layout = ({children}) => {
     };
     return (
         <Main>
-            {/* <Header open={open} handleOpen={handleDrawerOpen}/> */}
             <Sidebar open={open} handleClose={handleDrawerClose}/>
             <MainBox>
              <Header />
@@ -50,10 +49,15 @@ export default Layout
 
 const Main = styled.div`
   display: flex;
+  width: 100%;
 `
 const MainBox = styled.div`
   display: flex;
   width: 84%;
   margin-left: 15%;
   flex-direction: column;
+  @media screen and (max-width: 768px){
+    width: 100%;
+    margin-left: 0% !important;
+  }
 `

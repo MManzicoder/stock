@@ -6,7 +6,7 @@ import { DashboardRounded , AddBox, Person, Report,
 import ubwiza from "../assets/target.png"
 function Sidebar() {
     const location = useLocation();
-    const isActive = (history, path)=>{
+const isActive = (history, path)=>{
 
     if(history.pathname === path){
 
@@ -88,6 +88,9 @@ position: fixed;
  padding-left: 10px;
  /* box-shadow: 1px 0px 0px 1px rgba(0,0,0,0.2); */
  z-index: 1;
+ @media screen and (max-width: 768px){
+     display: none;
+ }
 `
 const Logo = styled.div`
    margin-top: 10px;

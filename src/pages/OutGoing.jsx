@@ -89,9 +89,14 @@ position: relative;
 const Main = styled.div`
    width: 101%;
    height: 90vh;
-    background:rgba(30, 140, 250, 0.3);
+   background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   display: flex;
+    @media screen and (max-width: 768px){
+     width: 100%;
+     height: 93vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -185,6 +190,9 @@ const Orders = styled.div`
       height: 50vh;
       margin: 0px;
    }
+    @media screen and (max-width: 768px){
+         width: 95%;
+    }
 `
 const AddButton = styled.button`
     width: 100%;
