@@ -238,6 +238,9 @@ const Card = styled.div`
   @media screen and (max-width: 1024px){
     width: 40% !important;
   }  
+   @media screen and (max-width: 768px){
+         width: 45%;
+    }
 `
 const IngredientSection = styled.div`
   width: 90%;
@@ -250,6 +253,7 @@ const IngredientSection = styled.div`
   @media screen and (max-width: 1024px){
      width: 100%;        
   }
+
 `
 const FormControl = styled.div`
       width: 100%;

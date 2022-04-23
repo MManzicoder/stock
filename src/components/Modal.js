@@ -125,27 +125,13 @@ const Wrapper = styled.div`
       @media screen and (max-width: 1024px){
           width: 60% !important;
           height: 25vh !important;
-            .form{
-              width: 80% !important;
-              input{
-                  margin-top: 30px !important;
-              }
-              .hold input{
-                  margin-top: 10px !important;
-              }
-              .first{
-                  margin-top: 10px !important;
-              }
-              .mtcategory{
-                  margin-top: 30px !important;
-              }
               button{
                   margin-top: 30px !important;
               }
           }
       }
       @media screen and (max-width: 768px){
-          height: 70vh !important;
+          height: 30vh !important;
       }
       @media screen and (max-width: 540px){
             width: 100% !important;

@@ -196,7 +196,7 @@ const Card = styled.div`
     width: 40% !important;
   } 
   @media screen and (max-width: 768px){
-         width: 70%;
+         width: 45% !important;
     }
 `
 const IngredientSection = styled.div`
