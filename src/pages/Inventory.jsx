@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import Layout from '../components/Layout'
 import styled from "styled-components"
 import Chart from '../components/Chart'
-import { DoubleArrowOutlined} from '@material-ui/icons'
+import { DoubleArrowOutlined,} from '@material-ui/icons'
+import { KeyboardDoubleArrowDown } from '@mui/icons-material';
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import {toast, ToastContainer } from 'react-toastify'
@@ -120,7 +121,7 @@ const getPrevThu =()=>{
     .catch(err=>console.log(err.message))
   }
 const getPrevFri =()=>{
-    request("history/date", "POST", 
+      request("history/date", "POST", 
     {date: datesofPreviousWeek[5] },
     {"bearer": `${localStorage.getItem("auth")}`, 
     "Content-Type":"application/json"})
@@ -280,13 +281,13 @@ const retrievePrice = ()=>{
                  <ArrowDefine>
                    <DoubleArrowOutlined className='icon'/>
                    <DoubleArrowOutlined className='icon'/>
+                   <KeyboardDoubleArrowDown className="icon"/>
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
                    <CurrencyFormat value={stock.quantity*price}  suffix=" Frw" 
                    thousandSeparator={true} displayType={"text"} />
-                 </Card>
-                 
+                 </Card>                
             </FirstSection>
             <SecondSection>
                <ChartHolder>
