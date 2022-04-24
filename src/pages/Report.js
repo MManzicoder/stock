@@ -118,6 +118,10 @@ const Main = styled.div`
     background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   @media screen and (max-width: 768px){
+     width: 100%;
+     height: 93vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -130,6 +134,14 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    @media screen and (max-width: 540px){
+     h2{
+       text-align: left !important;
+       font-size: 18px;
+       position: absolute;
+       left: 5%;
+     }
+   }
 `
 const ReportDiv = styled.div`
  width: 60%;
@@ -141,6 +153,14 @@ const ReportDiv = styled.div`
    width: 80%;
    height: 40vh;
  }
+  @media screen and (max-width: 768px){
+     width: 98%;
+     height: 45vh;
+   }
+  @media screen and (max-width: 540px){
+     width: 100%;
+     height: 50vh;
+   }
 `
 const ReportIssueSection = styled.div`
    width: 100%;
@@ -152,6 +172,10 @@ const ReportIssueSection = styled.div`
      font-size: 20px;
      height: 7px;
      margin-left: 40px !important;
+    @media screen and (max-width: 540px){
+      font-size: 15px;
+      width: 45%;
+      }
    }
 `
 const DownloadReport = styled.div`
@@ -162,6 +186,10 @@ const DownloadReport = styled.div`
   @media screen and (max-width: 1024px){
    margin-top: 80px;
    width: 23%;
+ }
+  @media screen and (max-width: 540px){
+   /* margin-top: 80px; */
+   width: 30%;
  }
 `
 const DownloadButton = styled.button`

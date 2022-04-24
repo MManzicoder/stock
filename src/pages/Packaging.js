@@ -78,7 +78,7 @@ return (
                         );
                       })}                    
                  </IngredientSection>)}
-                 {materials.length > 4 && <ReactPaginate
+                 {materials.length > 0 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -141,6 +141,10 @@ const Main = styled.div`
     background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   @media screen and (max-width: 768px){
+     width: 100%;
+     height: 93vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -151,6 +155,9 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 20px;
+    @media screen and (max-width: 540px){
+          height: 90vh;
+       }
 `
 const StockSettings = styled.div`
        width: 49%;
@@ -191,6 +198,9 @@ width: 35%;
   @media screen and (max-width: 1024px){
     width: 40% !important;
   } 
+    @media screen and (max-width: 540px){
+         width: 90% !important;
+    }
 `
 const IngredientSection = styled.div`
    width: 90%;
@@ -238,7 +248,9 @@ const NewIngredient = styled.div`
   @media screen and (max-width: 1024px){
           width: 30% !important;
        }
-
+  @media screen and (max-width: 540px){
+         width: 50% !important;
+    }
 `
 
 const AddIngredient = styled.button`

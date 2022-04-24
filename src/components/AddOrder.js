@@ -160,14 +160,8 @@ const Wrapper = styled.div`
           height: 45vh !important;
       }
       @media screen and (max-width: 540px){
-            width: 100% !important;
-            height: 100% !important;
-            .form{
-                width: 85% !important;
-            }
-            h2{
-                margin-top: 50px !important;
-            }  
+            width: 90% !important;
+            height: 60vh !important;
    }
    @media screen and (max-width: 450px){
        .d-flexs{
@@ -220,9 +214,14 @@ const Input = styled.input`
    height: 32px;
    padding: 0;
    z-index: 10;
-   color: red;
+   border: 1px solid dodgerblue;
+   border-radius: 50%;
+   :hover{
+       border-color: #ff0066;
+       color: dodgerblue;
+   }
    @media screen and (max-width: 540px){
-       left: 46%;
+       right: 5%;
        height: 40px !important;
        width: 40px !important;
        border: 3px solid dodgerblue;

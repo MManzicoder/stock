@@ -107,4 +107,8 @@ const Hold = styled.div`
    @media screen and (min-width: 768px){
      height: 500px !important;
    }
+   @media screen and (max-width: 540px){
+     height: 330px !important;
+   }
+
 `

@@ -316,6 +316,9 @@ const Main = styled.div`
      width: 100%;
      height: 93vh;
    }
+   @media screen and (max-width: 540px){
+     height: 130vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -356,6 +359,9 @@ const FirstSection = styled.div`
         margin-bottom: 20px;
         /* background: blue; */
    }
+   @media screen and (max-width: 540px){
+     width: 100%;
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -366,6 +372,9 @@ const SecondSection = styled.div`
   @media screen and (max-width: 1024px){
     width: 98%;
       flex-direction: column;
+   }
+    @media screen and (max-width: 540px){
+     width: 100%;
    }
 `
 const ChartHolder = styled.div`

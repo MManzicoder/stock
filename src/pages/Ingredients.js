@@ -80,7 +80,7 @@ return (
                         );
                       })}                    
                  </IngredientSection>)}
-                 {ingredients.length > 4 && <ReactPaginate
+                 {ingredients.length > 0 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -102,7 +102,7 @@ return (
                  {loading ? <Loader 
                  style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", 
                  borderTop: "3px solid transparent"}}></Loader>: 
-                 ( <IngredientSection>
+                 ( <IngredientSection style={{marginTop: window.screen.width <=768 && 60}}>
                       {displayPageUsedIngredients && displayPageUsedIngredients.map((ing, i)=>{
                         return(
                           <Card key={i}>
@@ -147,7 +147,9 @@ const Main = styled.div`
    padding: 10px;
    @media screen and (max-width: 768px){
          width: 100%;
+         height: 93vh;
     }
+
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -158,6 +160,9 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 20px;
+    @media screen and (max-width: 540px){
+        height: 90vh;
+    }
 `
 const StockSettings = styled.div`
        width: 49%;
@@ -169,9 +174,10 @@ const StockSettings = styled.div`
            opacity: 0.8;
            font-size: 18px;
        }
-       @media screen and (max-width: 1024px){
-          
+       @media screen and (max-width: 768px){
+        
        }
+       
 `
 const OtherSettings = styled.div`
     width: 49%;
@@ -200,6 +206,9 @@ const Card = styled.div`
   } 
   @media screen and (max-width: 768px){
          width: 45% !important;
+    }
+  @media screen and (max-width: 540px){
+         width: 90% !important;
     }
 `
 const IngredientSection = styled.div`
@@ -241,6 +250,7 @@ const ButtonDiv = styled.div`
     @media screen and (max-width: 1024px){
           margin-left: 30px;  
        }
+
 `
 const NewIngredient = styled.div`
   width: 20%;
@@ -248,6 +258,9 @@ const NewIngredient = styled.div`
   @media screen and (max-width: 1024px){
           width: 30% !important;
        }
+   @media screen and (max-width: 540px){
+         width: 50% !important;
+    }
 `
 
 const AddIngredient = styled.button`

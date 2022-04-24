@@ -108,7 +108,7 @@ const getIngredient = ()=>{
                     borderTop: "3px solid transparent"}}></Loader>: (  <IngredientSection>
                       {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
-                          <Card>
+                          <Card key={i}>
                         <FormControl>
                         <Label>{ing.name} </Label>
                      <p>{" "+ing.quantity} { ing.name === "Water" ? " L":" KG"}</p>
@@ -125,7 +125,7 @@ const getIngredient = ()=>{
                     
                  </IngredientSection>
 )}              
-{ingredients.length > 4 && <ReactPaginate
+{ingredients.length > 0 && <ReactPaginate
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
@@ -146,10 +146,10 @@ const getIngredient = ()=>{
                   <h2>Used ingredients</h2>
                    {loading ? <Loader style={{height: 100, width:100, marginTop: 100, 
                     border: "3px solid dodgerblue",borderTop: "3px solid transparent"}}>
-                    </Loader>:(<IngredientSection>
+                    </Loader>:(<IngredientSection style={{marginTop: window.screen.width <=768 && 60}}>
                       {displayPageUsedIngredients  && displayPageUsedIngredients.map((ing, i)=>{
                         return(
-                          <Card>
+                          <Card key={i}>
                         <FormControl>
                         <Label>{ing.name} </Label>
                    {ingId == ing._id ? <Input type='number' name="price" value={quantity} 
@@ -187,6 +187,7 @@ const Main = styled.div`
    padding: 10px;
    @media screen and (max-width: 768px){
          width: 100%;
+         height: 93vh;
     }
 
 `
@@ -204,6 +205,9 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 20px;
+    @media screen and (max-width: 540px){
+        height: 90vh;
+    }
 `
 const StockSettings = styled.div`
       width: 49%;
@@ -246,6 +250,9 @@ const Card = styled.div`
   } 
   @media screen and (max-width: 768px){
          width: 45% !important;
+    }
+    @media screen and (max-width: 540px){
+         width: 95% !important;
     }  
 `
 const IngredientSection = styled.div`
@@ -315,7 +322,9 @@ const NewIngredient = styled.div`
   @media screen and (max-width: 1024px){
           width: 30% !important;
        }
-
+  @media screen and (max-width: 540px){
+          width: 50% !important;
+       }
 `
 
 const AddIngredient = styled.button`

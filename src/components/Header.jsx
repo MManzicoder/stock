@@ -167,6 +167,7 @@ position: relative;
  }
  @media screen and (max-width: 1024px){
       height: 5vh;
+      
    }
 @media screen and (max-width: 768px){
     width: 100%;
@@ -174,6 +175,13 @@ position: relative;
     .menu{
         display: block;
     }
+     position:  sticky;
+      top: 0;
+      z-index: 5000 !important;
+      background: #fff;
+   }
+@media screen and (max-width: 540px){
+      height: 10vh;
    }
  /* background: black; */
 `
@@ -189,6 +197,12 @@ const ProfileInfo = styled.div`
    }
     @media screen and (max-width: 768px){
       right: 50px;
+   }
+    @media screen and (max-width: 540px){
+      right: 100px;
+   }
+   @media screen and (max-width: 540px){
+      right: 130px;
    }
 `
 const Notification = styled.div`
@@ -250,19 +264,19 @@ const LogoutSection = styled.div`
 position: relative;
 width: 100px;
 margin-left: 10px;
-  /* padding: 10px; */
   margin-top: 5px;
   .icon{
       padding: 0px;
   }
   z-index: 3;
+  /* right: 15%; */
 `
 const Lsection = styled.div`
    position: absolute;
    height: 40px;
    width: 100px;
    top: 30px;
-   left: -30px;
+   left: -50px;
    background: rgba(30, 140, 250, 0.9);
    border-radius: 7px;
    color: #fff;
@@ -379,7 +393,7 @@ const CloseModalButton = styled(Close)`
        color: dodgerblue;
    }
    @media screen and (max-width: 540px){
-       left: 46%;
+       right: 3%;
        height: 40px !important;
        width: 40px !important;
        border: 3px solid dodgerblue;

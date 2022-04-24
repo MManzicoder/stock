@@ -107,7 +107,10 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 20px;
-    flex-wrap: wrap;   
+    flex-wrap: wrap;
+    @media screen and (min-width: 540px){
+     height: 87 vh;
+   }   
 `
 const FirstSection = styled.div`
       width: 60%;
@@ -118,6 +121,9 @@ const FirstSection = styled.div`
       @media screen and (max-width: 1024px){
       width: 80%;   
    }
+   @media screen and (max-width: 540px){
+         width: 100%;
+    }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -157,17 +163,9 @@ const ArrowDefine = styled.div`
        margin-top: 40px;
        color:rgba(30, 140, 250, 0.9);
      }
-`
-const FormControl = styled.div`
-      width: 100%;
-      height: auto;
-      display: flex;
-      align-items: center;
-      /* text-align: center; */
-      justify-content: space-around;
-      label,p{
-        font-weight: bold;
-      }
+     @media screen and (max-width: 768px){
+         width: 15%;
+    }
 `
 const Label = styled.label`
    /* width: 50%; */
@@ -178,6 +176,9 @@ const ButtonDiv = styled.div`
     @media screen and (max-width: 1024px){
       width: 20%;   
    }
+   @media screen and (max-width: 540px){
+         width: 30%;
+    }
 `
 const Orders = styled.div`
    width: 80%;
@@ -192,6 +193,10 @@ const Orders = styled.div`
    }
     @media screen and (max-width: 768px){
          width: 95%;
+    }
+    @media screen and (max-width: 540px){
+         width: 98%;
+         height: 45vh;
     }
 `
 const AddButton = styled.button`

@@ -129,6 +129,10 @@ const Wrapper = styled.div`
          height: 40vh !important;
          width: 70%;
     }
+    @media screen and (max-width: 768px){
+         width: 85%;
+         height: 60vh !important;
+    }
 
 `
 
@@ -148,7 +152,7 @@ const Wrapper = styled.div`
        color: dodgerblue;
    }
    @media screen and (max-width: 540px){
-       left: 46%;
+       right: 5%;
        height: 40px !important;
        width: 40px !important;
        border: 3px solid dodgerblue;
@@ -187,6 +191,9 @@ const ActionSection = styled.div`
      align-items: center;
      width: 80%;
      margin: 0 auto;
+     @media screen and (max-width: 540px){
+        margin-left: -20px;
+    }
 `
 const Action = styled.div`
    width: 22%;
@@ -208,6 +215,9 @@ const Action = styled.div`
        color: #ff0066;
    }
    font-size: 15px;
+   @media screen and (max-width: 540px){
+         width: 30%;
+    }
    
 `
 export default OrderView

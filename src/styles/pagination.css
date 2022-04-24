@@ -16,7 +16,19 @@
      left: 25%;
      top: 78vh;
      width: 40%;
+         
  }
+ @media screen and (max-width: 768px){
+         .pagination{
+             left: 5%;
+         }
+    }
+ @media screen and (max-width: 540px){
+         .pagination{
+             top: 90vh !important;
+             left: 0%;
+         }
+    }    
  .pagination1 {
      align-items: center !important;
      display: flex;

@@ -359,6 +359,8 @@ export const RememberMe = styled.div`
      @media screen and (max-width: 768px){
          width: 50px !important;
          height: 50px !important;
+         margin-left: 130px !important;
+         margin-bottom: 50px !important;
     }
      @keyframes spin {
   0% { transform: rotate(0deg); }

@@ -167,17 +167,13 @@ const Wrapper = styled.div`
           }
       }
       @media screen and (max-width: 768px){
-          height: 70vh !important;
+          height: 28vh !important;
       }
       @media screen and (max-width: 540px){
-            width: 100% !important;
-            height: 100% !important;
-            .form{
-                width: 85% !important;
-            }
-            h2{
-                margin-top: 50px !important;
-            }  
+           top: 20vh !important;
+            width: 80% !important;
+            height: 40vh !important;
+            
    }
    @media screen and (max-width: 450px){
        .d-flexs{
@@ -219,7 +215,6 @@ const Input = styled.input`
  border-radius: 5px;
  outline: 1px solid rgba(30, 140, 250, 0.9);
 `
-
  const CloseModalButton = styled(Close)`
    cursor: pointer;
    position: absolute;
@@ -229,8 +224,14 @@ const Input = styled.input`
    height: 32px;
    padding: 0;
    z-index: 10;
+   border: 1px solid dodgerblue;
+   border-radius: 50%;
+   :hover{
+       border-color: #ff0066;
+       color: dodgerblue;
+   }
    @media screen and (max-width: 540px){
-       left: 46%;
+       right: 5%;
        height: 40px !important;
        width: 40px !important;
        border: 3px solid dodgerblue;
@@ -240,6 +241,9 @@ const Input = styled.input`
 const Form = styled.form`
    width: 70%;
    margin: 10px auto;
+   @media screen and (max-width: 540px){
+          width: 80%;
+       }
 `
 const AddButton = styled.div`
   width: 30%;

@@ -341,6 +341,9 @@ const Main = styled.div`
       width: 100%;
       height: 93vh;   
    }
+   @media screen and (max-width: 540px){
+      height: 130vh;
+  }
    
 `
 const Division1 = styled.div`
@@ -375,7 +378,12 @@ const SubDivision = styled.div`
    @media screen and (max-width: 768px){
      width: 95%;
    }
-   
+   @media screen and (max-width: 450px){
+     width: 100%;
+     div:nth-child(3){
+       width: 60% !important;
+     }
+   }
 `
 const Card = styled.div`
   width: 28%;
@@ -390,7 +398,12 @@ const Card = styled.div`
     width: 30%;
     margin-bottom: 30px;
   }
-  /* margin-left: 15px; */
+  @media screen and (max-width: 540px){
+    width: 45%;
+  }
+    @media screen and (max-width: 540px){
+    /* width: 48%; */
+  }
 `
 const ImageHolder = styled.div`
  width: 60px;
@@ -442,4 +455,13 @@ const ChartHolder = styled.div`
       height: 34vh;
       margin-bottom: 10px;
    }
+   @media screen and (max-width: 540px){
+    width: 98%;
+    margin-bottom: 30px;
+    height: 35vh;
+
+  }
+  @media screen and (max-width: 450px){
+    height: 30vh;
+  }
 `
