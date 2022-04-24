@@ -279,9 +279,9 @@ const retrievePrice = ()=>{
                     </ButtonDiv>
                    </Card>
                  <ArrowDefine>
-                   <DoubleArrowOutlined className='icon'/>
-                   <DoubleArrowOutlined className='icon'/>
-                   <KeyboardDoubleArrowDown className="icon"/>
+                   <DoubleArrowOutlined className='icon desk'/>
+                   <DoubleArrowOutlined className='icon desk'/>
+                   <KeyboardDoubleArrowDown className="icon key"/>
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
@@ -350,6 +350,7 @@ const FirstSection = styled.div`
       height: 10vh; 
       display: flex;
       justify-content: space-around;  
+      flex-wrap: wrap;
       margin: 20px auto;
       @media screen and (max-width: 1024px){
        width: 70%;
@@ -363,6 +364,20 @@ const FirstSection = styled.div`
    @media screen and (max-width: 540px){
      width: 100%;
    }
+  @media screen and (max-width: 450px){
+    position: relative;
+    .key{
+        position: absolute;
+        top: 110%;
+        left: 40%;
+      }
+    margin-bottom: 200px;
+  }
+  div:nth-child(3){
+    position: absolute;
+    left: 4%;
+    top: 200%;
+  }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -393,6 +408,10 @@ const ChartHolder = styled.div`
   @media screen and (max-width: 768px){
        height: 32vh; 
    }
+   @media screen and (max-width: 450px){
+     width: 99%;
+   }
+   
 `
 const Card = styled.div`
   width: 28%;
@@ -403,10 +422,14 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
-  @media screen and (width: 1024px){
+  @media screen and (max-width: 1024px){
       width: 35%;
    }
-  /* margin-left: 15px; */
+
+   @media screen and (max-width: 450px){
+      width: 80% !important;
+      margin-bottom: 60px;
+   }
 `
 const ArrowDefine = styled.div`
      width: 10%;
@@ -419,7 +442,20 @@ const ArrowDefine = styled.div`
        margin-top: 40px;
        color:rgba(30, 140, 250, 0.9);
      }
+     .key{
+       display: none;
+     }
+     @media screen and (max-width: 450px){
+       .key{
+         display: block;
+       }
+       .desk{
+         display: none;
+       }
+   
+     }
 `
+
 const FormControl = styled.div`
       width: 100%;
       height: auto;
@@ -438,8 +474,7 @@ const ButtonDiv = styled.div`
      width: 50%;
      margin: 30px auto;
      margin-left: 50px;
-     a{
-      
+     a{      
        padding: 10px 15px;
        text-decoration: none;
        border-radius: 5px;
