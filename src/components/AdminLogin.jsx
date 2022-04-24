@@ -356,9 +356,15 @@ export const RememberMe = styled.div`
      margin-left: 200px;
      margin-top: 5px;
      animation: spin 1s linear infinite;
+     @media screen and (max-width: 768px){
+         width: 50px !important;
+         height: 50px !important;
+    }
      @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+  
+
 }
  /* position: absolute; */
 `

@@ -185,6 +185,10 @@ const Main = styled.div`
     background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   @media screen and (max-width: 768px){
+         width: 100%;
+    }
+
 `
 const Holder= styled.div`
 width: 100%;
@@ -239,7 +243,10 @@ const Card = styled.div`
   margin-bottom: 30px;
   @media screen and (max-width: 1024px){
     width: 40% !important;
-  }  
+  } 
+  @media screen and (max-width: 768px){
+         width: 45% !important;
+    }  
 `
 const IngredientSection = styled.div`
   width: 90%;

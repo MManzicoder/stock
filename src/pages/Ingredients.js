@@ -145,6 +145,9 @@ const Main = styled.div`
     background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
+   @media screen and (max-width: 768px){
+         width: 100%;
+    }
 `
 const Wrapper = styled.div`
     width: 99%;
