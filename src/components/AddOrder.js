@@ -119,21 +119,17 @@ const Background = styled.div`
     }
     @media screen and (max-width: 540px){
         height: 120vh !important;
-            .wrapperHeight{
-                height: 100% !important;
-            }
 }
 }
-  @media screen and (max-width: 400px){
-      height: 140vh !important;
+  @media screen and (max-width: 450px){
+      height: 103vh !important;
   }
-  @media screen and (max-width: 320px){
-      height: 152vh !important;
-
-}
-@media screen and (max-width: 280px){
-       height: 132vh !important;
-   }
+  @media screen and (max-width: 380px){
+      height: 125vh !important;
+      .animateOrder{
+            top: 40vh !important;
+        }
+  }
 `
 
 
@@ -176,16 +172,10 @@ const Wrapper = styled.div`
           }
 
        }
-      .form{
-          input{
-              margin-top: 20px !important;
-          }
-          .mtcategory{
-              margin-top: 20px !important;
-          }
-      }
    }
-
+  @media screen and (max-width: 380px){
+         
+  }
    @media screen and (max-width: 280px){
        h2{
            font-size: 15px !important;
@@ -231,6 +221,9 @@ const Input = styled.input`
 const Form = styled.form`
    width: 70%;
    margin: 10px auto;
+  @media screen and (max-width: 450px){
+         width: 90%;
+    }
 `
 const AddButton = styled.div`
   width: 30%;

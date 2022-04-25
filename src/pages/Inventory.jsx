@@ -372,12 +372,12 @@ const FirstSection = styled.div`
         left: 40%;
       }
     margin-bottom: 200px;
-  }
   div:nth-child(3){
     position: absolute;
     left: 4%;
     top: 200%;
   }
+}
 `
 const SecondSection = styled.div`
   width: 96%;

@@ -75,26 +75,13 @@ const Background = styled.div`
             height: 50vh !important;
         }
     }
-    @media screen and (max-width: 768px){
-    .wrapperHeight{
-        height: 80vh !important;    }
-    @media screen and (max-width: 540px){
-        height: 120vh !important;
-            .wrapperHeight{
-                height: 100% !important;
-            }
 }
-}
-  @media screen and (max-width: 400px){
-      height: 140vh !important;
+  @media screen and (max-width: 450px){
+      height: 103vh !important;
   }
-  @media screen and (max-width: 320px){
-      height: 152vh !important;
-
-}
-@media screen and (max-width: 280px){
-       height: 132vh !important;
-   }
+ @media screen and (max-width: 380px){
+      height: 125vh !important;
+  }
 `
 
 
@@ -133,7 +120,12 @@ const Wrapper = styled.div`
          width: 85%;
          height: 60vh !important;
     }
-
+    @media screen and (max-width: 450px){
+         width: 98%;
+    }
+    @media screen and (max-width: 380px){
+      height: 70vh !important;
+  }
 `
 
  const CloseModalButton = styled(Close)`
@@ -171,6 +163,12 @@ const Holder = styled.div`
      display: flex;
      align-items: center; 
  }
+ @media screen and (max-width: 380px){
+      width: 100% !important;
+  }
+   @media screen and (max-width: 360px){
+      width: 90% !important;
+  }
 `
 const Field = styled.div`
 margin-bottom: 3px;
@@ -194,6 +192,12 @@ const ActionSection = styled.div`
      @media screen and (max-width: 540px){
         margin-left: -20px;
     }
+        @media screen and (max-width: 450px){
+         width: 90%;
+    }
+    @media screen and (max-width: 360px){
+      width: 98% !important;
+  }
 `
 const Action = styled.div`
    width: 22%;
@@ -218,6 +222,14 @@ const Action = styled.div`
    @media screen and (max-width: 540px){
          width: 30%;
     }
-   
+    @media screen and (max-width: 450px){
+         width: 35%;
+    }
+    @media screen and (max-width: 380px){
+      width: 40%;
+  }
+     @media screen and (max-width: 360px){
+      width: 50% !important;
+  }
 `
 export default OrderView

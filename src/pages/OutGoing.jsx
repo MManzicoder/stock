@@ -97,6 +97,9 @@ const Main = styled.div`
      width: 100%;
      height: 93vh;
    }
+   @media screen and (max-width: 380px){
+     height: 115vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -109,8 +112,12 @@ const Wrapper = styled.div`
     padding: 20px;
     flex-wrap: wrap;
     @media screen and (min-width: 540px){
-     height: 87 vh;
+     height: 87vh;
+   }
+   @media screen and (max-width: 380px){
+     height: 110vh;
    }   
+
 `
 const FirstSection = styled.div`
       width: 60%;
@@ -124,6 +131,14 @@ const FirstSection = styled.div`
    @media screen and (max-width: 540px){
          width: 100%;
     }
+    @media screen and (max-width: 380px){
+    div:nth-child(1){
+      margin-left: -4%;
+    }
+    div:nth-child(3){
+      margin-right: -4%;
+    }
+   }
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -132,6 +147,9 @@ const SecondSection = styled.div`
   align-items: center;
   margin: 70px auto;
   justify-content: space-around;
+  @media screen and (max-width: 450px){
+         width: 100%;
+    }
 `
 const Card = styled.div`
   width: 28%;
@@ -151,6 +169,12 @@ const Card = styled.div`
   @media screen and (max-width: 1024px){
       width: 34%;   
    }
+   @media screen and (max-width: 450px){
+     width: 40%;
+   }
+   @media screen and (max-width: 380px){
+    width: 48%;
+   }
 `
 const ArrowDefine = styled.div`
      width: 10%;
@@ -166,6 +190,9 @@ const ArrowDefine = styled.div`
      @media screen and (max-width: 768px){
          width: 15%;
     }
+    @media screen and (max-width: 380px){
+     display: none;
+   }
 `
 const Label = styled.label`
    /* width: 50%; */
@@ -178,6 +205,9 @@ const ButtonDiv = styled.div`
    }
    @media screen and (max-width: 540px){
          width: 30%;
+    }
+    @media screen and (max-width: 450px){
+         width: 40%;
     }
 `
 const Orders = styled.div`
@@ -198,6 +228,10 @@ const Orders = styled.div`
          width: 98%;
          height: 45vh;
     }
+    @media screen and (max-width: 380px){
+      width: 100%;
+     height: 60vh;
+   }
 `
 const AddButton = styled.button`
     width: 100%;
