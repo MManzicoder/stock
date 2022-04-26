@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Chart from '../components/Chart'
 import { DoubleArrowOutlined} from '@material-ui/icons'
 import { Link, useHistory, useParams } from 'react-router-dom'
+import { KeyboardDoubleArrowDown } from '@mui/icons-material';
 import { Loader } from '../components/AdminLogin'
 import { Button } from './IngredientsEdit'
 import { request } from '../apiHandler/Authapi'
@@ -310,8 +311,9 @@ const retrievePrice = ()=>{
                     </ButtonDiv>
                    </Card>
                  <ArrowDefine>
-                   <DoubleArrowOutlined className='icon'/>
-                   <DoubleArrowOutlined className='icon'/>
+                   <DoubleArrowOutlined className='icon desk'/>
+                   <DoubleArrowOutlined className='icon desk'/>
+                  <KeyboardDoubleArrowDown className="icon key"/>
                  </ArrowDefine>
                  <Card style={{display: "flex", flexDirection: "column"}}>
                    <span style={{fontWeight: "bold"}}>Expected Amount</span>
@@ -339,13 +341,19 @@ export default InventoryEdit
 const Main = styled.div`
    width: 101%;
    height: 90vh;
-  background:rgba(30, 140, 250, 0.3);
+    background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
    display: flex;
    @media screen and (max-width: 768px){
      width: 100%;
      height: 93vh;
+   }
+   @media screen and (max-width: 540px){
+     height: 130vh;
+   }
+    @media screen and (max-width: 380px){
+     height: 150vh;
    }
 `
 const Wrapper = styled.div`
@@ -377,9 +385,23 @@ const FirstSection = styled.div`
       height: 10vh; 
       display: flex;
       justify-content: space-around;  
+      flex-wrap: wrap;
       margin: 20px auto;
+      @media screen and (min-width: 1025px){
+        margin-top: -20px;
+        div:nth-child(1){
+          /* height: 150px !important; */
+        }
+        margin-bottom: 100px !important;
+      }
       @media screen and (max-width: 1024px){
        width: 70%;
+   }
+    @media screen and (min-width: 1024px){
+      div:nth-child(1){
+        height: auto;
+      }
+      margin-bottom: 55px;
    }
       @media screen and (max-width: 768px){
         width: 90%;
@@ -387,6 +409,49 @@ const FirstSection = styled.div`
         margin-bottom: 20px;
         /* background: blue; */
    }
+   @media screen and (max-width: 540px){
+     width: 100%;
+   }
+  @media screen and (max-width: 450px){
+    position: relative;
+    .key{
+        position: absolute;
+        top: 110%;
+        left: 40%;
+      }
+    margin-bottom: 200px;
+  div:nth-child(3){
+    position: absolute;
+    left: 4%;
+    top: 200%;
+  }
+  }
+ @media screen and (max-width: 380px){
+    .key{
+        top: 140%;
+        /* left: 40%; */
+      }
+    margin-bottom: 250px;
+  div:nth-child(3){
+    position: absolute;
+    left: 4%;
+    top: 250%;
+  }
+}
+  @media screen and (max-width: 360px){
+    div:nth-child(1){
+      /* height: 140px !important; */
+      height: auto;
+    }   
+    .key{
+      top: 170%;
+    }  
+    div:nth-child(3){
+    left: 4%;
+    top: 270%;
+  }
+   }
+
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -397,6 +462,9 @@ const SecondSection = styled.div`
   @media screen and (max-width: 1024px){
     width: 98%;
       flex-direction: column;
+   }
+    @media screen and (max-width: 540px){
+     width: 100%;
    }
 `
 const ChartHolder = styled.div`
@@ -414,6 +482,12 @@ const ChartHolder = styled.div`
   @media screen and (max-width: 768px){
        height: 32vh; 
    }
+   @media screen and (max-width: 450px){
+     width: 99%;
+   }
+  @media screen and (max-width: 360px){
+    width: 100%;
+  }
 `
 const Card = styled.div`
   width: 28%;
@@ -424,11 +498,14 @@ const Card = styled.div`
   position: relative;
   align-items: center;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
-  @media screen and (width: 1024px){
-      width: 37%;
-      height: 135px;
+  @media screen and (max-width: 1024px){
+      width: 35%;
    }
-  /* margin-left: 15px; */
+
+   @media screen and (max-width: 450px){
+      width: 80% !important;
+      margin-bottom: 60px;
+   }
 `
 const ArrowDefine = styled.div`
      width: 10%;
@@ -440,6 +517,18 @@ const ArrowDefine = styled.div`
      .icon{
        margin-top: 40px;
        color:rgba(30, 140, 250, 0.9);
+     }
+     .key{
+       display: none;
+     }
+     @media screen and (max-width: 450px){
+       .key{
+         display: block;
+       }
+       .desk{
+         display: none;
+       }
+   
      }
 `
 const FormControl = styled.div`

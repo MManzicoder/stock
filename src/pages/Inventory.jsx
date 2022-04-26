@@ -320,6 +320,9 @@ const Main = styled.div`
    @media screen and (max-width: 540px){
      height: 130vh;
    }
+    @media screen and (max-width: 380px){
+     height: 150vh;
+   }
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -351,7 +354,10 @@ const FirstSection = styled.div`
       display: flex;
       justify-content: space-around;  
       flex-wrap: wrap;
-      margin: 20px auto;
+      margin: 10px auto;
+      @media screen and (min-width: 1025px){
+        margin-top: -20px;
+      }
       @media screen and (max-width: 1024px){
        width: 70%;
    }
@@ -377,7 +383,33 @@ const FirstSection = styled.div`
     left: 4%;
     top: 200%;
   }
+  }
+ @media screen and (max-width: 380px){
+    .key{
+        top: 140%;
+        /* left: 40%; */
+      }
+    margin-bottom: 250px;
+  div:nth-child(3){
+    position: absolute;
+    left: 4%;
+    top: 250%;
+  }
 }
+  @media screen and (max-width: 360px){
+    div:nth-child(1){
+      /* height: 140px !important; */
+      height: auto;
+    }   
+    .key{
+      top: 170%;
+    }  
+    div:nth-child(3){
+    left: 4%;
+    top: 270%;
+  }
+   }
+
 `
 const SecondSection = styled.div`
   width: 96%;
@@ -411,7 +443,9 @@ const ChartHolder = styled.div`
    @media screen and (max-width: 450px){
      width: 99%;
    }
-   
+  @media screen and (max-width: 360px){
+    width: 100%;
+  }
 `
 const Card = styled.div`
   width: 28%;

@@ -100,6 +100,11 @@ const StockSettings = styled.div`
          margin-top: 30vh;
          color: grey;
        }
+       @media screen and (max-width: 540px){
+         width: 50%;
+       }
+
+     
 `
 const OtherSettings = styled.div`
     width: 49%;
@@ -121,6 +126,9 @@ const FormControl = styled.div`
       height: auto;
       align-items: center;
       text-align: center;
+        @media screen and (max-width: 540px){
+         width: 98%;
+       }
 `
 const Label = styled.label`
    width: 50%;

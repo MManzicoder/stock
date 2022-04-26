@@ -145,8 +145,8 @@ const Wrapper = styled.div`
    }
    @media screen and (max-width: 540px){
        right: 5%;
-       height: 40px !important;
-       width: 40px !important;
+       height: 30px !important;
+       width: 30px !important;
        border: 3px solid dodgerblue;
        border-radius: 50%;
    }

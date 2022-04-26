@@ -173,8 +173,8 @@ const Wrapper = styled.div`
 
        }
    }
-  @media screen and (max-width: 380px){
-         
+  @media screen and (max-width: 360px){
+         width: 96% !important;
   }
    @media screen and (max-width: 280px){
        h2{
@@ -212,8 +212,8 @@ const Input = styled.input`
    }
    @media screen and (max-width: 540px){
        right: 5%;
-       height: 40px !important;
-       width: 40px !important;
+       height: 30px !important;
+       width: 30px !important;
        border: 3px solid dodgerblue;
        border-radius: 50%;
    }

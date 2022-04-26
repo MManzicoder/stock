@@ -98,7 +98,7 @@ const getMaterial = ()=>{
                  borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
                       {displayPageMaterials && displayPageMaterials.map((mat, i)=>{
                         return(
-                          <Card>
+                          <Card key={i} className="card">
                         <FormControl>
                         <Label>{mat.name} </Label>
                    {mId == mat._id ? <Input type='number' name="price" value={quantity} 
@@ -142,7 +142,7 @@ const getMaterial = ()=>{
                  (<IngredientSection style={{marginTop: window.screen.width <=768 && 70}}>
                       {displayPageUsedMaterials && displayPageUsedMaterials.map((mat, i)=>{
                         return(
-                          <Card>
+                          <Card key={i} className="card">
                         <FormControl>
                         <Label>{mat.name} </Label>
                      <p>{" "+mat.quantity }</p>
@@ -175,9 +175,9 @@ const Main = styled.div`
    margin-top: 0px;
    padding: 10px;
    @media screen and (max-width: 768px){
-     width: 100%;
-     height: 93vh;
-   }
+         width: 100%;
+         height: 93vh;
+    }
 `
 const Holder= styled.div`
 width: 100%;
@@ -194,11 +194,14 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 20px;
     @media screen and (max-width: 540px){
-          height: 90vh;
-       }
+        height: 90vh;
+    }
+    @media screen and (max-width: 360px){
+         width: 100% !important;
+    }
 `
 const StockSettings = styled.div`
-              width: 49%;
+      width: 49%;
        height: 100%;
        border-right: 3px dashed rgba(30, 140, 250, 0.5);
        h2{
@@ -207,9 +210,14 @@ const StockSettings = styled.div`
            opacity: 0.8;
            font-size: 18px;
        }
-       @media screen and (max-width: 1024px){
-          
-       }
+      @media screen and (max-width: 450px){
+                 .card{
+           margin-left: -30px !important;
+         }
+
+      @media screen and (max-width: 360px){
+         width: 53% !important;
+    }
 `
 const OtherSettings = styled.div`
     width: 49%;
@@ -224,7 +232,7 @@ const OtherSettings = styled.div`
 `
 
 const Card = styled.div`
-width: 35%;
+   width: 35%;
   height: auto;
   background: #fff;
   border-radius: 7px;
@@ -235,13 +243,19 @@ width: 35%;
   margin-bottom: 30px;
   @media screen and (max-width: 1024px){
     width: 40% !important;
-  } 
-  @media screen and (max-width: 540px){
+  }  
+   @media screen and (max-width: 768px){
+         width: 45% !important;
+    }
+    @media screen and (max-width: 540px){
          width: 90% !important;
+    }
+    @media screen and (max-width: 450px){
+         width: 98% !important;
     }
 `
 const IngredientSection = styled.div`
-   width: 90%;
+  width: 90%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -251,6 +265,7 @@ const IngredientSection = styled.div`
   @media screen and (max-width: 1024px){
      width: 100%;        
   }
+
 `
 const FormControl = styled.div`
       width: 100%;
@@ -284,7 +299,7 @@ export const Button = styled.button`
   text-align: center;
 `
 const ButtonDiv = styled.div`
-     width: 50%;
+   width: 50%;
      margin: 30px auto;
      margin-left: 50px;
      a{
@@ -299,6 +314,7 @@ const ButtonDiv = styled.div`
     @media screen and (max-width: 1024px){
           margin-left: 30px;  
        }
+
 `
 const NewIngredient = styled.div`
   width: 20%;
@@ -306,10 +322,15 @@ const NewIngredient = styled.div`
   @media screen and (max-width: 1024px){
           width: 30% !important;
        }
-  @media screen and (max-width: 1024px){
-          width: 50% !important;
-       }
+  @media screen and (max-width: 540px){
+         width: 50% !important;
+    }
+  @media screen and (max-width: 450px){
+    margin-top: -40px !important;
+    width: 80% !important;
+    }
 `
+
 const AddIngredient = styled.button`
     width: 100%;
     height: 100%;

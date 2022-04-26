@@ -63,7 +63,7 @@ return (
                  {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: (<IngredientSection>
                       {displayPageMaterials && displayPageMaterials.map((mat, i)=>{
                         return(
-                          <Card key={i}>
+                          <Card key={i} className="card">
                         <FormControl>
                         <Label>{mat.name} </Label>
                      <p>{" "+mat.quantity }</p>
@@ -98,7 +98,7 @@ return (
               <OtherSettings>
                   <h2>Materials out of the stock</h2>
                  {loading ? <Loader style={{height: 100, width:100,marginBottom: 50, marginTop: 100, border: "3px solid dodgerblue", borderTop: "3px solid transparent"}}></Loader>: 
-                 ( <IngredientSection>
+                 ( <IngredientSection style={{marginTop: window.screen.width <=768 && 60}}>
                       {displayPageUsedMaterials && displayPageUsedMaterials.map((matr, i)=>{
                         return(
                           <Card key={i}>
@@ -130,11 +130,6 @@ return (
 }
 
 export default Packaging;
-const Holder= styled.div`
-width: 100%;
-height: 100vh;
-position: relative;
-`
 const Main = styled.div`
    width: 101%;
    height: 90vh;
@@ -142,9 +137,14 @@ const Main = styled.div`
    margin-top: 0px;
    padding: 10px;
    @media screen and (max-width: 768px){
-     width: 100%;
-     height: 93vh;
-   }
+         width: 100%;
+         height: 93vh;
+    }
+`
+const Holder= styled.div`
+width: 100%;
+height: 100vh;
+position: relative;
 `
 const Wrapper = styled.div`
     width: 99%;
@@ -156,11 +156,14 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 20px;
     @media screen and (max-width: 540px){
-          height: 90vh;
-       }
+        height: 90vh;
+    }
+    @media screen and (max-width: 360px){
+         width: 100% !important;
+    }
 `
 const StockSettings = styled.div`
-       width: 49%;
+      width: 49%;
        height: 100%;
        border-right: 3px dashed rgba(30, 140, 250, 0.5);
        h2{
@@ -169,12 +172,17 @@ const StockSettings = styled.div`
            opacity: 0.8;
            font-size: 18px;
        }
-       @media screen and (max-width: 1024px){
-          
-       }
+     @media screen and (max-width: 450px){
+                 .card{
+           margin-left: -30px !important;
+         }
+
+      @media screen and (max-width: 360px){
+         width: 53% !important;
+    }
 `
 const OtherSettings = styled.div`
-   width: 49%;
+    width: 49%;
     height: 100%;
     padding-left: 20px;
     h2{
@@ -182,11 +190,19 @@ const OtherSettings = styled.div`
            color: rgba(30, 140, 250, 0.9);
            opacity: 0.8;
            font-size: 18px;           
-       }        
+       }    
+    @media screen and (max-width: 360px){
+      .card2{
+        width: 110% !important;
+        button{
+          width: 130% !important;
+        }
+      }
+    }
 `
 
 const Card = styled.div`
-width: 35%;
+   width: 35%;
   height: auto;
   background: #fff;
   border-radius: 7px;
@@ -197,13 +213,19 @@ width: 35%;
   margin-bottom: 30px;
   @media screen and (max-width: 1024px){
     width: 40% !important;
-  } 
+  }  
+   @media screen and (max-width: 768px){
+         width: 45% !important;
+    }
     @media screen and (max-width: 540px){
          width: 90% !important;
     }
+    @media screen and (max-width: 450px){
+         width: 98% !important;
+    }
 `
 const IngredientSection = styled.div`
-   width: 90%;
+  width: 90%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -213,6 +235,7 @@ const IngredientSection = styled.div`
   @media screen and (max-width: 1024px){
      width: 100%;        
   }
+
 `
 const FormControl = styled.div`
       width: 100%;
@@ -241,6 +264,7 @@ const ButtonDiv = styled.div`
     @media screen and (max-width: 1024px){
           margin-left: 30px;  
        }
+
 `
 const NewIngredient = styled.div`
   width: 20%;
@@ -250,6 +274,10 @@ const NewIngredient = styled.div`
        }
   @media screen and (max-width: 540px){
          width: 50% !important;
+    }
+  @media screen and (max-width: 450px){
+    margin-top: -40px !important;
+    width: 80% !important;
     }
 `
 

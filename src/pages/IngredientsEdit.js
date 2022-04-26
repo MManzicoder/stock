@@ -106,7 +106,7 @@ const getIngredient = ()=>{
                  </Loader>: (<IngredientSection>
                       {displayPageIngredients && displayPageIngredients.map((ing, i)=>{
                         return(
-                          <Card>
+                          <Card key={i} className="card">
                         <FormControl>
                         <Label>{ing.name} </Label>
                    {ingId == ing._id ? <Input type='number' name="price" 
@@ -130,7 +130,7 @@ const getIngredient = ()=>{
                       previousLabel= { <ArrowLeft />}
                       nextLabel ={ <ArrowRight /> }
                       pageCount = { pageCount1 }
-                      onPageChange ={changePage}
+                       onPageChange ={changePage}
                       containerClassName = { "pagination"}
                       previousLinkClassName = {"previousLink"}
                       nextLinkClassName = {"nextLink"}
@@ -205,6 +205,9 @@ const Wrapper = styled.div`
     @media screen and (max-width: 540px){
         height: 90vh;
     }
+    @media screen and (max-width: 360px){
+         width: 100% !important;
+    }
 `
 const StockSettings = styled.div`
       width: 49%;
@@ -216,9 +219,14 @@ const StockSettings = styled.div`
            opacity: 0.8;
            font-size: 18px;
        }
-       @media screen and (max-width: 1024px){
-          
-       }
+      @media screen and (max-width: 450px){
+                 .card{
+           margin-left: -30px !important;
+         }
+
+      @media screen and (max-width: 360px){
+         width: 53% !important;
+    }
 `
 const OtherSettings = styled.div`
     width: 49%;
@@ -250,6 +258,9 @@ const Card = styled.div`
     }
     @media screen and (max-width: 540px){
          width: 90% !important;
+    }
+    @media screen and (max-width: 450px){
+         width: 98% !important;
     }
 `
 const IngredientSection = styled.div`
@@ -322,6 +333,10 @@ const NewIngredient = styled.div`
        }
   @media screen and (max-width: 540px){
          width: 50% !important;
+    }
+  @media screen and (max-width: 450px){
+    margin-top: -40px !important;
+    width: 80% !important;
     }
 `
 

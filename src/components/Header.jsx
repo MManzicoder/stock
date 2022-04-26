@@ -308,8 +308,7 @@ const NotifyDiv = styled.div`
          color: #fff;
      }
      `
-const MenuDiv = styled.div`
-    
+const MenuDiv = styled.div`   
     position: absolute;
     left: 5%;
 `
@@ -322,6 +321,7 @@ const MenuWrapper = styled.div`
   top: 0%;
   left: 0%;
   z-index: 7000 !important;
+ 
   /* place-items: center; */
 `
 const MenuItems = styled.ul`
@@ -331,6 +331,10 @@ const MenuItems = styled.ul`
  margin: 200px auto;
  flex-direction: column;
  list-style: none;
+  @media screen and (max-width: 360px){
+      margin-left: -20px;
+      width: 80%;
+  }
 `
 const ListItem = styled.li`
  width: 100% !important;

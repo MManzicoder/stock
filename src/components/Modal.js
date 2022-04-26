@@ -95,7 +95,7 @@ const Background = styled.div`
 }
 }
   @media screen and (max-width: 400px){
-      height: 140vh !important;
+      height: 105vh !important;
   }
   @media screen and (max-width: 320px){
       height: 152vh !important;
@@ -169,6 +169,9 @@ const Wrapper = styled.div`
            opacity: 0.7;
        }
    }
+    @media screen and (max-width: 360px){
+         width: 90% !important;
+    }
 `
 
 const Input = styled.input`
@@ -179,7 +182,6 @@ const Input = styled.input`
  border-radius: 5px;
  outline: 1px solid rgba(30, 140, 250, 0.9);
 `
-
  const CloseModalButton = styled(Close)`
    cursor: pointer;
    position: absolute;
@@ -197,12 +199,13 @@ const Input = styled.input`
    }
    @media screen and (max-width: 540px){
        right: 5%;
-       height: 40px !important;
-       width: 40px !important;
+       height: 30px !important;
+       width: 30px !important;
        border: 3px solid dodgerblue;
        border-radius: 50%;
    }
 `
+
 const Form = styled.form`
    width: 70%;
    margin: 10px auto;

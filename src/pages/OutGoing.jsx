@@ -150,6 +150,12 @@ const SecondSection = styled.div`
   @media screen and (max-width: 450px){
          width: 100%;
     }
+ @media screen and (min-width: 1025px){
+       .table{
+      height: 40vh !important;
+    }
+
+ }
 `
 const Card = styled.div`
   width: 28%;
@@ -209,6 +215,12 @@ const ButtonDiv = styled.div`
     @media screen and (max-width: 450px){
          width: 40%;
     }
+    @media screen and (max-width: 380px){
+      width: 70%;
+   }
+   @media screen and (min-width: 1025px){
+      margin-top: 90px;
+   }
 `
 const Orders = styled.div`
    width: 80%;
@@ -216,6 +228,9 @@ const Orders = styled.div`
    height: 40vh;
    border-radius: 10px;
    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
+    @media screen and (min-width: 1025px){
+      height: 30vh !important;
+    }
      @media screen and (max-width: 1024px){
       width: 90%;
       height: 50vh;

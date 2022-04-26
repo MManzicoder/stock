@@ -188,14 +188,7 @@ const Wrapper = styled.div`
           }
 
        }
-      .form{
-          input{
-              margin-top: 20px !important;
-          }
-          .mtcategory{
-              margin-top: 20px !important;
-          }
-      }
+       width: 95% !important;
    }
 
    @media screen and (max-width: 280px){
@@ -232,11 +225,12 @@ const Input = styled.input`
    }
    @media screen and (max-width: 540px){
        right: 5%;
-       height: 40px !important;
-       width: 40px !important;
+       height: 30px !important;
+       width: 30px !important;
        border: 3px solid dodgerblue;
        border-radius: 50%;
    }
+   
 `
 const Form = styled.form`
    width: 70%;
@@ -244,6 +238,9 @@ const Form = styled.form`
    @media screen and (max-width: 540px){
           width: 80%;
        }
+   @media screen and (max-width: 360px){
+          width: 95%;
+       }    
 `
 const AddButton = styled.div`
   width: 30%;

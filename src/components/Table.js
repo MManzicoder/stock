@@ -86,7 +86,7 @@ const handleCellClick = (params)=>{
   setShowModal((prev)=>!prev);
 }
   return (
-    <Hold style={{ height: window.screen.width ===1024 ? 650 : 250, width: '100%' }}>
+    <Hold className='table' style={{ height: window.screen.width ===1024 ? 650 : 250, width: '100%' }}>
       <DataGrid
         rows={orders}
         columns={columns}
