@@ -25,6 +25,7 @@ import IngredientsUsedEdit from './pages/IngredientsUsedEdit';
 import Packaging from './pages/Packaging';
 import MaterialsEdit from './pages/MaterialEdit';
 import MaterialsUsedEdit from './pages/MaterialsUsedEdit';
+import EditOrder from './pages/EditOrder';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
        <PrivateRoute component={InventoryEdit} path="/inventory/edit/:id"/>
        <PrivateRoute component={Inventory} path="/inventory"/>
        <PrivateRoute component={OutGoing} path="/orders"/>
+       <PrivateRoute component={EditOrder} path="/orders/:orderId"/>
        <PrivateRoute component={Settings} path="/settings"/>
        <Route component={PasswordResetNotification} path="/resetMessage"/>       
        <Route component={ForgotPassword} path="/forgotpassword"/>

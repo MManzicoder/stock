@@ -2,9 +2,11 @@ import React, { useState, useRef } from 'react';
 import styled from "styled-components";
 import CurrencyFormat from "react-currency-format"
 import { Close, Check, Delete, Edit } from "@material-ui/icons";
+import { useHistory } from 'react-router-dom';
 
 function OrderView({ data, show}) {
  const [showView, setShowView] = useState(show);
+ const history = useHistory();
  const modalRef = useRef();
  const closeModal = e =>{
         if(modalRef.current === e.target){
@@ -15,6 +17,10 @@ const closeAllStaff = () =>{
         setShowView(false);
 
     }
+
+const editOrder = orderId =>{
+     history.push(`/orders/${orderId}`);
+}    
   return (
       showView && <Background ref={modalRef} onClick = { closeModal }>
             <Wrapper className={`${ showView ? "animate": "" }`} 
@@ -42,7 +48,7 @@ const closeAllStaff = () =>{
                 displayType={"text"}/></p></Field>                              
               </Holder>
               <ActionSection>
-                <Action 
+                <Action onClick={editOrder(data.id)}
                 style={{marginLeft:"100px", marginRight: "30px", borderColor:"dodgerblue"}}>
                  <Edit className="edit"/> <span className='ed'>Edit</span>
                 </Action>
