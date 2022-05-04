@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import styled from "styled-components";
+import { getRequest, request } from '../apiHandler/Authapi';
 import CurrencyFormat from "react-currency-format"
 import { Close, Check, Delete, Edit } from "@material-ui/icons";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 function OrderView({ data, show}) {
  const [showView, setShowView] = useState(show);
@@ -18,11 +20,23 @@ const closeAllStaff = () =>{
 
     }
 
-const editOrder = orderId =>{
-     history.push(`/orders/${orderId}`);
-}    
-  return (
+const deleteOrder =()=>{
+     request(`orders/${data.id}`, "DELETE", {}, {"bearer": `${localStorage.getItem("auth")}`})
+     .then(res=>{
+        console.log(res);
+       if(res.error){
+         toast.error("An expected error occured!");
+         return;
+       }
+       toast.success(res.message);
+       history.push("/orders");
+       window.location.reload();
+       setShowView(false);
+     })
+}
+return (
       showView && <Background ref={modalRef} onClick = { closeModal }>
+           <ToastContainer position='top-center' autoClose={3000} />
             <Wrapper className={`${ showView ? "animate": "" }`} 
             style={{height: 400, padding: 15}}>
               <h2>Order details</h2>             
@@ -48,11 +62,11 @@ const editOrder = orderId =>{
                 displayType={"text"}/></p></Field>                              
               </Holder>
               <ActionSection>
-                <Action onClick={editOrder(data.id)}
+                <Link className ="action" to={`/orders/edit/${data.id}`}
                 style={{marginLeft:"100px", marginRight: "30px", borderColor:"dodgerblue"}}>
                  <Edit className="edit"/> <span className='ed'>Edit</span>
-                </Action>
-                <Action style={{borderColor: "#ff0066"}}>
+                </Link>
+                <Action className="action" onClick={deleteOrder} style={{borderColor: "#ff0066"}}>
                     <Delete className="delete" /><span className='del'>Delete</span>
                 </Action>
               </ActionSection>
@@ -204,8 +218,7 @@ const ActionSection = styled.div`
     @media screen and (max-width: 360px){
       width: 98% !important;
   }
-`
-const Action = styled.div`
+  .action{
    width: 22%;
    height: 40px;
    border: 1px solid black;
@@ -214,6 +227,7 @@ const Action = styled.div`
    display: flex;
    align-items: center;
    padding-left: 10px;
+   text-decoration: none;
    .edit, .ed{
        color: dodgerblue;
    }
@@ -237,5 +251,9 @@ const Action = styled.div`
      @media screen and (max-width: 360px){
       width: 50% !important;
   }
+  }
+`
+const Action = styled.div`
+
 `
 export default OrderView

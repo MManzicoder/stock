@@ -18,7 +18,7 @@ export default Profile
 const Main = styled.div`
    width: 101%;
    height: 90vh;
-    background:rgba(30, 140, 250, 0.3);
+  background:rgba(30, 140, 250, 0.3);
    margin-top: 0px;
    padding: 10px;
    @media screen and (max-width: 768px){

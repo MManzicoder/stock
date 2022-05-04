@@ -1,18 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from "../components/Layout";
-import { useParams} from "react-router-dom";
+import { Link, useParams, useHistory} from "react-router-dom";
 import styled from "styled-components";
 import { Loader } from "../components/AdminLogin";
-import { request } from '../apiHandler/Authapi';
+import { getRequest, request } from '../apiHandler/Authapi';
 import { toast, ToastContainer } from 'react-toastify';
 function EditOrder() {
+const history = useHistory();
 const { orderId } = useParams();
+const [loading, setLoading] = useState(false);
+const [order, setOrder] = useState({
+        recipientphone: "",
+        address: "",
+        quantity: 0,
+        price: 0,
+        status: ""
+    })
+const handleChange = e =>{
+    setOrder({
+        ...order,
+        [e.target.name]: e.target.value
+    })
+}
+const getOrder = ()=>{
+  getRequest(`orders/${orderId}`, {bearer: `${localStorage.getItem("auth")}`})
+  .then(res=>{
+    setOrder(res.order);
+  })
+}
+
+const saveOrder = () =>{
+    if(order.name =="" || order.quantity == 0 || order.address =="" || order.price == 0){
+        toast.error("All fields are required!")
+        setLoading(false);
+        return;
+    }
+    setLoading(true);
+        request(`orders/${orderId}`, "PUT", 
+        order, {"bearer":`${localStorage.getItem("auth")}`, 
+        "Content-Type":"application/json"})
+        .then(res=>{
+            setLoading(false);
+            if(res.error){
+                toast.error(res.error)
+            }
+            toast.success(res.message);
+            history.push("/orders");
+        })
+        .catch(err=>console.log(err.message))
+}
+useEffect(()=>{
+   getOrder();
+},[orderId]);
   return (
       <Layout>
+
         <Main>
+          <ToastContainer position="top-center" autoClose={3000} />
           <Wrapper>
-              <h2>{orderId}</h2>
-              <Form>
+              <h2>Edit order</h2>
+             <Sub>
+                <Form>
                   <FormControl>
                     <Label>Recipient</Label>
                    <Input type='text' name='recipientphone' value={order.recipientphone} 
@@ -42,11 +90,17 @@ const { orderId } = useParams();
                       </Select>
                     </FormControl>                                      
                </Form>
-               <AddButton>
-                   <Button onClick={saveOrder}>{!loading ? "Add": 
+              <Actions>
+                 <AddButton>
+                   <Button className='add' onClick={saveOrder}>{!loading ? "Save": 
                     <Loader style={{marginLeft: "40%", marginTop: 0, height: 20, width: 20}}></Loader>}
                    </Button>
                </AddButton>
+                <AddButton>
+                   <Link to={"/orders"} className='cancel'>Cancel</Link>
+               </AddButton>
+              </Actions>
+             </Sub>
           </Wrapper>    
         </Main>        
       </Layout>
@@ -80,12 +134,16 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    h2{
+      opacity: 0.7;
+    }
     @media screen and (max-width: 540px){
      h2{
        text-align: left !important;
        font-size: 18px;
        position: absolute;
        left: 5%;
+       
      }
    }
      @media screen and (max-width: 360px){
@@ -94,21 +152,28 @@ const Wrapper = styled.div`
 `
 
 const Form = styled.form`
-   width: 70%;
+   width: 80%;
    margin: 10px auto;
   @media screen and (max-width: 450px){
          width: 90%;
     }
+  
 `
-const AddButton = styled.div`
-  width: 30%;
-  height: 40px;
-  margin: 25px auto;
+const Actions = styled.div`
+ display: flex;
+ width: 50%;
+ margin: 10px auto;
+ align-items: center;
 
 `
-const Button = styled.button`
-  width: 100%;
-  height: 100%;
+const AddButton = styled.div`
+  position: relative; 
+  width: 15%;
+  height: 40px;
+  margin: 25px auto;
+ .add{
+  padding: 10px 20px;
+
   cursor: pointer;
   border-radius: 7px;
   background:rgba(30, 140, 250, 0.9);
@@ -117,7 +182,20 @@ const Button = styled.button`
   cursor: pointer;
   text-align: center;
   color: #fff;
+ }
+ .cancel{
+   padding: 7px 15px;
+   background: #ff0066;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 7px;
+   margin-top: 100px;
+    position: absolute;
+    top: -100px;
+ }
 `
+const Button = styled.button`
+  `
 const FormControl = styled.div`
     width: 100%;
     height: 50px;
@@ -135,4 +213,24 @@ const Select = styled.select`
  font-size: 16px;
  border-radius: 5px;
  outline: 1px solid rgba(30, 140, 250, 0.9);
+`
+const Input = styled.input`
+ width: 70%;
+ margin-top: 10px;
+ padding: 7px 10px;
+ border: 1px solid gray;
+ font-size: 16px;
+ border-radius: 5px;
+ outline: 1px solid rgba(30, 140, 250, 0.9);
+`
+
+const Sub= styled.div`
+   display: flex;
+   flex-direction: column;
+   width: 60%;
+   height: auto;
+   padding: 10px;
+   border: 3px dashed rgba(30, 140, 250, 0.5);
+   margin: 20px auto;
+   border-radius: 5px;
 `
