@@ -274,6 +274,9 @@ const ButtonDiv = styled.div`
 const NewIngredient = styled.div`
   width: 20%;
   margin: 10px auto;
+  @media screen and (min-width: 1036px){
+    margin-top: -8% !important;
+  }
   @media screen and (max-width: 1024px){
           width: 30% !important;
        }
