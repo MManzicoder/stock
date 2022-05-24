@@ -157,10 +157,13 @@ const Form = styled.form`
   @media screen and (max-width: 450px){
          width: 90%;
     }
+    @media screen and (max-width: 375px){
+     width: 96%;
+   }
   
 `
 const Actions = styled.div`
- display: flex;
+  display: flex;
  width: 50%;
  margin: 10px auto;
  align-items: center;
@@ -173,7 +176,6 @@ const AddButton = styled.div`
   margin: 25px auto;
  .add{
   padding: 10px 20px;
-
   cursor: pointer;
   border-radius: 7px;
   background:rgba(30, 140, 250, 0.9);
@@ -182,6 +184,11 @@ const AddButton = styled.div`
   cursor: pointer;
   text-align: center;
   color: #fff;
+  @media screen and (max-width: 450px){
+    position: absolute;
+    margin-left: -70% !important;
+    /* left: -20% !important; */
+  }
  }
  .cancel{
    padding: 7px 15px;
@@ -233,4 +240,15 @@ const Sub= styled.div`
    border: 3px dashed rgba(30, 140, 250, 0.5);
    margin: 20px auto;
    border-radius: 5px;
+   @media screen and (max-width: 768px){
+     width: 80%;
+   }
+   @media screen and (max-width: 540px){
+     margin-top: 50px;
+     width: 98%;
+   }
+   @media screen and (max-width: 375px){
+     /* margin-top: 50px; */
+     width: 100%;
+   }
 `
