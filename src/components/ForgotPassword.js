@@ -86,7 +86,7 @@ align-items: center;
     margin: 0px auto;
 }
  .row{
-     margin-top: 10px;
+     margin-top: 20px !important;
  }
  .row input{
      border: 1px solid black;

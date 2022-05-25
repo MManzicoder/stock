@@ -75,7 +75,7 @@ export const AdminLogin = ()=>{
                  />
               </FormControl>
               <Button onClick={handleAdminLogin} style={loading ? {padding: "0px"}: {}}>
-                 {!loading ? "Sign In": <Loader style={loading ? {marginLeft: "100px", marginTop: "-2px"}: {}}>
+                 {!loading ? "Sign In": <Loader className="mobile" style={loading ? {marginLeft: "100px", marginTop: "-2px"}: {}}>
                  </Loader> }
                  </Button>
               <UserBenefit className="userbenefit">
@@ -87,11 +87,6 @@ export const AdminLogin = ()=>{
                    <Link to="/forgotpassword">Forgot Password?</Link>   
               </UserBenefit>
           </Sub>
-          {/* <BottomHeader>
-             <p> Login as A 
-             <Link to="/sponsorlogin" onClick={directToSponsorLogin} 
-             > Sponsor</Link></p>
-          </BottomHeader> */}
         </Wrapper>
       </Holder>
     );
@@ -357,10 +352,10 @@ export const RememberMe = styled.div`
      margin-top: 5px;
      animation: spin 1s linear infinite;
      @media screen and (max-width: 768px){
-         width: 50px !important;
-         height: 50px !important;
-         margin-left: 130px !important;
-         margin-bottom: 50px !important;
+         width: 28px !important;
+         height: 28px !important;
+         margin-left: 47% !important;
+         /* margin-bottom: 50px !important; */
     }
      @keyframes spin {
   0% { transform: rotate(0deg); }

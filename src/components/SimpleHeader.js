@@ -29,8 +29,13 @@ const Nav = styled.div`
   align-items: center;
   .login{
       position: absolute;
-      right: 0px;
+      right: 20px;
   }
+  @media screen and (max-width: 540px){
+    .login{
+      right: 50px;
+    }
+   }
 
 `
 const Button = styled.button`
@@ -68,6 +73,12 @@ export const Logo = styled.div`
       color: black;
       font-size: 20px;
       left: 75px;
+   }
+   @media screen and (max-width: 540px){
+     margin-left: -30px;
+     p{
+       left: 20px;
+     }
    }
 `
 export const Image = styled.img`
