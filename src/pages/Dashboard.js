@@ -54,6 +54,9 @@ function Dashboard() {
       }
         setHistory(res.history);
     })
+    .catch(err=>{
+      console.log(err.message);
+    })
   }
 const getStock = ()=>{
     getRequest("stock", {"bearer": `${localStorage.getItem("auth")}`})

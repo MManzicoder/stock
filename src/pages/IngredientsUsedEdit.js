@@ -225,6 +225,7 @@ const StockSettings = styled.div`
           .card{
            margin-left: -30px !important;
          }
+        }
 
       @media screen and (max-width: 360px){
          width: 53% !important;
