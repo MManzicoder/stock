@@ -14,7 +14,8 @@ const AddOrder = ({ showModal, setShowModal}) => {
         address: "",
         quantity: 0,
         price: 0,
-        status: ""
+        status: "",
+        delivery: 0
     })
     const modalRef = useRef();
     const closeModal = e =>{
@@ -57,37 +58,43 @@ const handleChange = e =>{
         showModal ? (
         <Background ref={modalRef} onClick = { closeModal }>
             <ToastContainer position="top-center" autoClose={3000} />
-           <Wrapper className={`${ showModal ? "animateOrder": "" }`} style={{height: 380, padding: 15}}>
+           <Wrapper className={`${ showModal ? "animateOrder": "" }`} style={{height: "auto", padding: 15}}>
                <h3>New Order</h3>
                <Form>
                   <FormControl>
-                    <Label>Recipient</Label>
-                   <Input type='text' name='recipientphone' value={order.recipientphone} 
+                    <Label htmlFor='recip'>Recipient</Label>
+                   <Input type='text' id="recip" name='recipientphone' value={order.recipientphone} 
                    disabled={loading} onChange={handleChange} required placeholder='client phone'/>
                   </FormControl>
                   <FormControl>
-                    <Label>Address</Label>
-                   <Input type='text' name='address' value={order.address} disabled={loading} 
+                    <Label htmlFor='address'>Address</Label>
+                   <Input type='text' id='address' name='address' value={order.address} disabled={loading} 
                    onChange={handleChange} required placeholder='client location'/>
                   </FormControl>                  
                     <FormControl>
-                      <Label>Quantity</Label>
-                      <Input type='text' name='quantity' placeholder='Enter quantity' 
+                      <Label htmlFor='quantity'>Quantity</Label>
+                      <Input type='text' id='quantity' name='quantity' placeholder='Enter quantity' 
                       disabled={loading} value={order.quantity} onChange={handleChange} required/>
                     </FormControl>
                     <FormControl>
-                      <Label>Price</Label>
-                      <Input type='text' name='price' placeholder='Enter price' disabled={loading} 
+                      <Label htmlFor='price'>Price</Label>
+                      <Input type='text' id='price' name='price' placeholder='Enter price' disabled={loading} 
                       value={order.price} onChange={handleChange} required/>
-                    </FormControl>                                      
+                    </FormControl>   
+
                     <FormControl>
-                      <Label>Status</Label>
-                      <Select  name='status' disabled={loading} value={order.status} onChange={handleChange} required>
+                      <Label htmlFor='status'>Status</Label>
+                      <Select id='status'  name='status' disabled={loading} value={order.status} onChange={handleChange} required>
                           <option value={""}>select status</option>
                           <option value={"Paid"}>Paid</option>
                           <option value={"Not paid"}>Not paid</option>
                       </Select>
                     </FormControl>                                      
+                     <FormControl>
+                      <Label htmlFor='delivery'>Delivery & Food</Label>
+                      <Input type='text' id='delivery' name='delivery' placeholder='Enter delivery price and food' disabled={loading} 
+                      value={order.delivery} onChange={handleChange} required/>
+                    </FormControl>
                </Form>
                <AddButton>
                    <Button onClick={saveOrder}>{!loading ? "Add": 
@@ -150,14 +157,13 @@ const Wrapper = styled.div`
       }
       @media screen and (max-width: 1024px){
           width: 70% !important;
-          height: 38vh !important;
       }
       @media screen and (max-width: 768px){
-          height: 45vh !important;
+          /* height: 45vh !important; */
       }
       @media screen and (max-width: 540px){
             width: 90% !important;
-            height: 60vh !important;
+         
    }
    @media screen and (max-width: 450px){
        .d-flexs{

@@ -14,7 +14,8 @@ const [order, setOrder] = useState({
         address: "",
         quantity: 0,
         price: 0,
-        status: ""
+        status: "",
+        delivery: 0
     })
 const handleChange = e =>{
     setOrder({
@@ -88,7 +89,13 @@ useEffect(()=>{
                           <option value={"Paid"}>Paid</option>
                           <option value={"Not paid"}>Not paid</option>
                       </Select>
-                    </FormControl>                                      
+                    </FormControl>                     
+                                         <FormControl>
+                      <Label htmlFor='delivery'>Delivery & Food</Label>
+                      <Input type='text' id='delivery' name='delivery' placeholder='Enter delivery price and food' disabled={loading} 
+                      value={order.delivery} onChange={handleChange} required/>
+                    </FormControl>
+                 
                </Form>
               <Actions>
                  <AddButton>

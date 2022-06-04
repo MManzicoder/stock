@@ -58,7 +58,7 @@ return (
                <Field><p><Check className='check' /><span> Status</span></p> 
                <p>{data.status}</p></Field>
                <Field><p><Check className='check' /><span> Delivery & Food </span></p> 
-               <p><CurrencyFormat value={50000} thousandSeparator={true} suffix=" Frw" 
+               <p><CurrencyFormat value={data.delivery} thousandSeparator={true} suffix=" Frw" 
                 displayType={"text"}/></p></Field>                              
               </Holder>
               <ActionSection>

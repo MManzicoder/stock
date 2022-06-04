@@ -15,6 +15,7 @@ export default function Table() {
     price: "",
     amount: "",
     status:"",
+    delivery:"",
     createdAt:""
   })
   const pageSize = window.screen.width >=1366 ? 2 : window.screen.width === 1024 ? 10 : window.screen.width === 768 ? 7 : 4;
