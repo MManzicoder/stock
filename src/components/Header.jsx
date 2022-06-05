@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import userImgsrc from "../assets/avatar.png";
 import {Menu, Notifications, ArrowDropDown, ArrowRightOutlined ,
 DashboardRounded , AddBox, Person, Report, 
-    Settings, Shop, Input, OutdoorGrill} from "@material-ui/icons";
+    Settings, Shop, Input, OutdoorGrill, AccessAlarm} from "@material-ui/icons";
 import { useState } from 'react';
 import { isAuth } from '../shared/utils/isAuth';
 import { Close } from "@material-ui/icons";
@@ -57,54 +57,61 @@ function Header() {
              <p>Ubwiza</p>
           </Logo></Link>
               <MenuItems>
-              <ListItem onClick={()=>setOpen(false)}>
+                 <ListItem>
                 <Link to="/dashboard" style={isActive(location, "/dashboard")}>
                     <DashboardRounded className='icon'/>
                   <span>Dashboard</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              <ListItem>
                   <Link to="/inventory" style={isActive(location, "/inventory")}>
                       <Input className='icon'/>
                   <span>In Stock</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              <ListItem>
                   <Link to="/orders" style={isActive(location, "/orders")}>
                       <OutdoorGrill className='icon'/>
                   <span>Orders</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              <ListItem>
                   <Link to="/ingredients" style={isActive(location, "/ingredients")}>
                       <Shop className='icon'/>
                   <span>Ingredients</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              <ListItem>
                   <Link to="/packaging" style={isActive(location, "/packaging")}>
                       <AddBox className='icon'/>
                   <span>Packaging</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              <ListItem>
                   <Link to="/report" style={isActive(location, "/report")}>
                       <Report className='icon'/>
                   <span>Report</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
+              {userType.toLowerCase() ==="admin" && <ListItem>
+                  <Link to="/users" style={isActive(location, "/users")}>
+                      <Person className='icon'/>
+                  <span>Add User</span>
+                  </Link>
+              </ListItem>}
+              {userType.toLowerCase() ==="admin" && <ListItem>
+                  <Link to="/add_role" style={isActive(location, "/add_role")}>
+                      <AccessAlarm className='icon'/>
+                  <span>Add Role</span>
+                  </Link>
+              </ListItem>}              
+              <ListItem>
                   <Link to="/settings" style={isActive(location, "/settings")}>
                       <Settings className='icon'/>
                   <span>Settings</span>
                   </Link>
               </ListItem>
-              <ListItem onClick={()=>setOpen(false)}>
-                  <Link to="/profile" style={isActive(location, "/profile")}>
-                      <Person className='icon'/>
-                  <span>Profile</span>
-                  </Link>
-              </ListItem>
+
            </MenuItems>
             <CloseModalButton onClick={closeAllStaff} />
              </MenuWrapper>

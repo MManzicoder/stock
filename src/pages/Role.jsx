@@ -5,31 +5,28 @@ import styled from "styled-components";
 import { Loader } from "../components/AdminLogin";
 import { getRequest, request } from '../apiHandler/Authapi';
 import { toast, ToastContainer } from 'react-toastify';
-function EditOrder() {
+function AddOrder() {
 const history = useHistory();
 const [loading, setLoading] = useState(false);
-const[user, setUser] = useState({
-  username: "",
-  email:"",
-  userType:"",
-  password:""
+const[role, setRole] = useState({
+  roleName:""
 })
 const handleChange = e =>{
-    setUser({
-        ...user,
+    setRole({
+        ...role,
         [e.target.name]: e.target.value
     })
 }
 
 const saveUser = () =>{
-    if(user.username =="" || user.email== "" || user.userType =="" || user.password == ""){
-        toast.error("All fields are required!")
+    if(role.username ==""){
+        toast.error("role name is required")
         setLoading(false);
         return;
     }
     setLoading(true);
-        request("register", "POST", 
-        user, {"bearer":`${localStorage.getItem("auth")}`, 
+        request("role", "POST", 
+        role, {"bearer":`${localStorage.getItem("auth")}`, 
         "Content-Type":"application/json"})
         .then(res=>{
             setLoading(false);
@@ -48,34 +45,15 @@ const saveUser = () =>{
         <Main>
           <ToastContainer position="top-center" autoClose={3000} />
           <Wrapper>
-              <h2>Add new user</h2>
+              <h2>Add new Role</h2>
              <Sub>
                 <Form>
                   <FormControl>
-                    <Label>Username</Label>
-                   <Input type='text' name='username' value={user.username} 
-                   disabled={loading} onChange={handleChange} required placeholder='username'/>
+                    <Label>Role name</Label>
+                   <Input type='text' name='roleName' value={role.roleName} 
+                   disabled={loading} onChange={handleChange} required placeholder='Enter role name'/>
                   </FormControl>
-                  <FormControl>
-                    <Label>Email</Label>
-                   <Input type='text' name='email' value={user.email} disabled={loading} 
-                   onChange={handleChange} required placeholder='user email'/>
-                  </FormControl>    
-                  <FormControl>
-                    <Label>Password</Label>
-                   <Input type='text' name='password' value={user.password} disabled={loading} 
-                   onChange={handleChange} required placeholder='user password'/>
-                  </FormControl>    
-                  <FormControl>
-                    <Label>userType</Label>
-                    <Select  name='userType' disabled={loading} value={user.userType} onChange={handleChange} required>
-                          <option value={""}>userType</option>
-                          <option value={"MANAGER"}>MANAGER</option>
-                          <option value={"OTHER"}>OTHER</option>
-                      </Select>
-
-                  </FormControl>
-               </Form>
+                   </Form>
               <Actions>
                  <AddButton>
                    <Button className='add' onClick={saveUser}>{!loading ? "Save": 
@@ -93,7 +71,7 @@ const saveUser = () =>{
   )
 }
 
-export default EditOrder
+export default AddOrder
 
 const Main = styled.div`
    width: 101%;
@@ -200,18 +178,6 @@ const Label = styled.label`
  @media screen and (max-width: 450px){
    width: 40% !important;
  }
-`
-const Select = styled.select`
- width: 70%;
- margin-top: 10px;
- padding: 7px 10px;
- border: 1px solid gray;
- font-size: 16px;
- border-radius: 5px;
- outline: 1px solid rgba(30, 140, 250, 0.9);
- @media screen and (max-width: 450px){
-   width: 60%;
- }  
 `
 const Input = styled.input`
  width: 70%;

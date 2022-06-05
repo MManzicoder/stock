@@ -2,10 +2,12 @@ import React from 'react'
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom"
 import { DashboardRounded , AddBox, Person, Report, 
-    Settings, Shop, Input, OutdoorGrill} from "@material-ui/icons"
+    Settings, Shop, Input, OutdoorGrill, AccessAlarm} from "@material-ui/icons"
 import ubwiza from "../assets/target.png"
+import { isAuth } from '../shared/utils/isAuth';
 function Sidebar() {
     const location = useLocation();
+    const { userType } = isAuth();
 const isActive = (history, path)=>{
 
     if(history.pathname === path){
@@ -60,18 +62,25 @@ const isActive = (history, path)=>{
                   <span>Report</span>
                   </Link>
               </ListItem>
+              {userType.toLowerCase() ==="admin" && <ListItem>
+                  <Link to="/users" style={isActive(location, "/users")}>
+                      <Person className='icon'/>
+                  <span>Add User</span>
+                  </Link>
+              </ListItem>}
+              {userType.toLowerCase() ==="admin" && <ListItem>
+                  <Link to="/add_role" style={isActive(location, "/add_role")}>
+                      <AccessAlarm className='icon'/>
+                  <span>Add Role</span>
+                  </Link>
+              </ListItem>}              
               <ListItem>
                   <Link to="/settings" style={isActive(location, "/settings")}>
                       <Settings className='icon'/>
                   <span>Settings</span>
                   </Link>
               </ListItem>
-              <ListItem>
-                  <Link to="/profile" style={isActive(location, "/profile")}>
-                      <Person className='icon'/>
-                  <span>Profile</span>
-                  </Link>
-              </ListItem>
+
            </MenuItems>
         </Holder>
     )

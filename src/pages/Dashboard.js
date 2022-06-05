@@ -404,9 +404,6 @@ const Card = styled.div`
   @media screen and (max-width: 540px){
     width: 45%;
   }
-    @media screen and (max-width: 540px){
-    /* width: 48%; */
-  }
 `
 const ImageHolder = styled.div`
  width: 60px;
@@ -414,10 +411,18 @@ const ImageHolder = styled.div`
  border-radius: 10px;
  background: red;
  object-fit: cover;  
+ position: absolute;
+ left: -5%;
+ top:2vh;
   img{
       width: 100%;
       height: 100%;
       object-fit: cover;
+  }
+  @media screen and (max-width: 380px){
+    /* display: none; */
+    height: 40px;
+    width: 40px;
   }
 `
 const OtherInfo = styled.div`
