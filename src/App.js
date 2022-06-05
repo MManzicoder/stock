@@ -26,7 +26,7 @@ import Packaging from './pages/Packaging';
 import MaterialsEdit from './pages/MaterialEdit';
 import MaterialsUsedEdit from './pages/MaterialsUsedEdit';
 import EditOrder from './pages/EditOrder';
-
+import Role from "./pages/Role.jsx"
 
 function App() {
     const store = Store(useState);
@@ -46,7 +46,8 @@ function App() {
        <PrivateRoute component={Ingredients}  path="/ingredients" /> 
        <PrivateRoute component={Packaging}  path="/packaging" /> 
        <PrivateRoute component={Report}  path="/report" /> 
-       <PrivateRoute component={Profile}  path="/profile" /> 
+       <PrivateRoute component={Profile}  path="/users" /> 
+       <PrivateRoute component={Role}  path="/add_role" /> 
        <PrivateRoute component={InventoryEdit} path="/inventory/edit/:id"/>
         <PrivateRoute component={EditOrder} path="/orders/edit/:orderId"/>
        <PrivateRoute component={Inventory} path="/inventory"/>
