@@ -36,7 +36,6 @@ function App() {
     <Router>
     <ToastContainer position="top-center" autoClose={5000} />
        <Switch>
-       {/* {isAuth() ? <Redirect to="/dashboard" />: <Redirect to="/account"/>} */}
        <PublicRoute component = {Auth} path="/" exact/>
        <PrivateRoute component={Dashboard}  path="/dashboard" /> 
        <PrivateRoute component={IngredientsEdit} exact path="/ingredients/edit/:ingId"/> 
